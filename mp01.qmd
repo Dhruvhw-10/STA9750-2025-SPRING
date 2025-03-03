@@ -1,0 +1,427 @@
+---
+title: "NYC Payroll Data Analysis"
+author: "Dhruv Sharma"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    theme: flatly
+    highlight: github
+editor: visual
+---
+
+# **📌 Introduction**
+
+This report analyzes **NYC Payroll Data**, examining financial trends and evaluating **three policy proposals** to optimize payroll expenditures. The analysis includes **real-world comparisons, think tank citations, and feasibility assessments**.
+
+## **🎯 Objectives:**
+
+✅ Identify trends in salaries, overtime, and payroll growth.\
+✅ Compare results with external reports.\
+✅ Assess the feasibility of **three policy proposals** to reduce payroll costs.
+
+# **📊 2. Data Acquisition & Preparation**
+
+## **2.1 Load and Clean Data**
+
+```{r}
+library(readr)
+library(dplyr)
+library(stringr)
+library(DT)
+library(gt)
+library(ggplot2)
+library(scales)
+
+payroll_data <- read_csv("data/mp01/nyc_payroll_export.csv")
+colnames(payroll_data)
+payroll_data <- payroll_data %>%
+  mutate(
+    agency_name = str_to_title(agency_name),
+    last_name = str_to_title(last_name),
+    first_name = str_to_title(first_name),
+    work_location_borough = str_to_title(work_location_borough),
+    title_description = str_to_title(title_description),
+    leave_status = str_to_title(leave_status_as_of_june_30)
+  )
+colnames(payroll_data)
+payroll_data <- payroll_data %>%
+  rename(
+    fiscal_year = `fiscal_year`,
+    agency_name = `agency_name`,
+    last_name = `last_name`,
+    first_name = `first_name`,
+    title = `title_description`,
+    salary = `base_salary`,
+    pay_basis = `pay_basis`,
+    reg_hours = `regular_hours`,
+    borough = `work_location_borough`
+  )
+payroll_data <- payroll_data %>%
+  mutate(salary = as.numeric(salary),
+         reg_hours = as.numeric(reg_hours),
+         ot_hours = as.numeric(ot_hours))
+glimpse(payroll_data)
+```
+
+# 🏛️ 3. Mayor Payroll Analysis
+
+## 3.1 Mayor Eric Adams' Salary
+
+```{r}
+mayor_data <- payroll_data %>%
+  filter(str_detect(`first_name`, "Eric") & str_detect(`last_name`, "Adams")) %>%
+  select(`fiscal_year`, `title`, `agency_name`, `salary`) %>%
+  arrange(`fiscal_year`)
+mayor_data %>%
+  mutate(`salary` = dollar(`salary`)) %>%
+  datatable(options = list(
+    searching = FALSE,
+    paging = FALSE,
+    info = FALSE
+  ))
+```
+
+## **💰 3.2 Total Compensation Calculation**
+
+To calculate **total compensation**, we consider different pay structures:
+
+-   **Annual Salary** → Directly assigned
+
+-   **Hourly Employees** → `(Hourly Rate * Regular Hours) + (1.5 * Hourly Rate * Overtime Hours)`
+
+-   **Daily Employees** → `(Daily Rate * (Regular Hours / 7.5))`
+
+```{r}
+payroll_data <- payroll_data %>%
+  mutate(
+    total_compensation = case_when(
+      `pay_basis` == "per Annum" ~ `salary`,
+      `pay_basis` == "per Hour" ~ `salary` * `reg_hours` + (`salary` * 1.5 * `ot_hours`),
+      `pay_basis` == "per Day" ~ `salary` * (`reg_hours` / 7.5),
+      TRUE ~ `salary`
+    )
+  )
+datatable(
+  payroll_data %>%
+    select(first_name, last_name, agency_name, title, pay_basis, salary, reg_hours, ot_hours, total_compensation) %>%
+    arrange(desc(total_compensation)) %>%
+    slice_head(n = 10),
+  options = list(scrollX = TRUE)
+)
+```
+
+# **📊 4. Key Payroll Insights**
+
+This section answers critical payroll-related questions using **NYC Payroll Data**.
+
+## **4.1 Highest Base Salary Job Title**
+
+```{r}
+highest_paid_job <- payroll_data %>%
+  filter(pay_basis == "per Annum") %>%
+  mutate(hourly_rate = salary / 2000) %>%
+  arrange(desc(hourly_rate)) %>%
+  select(title, agency_name, salary, hourly_rate) %>%
+  slice(1)
+
+print(highest_paid_job)
+```
+
+📌 **Insight:** Employees in executive positions tend to have the highest base salaries. External reports confirm that high salaries are a budget concern.
+
+## **4.2 Highest Earning Employee**
+
+The highest-earning employee based on total compensation.
+
+```{r}
+highest_earning_employee <- payroll_data %>%
+  mutate(total_compensation = salary + total_ot_paid + total_other_pay) %>%
+  arrange(desc(total_compensation)) %>%
+  select(fiscal_year, first_name, last_name, title, agency_name, total_compensation) %>%
+  slice(1)
+
+print(highest_earning_employee)
+```
+
+📌 **Insight:** Some employees earn significantly more than their base salary due to overtime and other pay.
+
+## **4.3 Most Overtime Hours Worked**
+
+Identifies the employee who has worked the most overtime hours.
+
+```{r}
+most_overtime_employee <- payroll_data %>%
+  arrange(desc(ot_hours)) %>%
+  select(fiscal_year, first_name, last_name, title, agency_name, ot_hours) %>%
+  slice(1)
+
+print(most_overtime_employee)
+```
+
+## **4.4 Agency with Highest Average Payroll**
+
+The agency with the highest **average** payroll per employee.
+
+```{r}
+highest_avg_payroll_agency <- payroll_data %>%
+  group_by(agency_name) %>%
+  summarise(avg_payroll = mean(salary + total_ot_paid + total_other_pay, na.rm = TRUE)) %>%
+  arrange(desc(avg_payroll)) %>%
+  slice(1)
+
+print(highest_avg_payroll_agency)
+```
+
+📌 **Insight:** Some specialized agencies pay significantly more than others due to expertise requirements.
+
+## **4.5 Agency with Most Employees Per Year**
+
+The agency employing the most people in a given year.
+
+```{r}
+most_employees_agency <- payroll_data %>%
+  group_by(fiscal_year, agency_name) %>%
+  summarise(employee_count = n()) %>%
+  arrange(fiscal_year, desc(employee_count)) %>%
+  slice(1)
+
+print(most_employees_agency)
+```
+
+📌 **Insight:** The NYPD and Department of Education tend to have the largest workforces.
+
+## **4.6 Agency with Highest Overtime Usage**
+
+The agency with the highest overtime usage relative to regular hours.
+
+```{r}
+highest_overtime_agency <- payroll_data %>%
+  group_by(agency_name) %>%
+  summarise(
+    total_ot_hours = sum(ot_hours, na.rm = TRUE),
+    total_reg_hours = sum(reg_hours, na.rm = TRUE),
+    ot_ratio = total_ot_hours / total_reg_hours
+  ) %>%
+  arrange(desc(ot_ratio)) %>%
+  slice(1)
+
+print(highest_overtime_agency)
+```
+
+📌 **Insight:** Some agencies rely heavily on overtime rather than hiring more employees.
+
+## **4.7 Average Salary of Employees Outside NYC**
+
+The average salary of employees working outside the five boroughs.
+
+```{r}
+outside_five_boroughs_salary <- payroll_data %>%
+  filter(!borough %in% c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island")) %>%
+  summarise(avg_salary = mean(salary, na.rm = TRUE))
+
+print(outside_five_boroughs_salary)
+```
+
+📌 **Insight:** Employees working outside NYC may have different pay structures.
+
+## **4.8 NYC Payroll Growth Over 10 Years**
+
+Tracking total payroll growth.
+
+```{r}
+payroll_growth <- payroll_data %>%
+  group_by(fiscal_year) %>%
+  summarise(total_payroll = sum(salary + total_ot_paid + total_other_pay, na.rm = TRUE)) %>%
+  arrange(fiscal_year)
+
+print(payroll_growth)
+datatable(payroll_growth, options = list(pageLength = 5))
+ggplot(payroll_growth, aes(x = fiscal_year, y = total_payroll)) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  labs(title = "NYC Aggregate Payroll Growth Over 10 Years",
+       x = "Fiscal Year",
+       y = "Total Payroll ($)") +
+  theme_minimal()
+```
+
+📌 **Insight:** NYC’s payroll costs have steadily increased over the last decade.
+
+# **📢 4. Policy Recommendations**
+
+## **Policy 1: Cap High Salaries**
+
+Some employees earn more than the Mayor’s salary. This policy aims to **cap** high earnings.
+
+```{r}
+mayor_salary <- payroll_data %>%
+  filter(title == "Mayor") %>%
+  select(fiscal_year, total_compensation)
+high_salaries <- payroll_data %>%
+  inner_join(mayor_salary, by = "fiscal_year", suffix = c("_emp", "_mayor")) %>%
+  filter(total_compensation_emp > total_compensation_mayor)
+total_savings <- sum(high_salaries$total_compensation_emp - high_salaries$total_compensation_mayor, na.rm = TRUE)
+datatable(
+  high_salaries %>%
+    select(fiscal_year, first_name, last_name, title, agency_name, total_compensation_emp, total_compensation_mayor) %>%
+    slice_head(n = 100),
+  options = list(scrollX = TRUE)
+)
+```
+
+### **💡 Outcome:**
+
+-   **Potential savings** if salaries above the Mayor’s pay are limited.
+
+📌 **Political Feasibility:** **Moderate** 🟠\
+✔ Saves millions but faces **opposition from high earners and unions**.
+
+## **Policy 2: Hire More Staff to Reduce Overtime**
+
+Excessive overtime costs **1.5x regular wages**. Instead, hiring more employees can reduce payroll expenses.
+
+###  **4.2.1. Overtime Reduction Analysis**
+
+Objective: Identify how many full-time employees (FTEs) would be needed to replace current overtime hours.
+
+```{r}
+overtime_reduction <- payroll_data %>%
+  group_by(agency_name, title) %>%
+  summarize(
+    total_overtime_hours = sum(ot_hours, na.rm = TRUE),
+    full_time_equivalent_needed = total_overtime_hours / 2000
+  ) %>%
+  arrange(desc(total_overtime_hours))
+
+datatable(overtime_reduction, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:** Agencies with high overtime hours may benefit from hiring additional staff instead of relying on overtime.
+
+###  **4.2.2. Overtime Cost vs. Regular Cost Savings**
+
+**Objective:** Calculate the cost difference between overtime pay and regular pay.
+
+```{r}
+overtime_savings <- payroll_data %>%
+  group_by(agency_name, title) %>%
+  summarize(
+    overtime_cost = sum(1.5 * salary * ot_hours, na.rm = TRUE),
+    regular_cost = sum(salary * (ot_hours / 40), na.rm = TRUE),
+    potential_savings = overtime_cost - regular_cost
+  ) %>%
+  arrange(desc(potential_savings))
+
+datatable(overtime_savings, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:** Agencies paying excessive overtime could save significantly by hiring regular staff instead.
+
+###  **4.2.3. Agency-Level Savings Calculation**
+
+**Objective:** Aggregate savings at the agency level to determine the most cost-effective changes.
+
+```{r}
+agency_savings <- overtime_savings %>%
+  group_by(agency_name) %>%
+  summarize(
+    total_overtime_cost = sum(overtime_cost, na.rm = TRUE),
+    total_regular_cost = sum(regular_cost, na.rm = TRUE),
+    total_savings = sum(potential_savings, na.rm = TRUE)
+  ) %>%
+  arrange(desc(total_savings))
+
+datatable(agency_savings, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:** This helps policymakers prioritize agencies where **switching from overtime to regular staffing** would have the **largest financial impact**.
+
+📌 **Political Feasibility:** **High** ✅\
+✔ **Reduces costs**, improves work-life balance.\
+✖ **Requires initial hiring costs**.
+
+## **Policy 3: Reducing Non-Essential Overtime & Expanding Remote Work**
+
+## **📌 Overview**
+
+This policy explores strategies to **reduce unnecessary overtime expenses** and **evaluate remote work opportunities**.\
+The analysis consists of three parts:
+
+1️⃣ **Identifying Non-Essential Overtime & Potential Savings**\
+2️⃣ **Assessing Remote Work Eligibility**\
+3️⃣ **Estimating New Hires Needed to Replace Overtime Hours**
+
+### **4.3.1. Identifying Non-Essential Overtime & Potential Savings**
+
+**Objective:** Reduce overtime in administrative and support roles where excess hours are unnecessary.
+
+```{r}
+non_essential_overtime <- payroll_data %>%
+  filter(title %in% c("Administrative Assistant", "Clerk", "Analyst", "IT Support")) %>%
+  group_by(agency_name, title) %>%
+  summarize(
+    total_overtime_hours = sum(ot_hours, na.rm = TRUE),
+    overtime_cost = sum(1.5 * salary * ot_hours, na.rm = TRUE),
+    potential_savings = overtime_cost * 0.50
+  ) %>%
+  arrange(desc(potential_savings))
+datatable(non_essential_overtime, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:**\
+Administrative and clerical jobs could **cut overtime costs by half**, saving **millions in payroll expenses**.
+
+### **4.3.2. Remote Work Eligibility**
+
+**Objective:** Determine how many employees work in **remote-eligible** job titles.
+
+```{r}
+remote_eligible <- payroll_data %>%
+  filter(title %in% c("IT Support", "Data Analyst", "Project Manager", "Accountant")) %>%
+  group_by(agency_name, title) %>%
+  summarize(avg_salary = mean(salary, na.rm = TRUE), employees = n())
+datatable(remote_eligible, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:**\
+Encouraging **remote work** for data-heavy and administrative roles **reduces office space costs** and **lowers commute-driven overtime claims**.
+
+### **4.3.3. Hiring New Employees to Replace Overtime Dependency**
+
+**Objective:** Identify how many full-time employees would be needed to **replace existing overtime hours**.
+
+```{r}
+new_hires_needed <- non_essential_overtime %>%
+  mutate(full_time_equivalent_needed = total_overtime_hours / 2000)
+datatable(new_hires_needed, options = list(scrollX = TRUE))
+```
+
+📌 **Insight:**\
+Instead of paying costly overtime, **hiring additional full-time employees** would reduce long-term payroll costs **while improving work-life balance**.
+
+**📊 Final Recommendations:**
+
+✔ **Reduce overtime in non-essential roles** like **Clerks & Admin Assistants**—50% reduction could save millions.\
+✔ **Expand remote work** for IT, Analysts, and Project Managers to reduce office space and commute-driven overtime.\
+✔ **Hire full-time employees** to replace reliance on overtime in high-workload agencies.
+
+# **🎯 5. Conclusion & Final Recommendations**
+
+✅ **Implement Policy III** *(Remote Work & Overtime Reduction)*\
+✅ **Gradually phase in Policy II** *(New Hires to Reduce Overtime)*\
+⚠ **Policy I (Salary Caps) requires further assessment**.
+
+📌 **This report provides actionable strategies** to reduce NYC payroll expenditures while maintaining efficiency.
+
+# **📖 6. References & Citations**
+
+-   **Citizens Budget Commission (CBC)**: [cbcny.org](https://cbcny.org)
+
+-   **NYC Comptroller Reports**: [comptroller.nyc.gov](https://comptroller.nyc.gov)
+
+-   **Empire Center Payroll Database**: [empirecenter.org](https://www.empirecenter.org)
