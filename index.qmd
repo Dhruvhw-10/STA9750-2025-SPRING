@@ -1,56 +1,8 @@
----
-title: "Dhruv's STA 9750 Website"
-author: "Dhruv Sharma"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-format: html
----
-# Welcome to My STA 9750 Project Page! 🚀
-
-## Hello, I'm Dhruv Sharma! 👋
-
-I am a **data-driven thinker** and a student at *Baruch College*, currently taking **STA 9750**. This site will be my digital notebook for the course, showcasing **my projects, experiments, and insights in statistical analysis and data science.**  
-
-Through this journey, I aim to **develop stronger analytical skills**, improve my ability to **communicate data insights**, and **apply real-world statistical techniques using R and Quarto.**  
-
----
-
-## What You’ll Find Here 📂
-✅ **📊 Mini-Projects** - Real-world data science challenges  
-✅ **📚 Course Assignments** - My approaches & learnings  
-✅ **📝 Blog & Reflections** - Sharing insights & lessons  
-✅ **✨ Additional Learning Resources** - References & tools that helped me  
-
----
-
-## **Featured Project: [Project Title]** 🌟  
-🚧 *Coming Soon: A deep dive into [a specific project/topic]. Stay tuned!* 🚧  
-
----
-
-## **Skills & Tools I’m Using 🛠️**
-- **📈 R, Quarto & Data Visualization**
-- **📊 Statistical Modeling & Inference**
-- **🔍 Hypothesis Testing & Data Exploration**
-- **🛠️ Git, GitHub & Version Control**
-
----
-
-## **A Fun Fact About Me 🎉**
-Aside from statistics and data, I enjoy **gaming, watching and playing soccer**! I believe that **storytelling through data** is one of the most powerful ways to **make an impact in today's world.**
-
----
-
-## **Connect With Me 🌐**
-- 🏠 **GitHub**: [My Repository](https://github.com/Dhruv10-hw)
-- 🏠 **GitHub**: [My Repository](https://github.com/Dhruvhw-10)
-- 📧 **Email**: [your-email@example.com](mailto:Dhruvsharma2299@gmail.com)
-- 🔗 **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/dhruv-sharma-75a056212)
-
----
-
-## **📢 Stay Tuned! 🚀**
-I’ll be updating this website frequently, so make sure to **check back soon** for more insights, projects, and analysis!  
-
-> *"Data is the new oil, but insights are the fuel that drive the world forward."* - Anonymous  
-
----
+<html xmlns="http://www.w3.org/1999/xhtml">    
+  <head>      
+    <title>Redirect to mp01.html</title>      
+    <meta http-equiv="refresh" content="0;URL='mp01.html'" />    
+  </head>    
+  <body> 
+  </body>  
+</html>     
