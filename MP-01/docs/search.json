@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "mp01.html",
+    "href": "mp01.html",
+    "title": "NYC Payroll Data Analysis",
+    "section": "",
+    "text": "This report analyzes NYC Payroll Data, examining financial trends and evaluating three policy proposals to optimize payroll expenditures. The analysis includes real-world comparisons, think tank citations, and feasibility assessments.\n\n\n✅ Identify trends in salaries, overtime, and payroll growth.\n✅ Compare results with external reports.\n✅ Assess the feasibility of three policy proposals to reduce payroll costs."
+  },
+  {
+    "objectID": "mp01.html#objectives",
+    "href": "mp01.html#objectives",
+    "title": "NYC Payroll Data Analysis",
+    "section": "",
+    "text": "✅ Identify trends in salaries, overtime, and payroll growth.\n✅ Compare results with external reports.\n✅ Assess the feasibility of three policy proposals to reduce payroll costs."
+  },
+  {
+    "objectID": "mp01.html#load-and-clean-data",
+    "href": "mp01.html#load-and-clean-data",
+    "title": "NYC Payroll Data Analysis",
+    "section": "2.1 ** Load and Clean Data**",
+    "text": "2.1 ** Load and Clean Data**\n\n\nCode\nlibrary(readr)\nlibrary(dplyr)\nlibrary(stringr)\nlibrary(DT)\nlibrary(gt)\nlibrary(ggplot2)\nlibrary(scales)\n\npayroll_data &lt;- read_csv(\"data/mp01/nyc_payroll_export.csv\")\ncolnames(payroll_data)\n\n\n [1] \"fiscal_year\"                \"payroll_number\"            \n [3] \"agency_name\"                \"last_name\"                 \n [5] \"first_name\"                 \"mid_init\"                  \n [7] \"agency_start_date\"          \"work_location_borough\"     \n [9] \"title_description\"          \"leave_status_as_of_june_30\"\n[11] \"base_salary\"                \"pay_basis\"                 \n[13] \"regular_hours\"              \"regular_gross_paid\"        \n[15] \"ot_hours\"                   \"total_ot_paid\"             \n[17] \"total_other_pay\"           \n\n\nCode\npayroll_data &lt;- payroll_data %&gt;%\n  mutate(\n    agency_name = str_to_title(agency_name),\n    last_name = str_to_title(last_name),\n    first_name = str_to_title(first_name),\n    work_location_borough = str_to_title(work_location_borough),\n    title_description = str_to_title(title_description),\n    leave_status = str_to_title(leave_status_as_of_june_30)\n  )\ncolnames(payroll_data)\n\n\n [1] \"fiscal_year\"                \"payroll_number\"            \n [3] \"agency_name\"                \"last_name\"                 \n [5] \"first_name\"                 \"mid_init\"                  \n [7] \"agency_start_date\"          \"work_location_borough\"     \n [9] \"title_description\"          \"leave_status_as_of_june_30\"\n[11] \"base_salary\"                \"pay_basis\"                 \n[13] \"regular_hours\"              \"regular_gross_paid\"        \n[15] \"ot_hours\"                   \"total_ot_paid\"             \n[17] \"total_other_pay\"            \"leave_status\"              \n\n\nCode\npayroll_data &lt;- payroll_data %&gt;%\n  rename(\n    fiscal_year = `fiscal_year`,\n    agency_name = `agency_name`,\n    last_name = `last_name`,\n    first_name = `first_name`,\n    title = `title_description`,\n    salary = `base_salary`,\n    pay_basis = `pay_basis`,\n    reg_hours = `regular_hours`,\n    borough = `work_location_borough`\n  )\npayroll_data &lt;- payroll_data %&gt;%\n  mutate(salary = as.numeric(salary),\n         reg_hours = as.numeric(reg_hours),\n         ot_hours = as.numeric(ot_hours))\nglimpse(payroll_data)\n\n\nRows: 6,225,611\nColumns: 18\n$ fiscal_year                &lt;dbl&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2…\n$ payroll_number             &lt;dbl&gt; 67, 67, 67, 67, 67, 67, 67, 67, 67, 67, 67,…\n$ agency_name                &lt;chr&gt; \"Admin For Children's Svcs\", \"Admin For Chi…\n$ last_name                  &lt;chr&gt; \"Faye Fall\", \"Kilgore\", \"Wisdom\", \"Miller\",…\n$ first_name                 &lt;chr&gt; \"Sokhna\", \"Orlantha\", \"Cherise\", \"Moya-Gaye…\n$ mid_init                   &lt;chr&gt; \"M\", \"B\", \"M\", \"S\", \"M\", \"L\", \"O\", NA, \"N\",…\n$ agency_start_date          &lt;dttm&gt; 2023-11-20, 2023-08-28, 2022-10-24, 2023-0…\n$ borough                    &lt;chr&gt; \"Bronx\", \"Brooklyn\", \"Manhattan\", \"Manhatta…\n$ title                      &lt;chr&gt; \"Child Protective Specialist\", \"Child Prote…\n$ leave_status_as_of_june_30 &lt;chr&gt; \"ACTIVE\", \"ACTIVE\", \"ON LEAVE\", \"ON LEAVE\",…\n$ salary                     &lt;dbl&gt; 62043, 62043, 43144, 62043, 60236, 62043, 6…\n$ pay_basis                  &lt;chr&gt; \"per Annum\", \"per Annum\", \"per Annum\", \"per…\n$ reg_hours                  &lt;dbl&gt; 1050.00, 1470.00, 1251.50, 1400.75, 700.00,…\n$ regular_gross_paid         &lt;dbl&gt; 31267.96, 44660.96, 28649.20, 44515.43, 221…\n$ ot_hours                   &lt;dbl&gt; 12.00, 99.75, 30.00, 44.75, 53.00, 146.00, …\n$ total_ot_paid              &lt;dbl&gt; 425.00, 3859.84, 802.42, 1476.98, 1933.33, …\n$ total_other_pay            &lt;dbl&gt; 78.04, 78.14, 78.26, 78.37, 78.47, 78.86, 7…\n$ leave_status               &lt;chr&gt; \"Active\", \"Active\", \"On Leave\", \"On Leave\",…"
+  },
+  {
+    "objectID": "mp01.html#mayor-eric-adams-salary",
+    "href": "mp01.html#mayor-eric-adams-salary",
+    "title": "NYC Payroll Data Analysis",
+    "section": "3.1 Mayor Eric Adams’ Salary",
+    "text": "3.1 Mayor Eric Adams’ Salary\n\n\nCode\nmayor_data &lt;- payroll_data %&gt;%\n  filter(str_detect(`first_name`, \"Eric\") & str_detect(`last_name`, \"Adams\")) %&gt;%\n  select(`fiscal_year`, `title`, `agency_name`, `salary`) %&gt;%\n  arrange(`fiscal_year`)\nmayor_data %&gt;%\n  mutate(`salary` = dollar(`salary`)) %&gt;%\n  datatable(options = list(\n    searching = FALSE,\n    paging = FALSE,\n    info = FALSE\n  ))"
+  },
+  {
+    "objectID": "mp01.html#total-compensation-calculation",
+    "href": "mp01.html#total-compensation-calculation",
+    "title": "NYC Payroll Data Analysis",
+    "section": "3.2 💰 Total Compensation Calculation",
+    "text": "3.2 💰 Total Compensation Calculation\nTo calculate total compensation, we consider different pay structures:\n\nAnnual Salary → Directly assigned\nHourly Employees → (Hourly Rate * Regular Hours) + (1.5 * Hourly Rate * Overtime Hours)\nDaily Employees → (Daily Rate * (Regular Hours / 7.5))\n\n\n\nCode\npayroll_data &lt;- payroll_data %&gt;%\n  mutate(\n    total_compensation = case_when(\n      `pay_basis` == \"per Annum\" ~ `salary`,\n      `pay_basis` == \"per Hour\" ~ `salary` * `reg_hours` + (`salary` * 1.5 * `ot_hours`),\n      `pay_basis` == \"per Day\" ~ `salary` * (`reg_hours` / 7.5),\n      TRUE ~ `salary`\n    )\n  )\ndatatable(\n  payroll_data %&gt;%\n    select(first_name, last_name, agency_name, title, pay_basis, salary, reg_hours, ot_hours, total_compensation) %&gt;%\n    arrange(desc(total_compensation)) %&gt;%\n    slice_head(n = 10),\n  options = list(scrollX = TRUE)\n)"
+  },
+  {
+    "objectID": "mp01.html#highest-base-salary-job-title",
+    "href": "mp01.html#highest-base-salary-job-title",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.1 ** Highest Base Salary Job Title**",
+    "text": "4.1 ** Highest Base Salary Job Title**\n\n\nCode\nhighest_paid_job &lt;- payroll_data %&gt;%\n  filter(pay_basis == \"per Annum\") %&gt;%\n  mutate(hourly_rate = salary / 2000) %&gt;%\n  arrange(desc(hourly_rate)) %&gt;%\n  select(title, agency_name, salary, hourly_rate) %&gt;%\n  slice(1)\n\nprint(highest_paid_job)\n\n\n# A tibble: 1 × 4\n  title agency_name           salary hourly_rate\n  &lt;chr&gt; &lt;chr&gt;                  &lt;dbl&gt;       &lt;dbl&gt;\n1 Chair Nyc Housing Authority 414707        207.\n\n\n📌 Insight: Employees in executive positions tend to have the highest base salaries. External reports confirm that high salaries are a budget concern."
+  },
+  {
+    "objectID": "mp01.html#highest-earning-employee",
+    "href": "mp01.html#highest-earning-employee",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.2 ** Highest Earning Employee**",
+    "text": "4.2 ** Highest Earning Employee**\nThe highest-earning employee based on total compensation.\n\n\nCode\nhighest_earning_employee &lt;- payroll_data %&gt;%\n  mutate(total_compensation = salary + total_ot_paid + total_other_pay) %&gt;%\n  arrange(desc(total_compensation)) %&gt;%\n  select(fiscal_year, first_name, last_name, title, agency_name, total_compensation) %&gt;%\n  slice(1)\n\nprint(highest_earning_employee)\n\n\n# A tibble: 1 × 6\n  fiscal_year first_name last_name title          agency_name total_compensation\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                    &lt;dbl&gt;\n1        2024 Mark       Tettonis  Chief Marine … Department…           1382854.\n\n\n📌 Insight: Some employees earn significantly more than their base salary due to overtime and other pay."
+  },
+  {
+    "objectID": "mp01.html#most-overtime-hours-worked",
+    "href": "mp01.html#most-overtime-hours-worked",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.3 ** Most Overtime Hours Worked**",
+    "text": "4.3 ** Most Overtime Hours Worked**\nIdentifies the employee who has worked the most overtime hours.\n\n\nCode\nmost_overtime_employee &lt;- payroll_data %&gt;%\n  arrange(desc(ot_hours)) %&gt;%\n  select(fiscal_year, first_name, last_name, title, agency_name, ot_hours) %&gt;%\n  slice(1)\n\nprint(most_overtime_employee)\n\n\n# A tibble: 1 × 6\n  fiscal_year first_name last_name   title              agency_name     ot_hours\n        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;              &lt;chr&gt;              &lt;dbl&gt;\n1        2022 James      Internicola Correction Officer Department Of …    3693."
+  },
+  {
+    "objectID": "mp01.html#agency-with-highest-average-payroll",
+    "href": "mp01.html#agency-with-highest-average-payroll",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.4 ** Agency with Highest Average Payroll**",
+    "text": "4.4 ** Agency with Highest Average Payroll**\nThe agency with the highest average payroll per employee.\n\n\nCode\nhighest_avg_payroll_agency &lt;- payroll_data %&gt;%\n  group_by(agency_name) %&gt;%\n  summarise(avg_payroll = mean(salary + total_ot_paid + total_other_pay, na.rm = TRUE)) %&gt;%\n  arrange(desc(avg_payroll)) %&gt;%\n  slice(1)\n\nprint(highest_avg_payroll_agency)\n\n\n# A tibble: 1 × 2\n  agency_name             avg_payroll\n  &lt;chr&gt;                         &lt;dbl&gt;\n1 Office Of Racial Equity     153102.\n\n\n📌 Insight: Some specialized agencies pay significantly more than others due to expertise requirements."
+  },
+  {
+    "objectID": "mp01.html#agency-with-most-employees-per-year",
+    "href": "mp01.html#agency-with-most-employees-per-year",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.5 ** Agency with Most Employees Per Year**",
+    "text": "4.5 ** Agency with Most Employees Per Year**\nThe agency employing the most people in a given year.\n\n\nCode\nmost_employees_agency &lt;- payroll_data %&gt;%\n  group_by(fiscal_year, agency_name) %&gt;%\n  summarise(employee_count = n()) %&gt;%\n  arrange(fiscal_year, desc(employee_count)) %&gt;%\n  slice(1)\n\n\n`summarise()` has grouped output by 'fiscal_year'. You can override using the\n`.groups` argument.\n\n\nCode\nprint(most_employees_agency)\n\n\n# A tibble: 11 × 3\n# Groups:   fiscal_year [11]\n   fiscal_year agency_name            employee_count\n         &lt;dbl&gt; &lt;chr&gt;                           &lt;int&gt;\n 1        2014 Dept Of Ed Pedagogical         100589\n 2        2015 Dept Of Ed Pedagogical         111857\n 3        2016 Dept Of Ed Pedagogical         106263\n 4        2017 Dept Of Ed Pedagogical         104629\n 5        2018 Dept Of Ed Pedagogical         107956\n 6        2019 Dept Of Ed Pedagogical         112067\n 7        2020 Dept Of Ed Pedagogical         114999\n 8        2021 Dept Of Ed Pedagogical         113523\n 9        2022 Dept Of Ed Pedagogical         120453\n10        2023 Dept Of Ed Pedagogical         106882\n11        2024 Dept Of Ed Pedagogical         108209\n\n\n📌 Insight: The NYPD and Department of Education tend to have the largest workforces."
+  },
+  {
+    "objectID": "mp01.html#agency-with-highest-overtime-usage",
+    "href": "mp01.html#agency-with-highest-overtime-usage",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.6 ** Agency with Highest Overtime Usage**",
+    "text": "4.6 ** Agency with Highest Overtime Usage**\nThe agency with the highest overtime usage relative to regular hours.\n\n\nCode\nhighest_overtime_agency &lt;- payroll_data %&gt;%\n  group_by(agency_name) %&gt;%\n  summarise(\n    total_ot_hours = sum(ot_hours, na.rm = TRUE),\n    total_reg_hours = sum(reg_hours, na.rm = TRUE),\n    ot_ratio = total_ot_hours / total_reg_hours\n  ) %&gt;%\n  arrange(desc(ot_ratio)) %&gt;%\n  slice(1)\n\nprint(highest_overtime_agency)\n\n\n# A tibble: 1 × 4\n  agency_name       total_ot_hours total_reg_hours ot_ratio\n  &lt;chr&gt;                      &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;\n1 Board Of Election       3062029.       15339960.    0.200\n\n\n📌 Insight: Some agencies rely heavily on overtime rather than hiring more employees."
+  },
+  {
+    "objectID": "mp01.html#average-salary-of-employees-outside-nyc",
+    "href": "mp01.html#average-salary-of-employees-outside-nyc",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.7 ** Average Salary of Employees Outside NYC**",
+    "text": "4.7 ** Average Salary of Employees Outside NYC**\nThe average salary of employees working outside the five boroughs.\n\n\nCode\noutside_five_boroughs_salary &lt;- payroll_data %&gt;%\n  filter(!borough %in% c(\"Bronx\", \"Brooklyn\", \"Manhattan\", \"Queens\", \"Staten Island\")) %&gt;%\n  summarise(avg_salary = mean(salary, na.rm = TRUE))\n\nprint(outside_five_boroughs_salary)\n\n\n# A tibble: 1 × 1\n  avg_salary\n       &lt;dbl&gt;\n1     53750.\n\n\n📌 Insight: Employees working outside NYC may have different pay structures."
+  },
+  {
+    "objectID": "mp01.html#nyc-payroll-growth-over-10-years",
+    "href": "mp01.html#nyc-payroll-growth-over-10-years",
+    "title": "NYC Payroll Data Analysis",
+    "section": "4.8 ** NYC Payroll Growth Over 10 Years**",
+    "text": "4.8 ** NYC Payroll Growth Over 10 Years**\nTracking total payroll growth.\n\n\nCode\npayroll_growth &lt;- payroll_data %&gt;%\n  group_by(fiscal_year) %&gt;%\n  summarise(total_payroll = sum(salary + total_ot_paid + total_other_pay, na.rm = TRUE)) %&gt;%\n  arrange(fiscal_year)\n\nprint(payroll_growth)\n\n\n# A tibble: 11 × 2\n   fiscal_year total_payroll\n         &lt;dbl&gt;         &lt;dbl&gt;\n 1        2014  22638474550.\n 2        2015  25474766615.\n 3        2016  26510880597.\n 4        2017  27233620959.\n 5        2018  27965852639.\n 6        2019  29454920930.\n 7        2020  32370167317.\n 8        2021  31441206055.\n 9        2022  34872407402.\n10        2023  33319364876.\n11        2024  34700020886.\n\n\nCode\ndatatable(payroll_growth, options = list(pageLength = 5))\n\n\n\n\n\n\nCode\nggplot(payroll_growth, aes(x = fiscal_year, y = total_payroll)) +\n  geom_line() +\n  geom_point() +\n  scale_y_continuous(labels = scales::dollar_format()) +\n  labs(title = \"NYC Aggregate Payroll Growth Over 10 Years\",\n       x = \"Fiscal Year\",\n       y = \"Total Payroll ($)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n📌 Insight: NYC’s payroll costs have steadily increased over the last decade."
+  },
+  {
+    "objectID": "mp01.html#policy-1-cap-high-salaries",
+    "href": "mp01.html#policy-1-cap-high-salaries",
+    "title": "NYC Payroll Data Analysis",
+    "section": "5.1 Policy 1: Cap High Salaries",
+    "text": "5.1 Policy 1: Cap High Salaries\nSome employees earn more than the Mayor’s salary. This policy aims to cap high earnings.\n\n\nCode\nmayor_salary &lt;- payroll_data %&gt;%\n  filter(title == \"Mayor\") %&gt;%\n  select(fiscal_year, total_compensation)\nhigh_salaries &lt;- payroll_data %&gt;%\n  inner_join(mayor_salary, by = \"fiscal_year\", suffix = c(\"_emp\", \"_mayor\")) %&gt;%\n  filter(total_compensation_emp &gt; total_compensation_mayor)\n\n\nWarning in inner_join(., mayor_salary, by = \"fiscal_year\", suffix = c(\"_emp\", : Detected an unexpected many-to-many relationship between `x` and `y`.\nℹ Row 17197 of `x` matches multiple rows in `y`.\nℹ Row 1 of `y` matches multiple rows in `x`.\nℹ If a many-to-many relationship is expected, set `relationship =\n  \"many-to-many\"` to silence this warning.\n\n\nCode\ntotal_savings &lt;- sum(high_salaries$total_compensation_emp - high_salaries$total_compensation_mayor, na.rm = TRUE)\ndatatable(\n  high_salaries %&gt;%\n    select(fiscal_year, first_name, last_name, title, agency_name, total_compensation_emp, total_compensation_mayor) %&gt;%\n    slice_head(n = 100),\n  options = list(scrollX = TRUE)\n)\n\n\n\n\n\n\n\n5.1.1 💡 Outcome:\n\nPotential savings if salaries above the Mayor’s pay are limited.\n\n📌 Political Feasibility: Moderate 🟠\n✔ Saves millions but faces opposition from high earners and unions."
+  },
+  {
+    "objectID": "mp01.html#policy-2-hire-more-staff-to-reduce-overtime",
+    "href": "mp01.html#policy-2-hire-more-staff-to-reduce-overtime",
+    "title": "NYC Payroll Data Analysis",
+    "section": "5.2 Policy 2: Hire More Staff to Reduce Overtime",
+    "text": "5.2 Policy 2: Hire More Staff to Reduce Overtime\nExcessive overtime costs 1.5x regular wages. Instead, hiring more employees can reduce payroll expenses.\n\n5.2.1 ** Overtime Reduction Analysis**\nObjective: Identify how many full-time employees (FTEs) would be needed to replace current overtime hours.\n\n\nCode\novertime_reduction &lt;- payroll_data %&gt;%\n  group_by(agency_name, title) %&gt;%\n  summarize(\n    total_overtime_hours = sum(ot_hours, na.rm = TRUE),\n    full_time_equivalent_needed = total_overtime_hours / 2000\n  ) %&gt;%\n  arrange(desc(total_overtime_hours))\n\n\n`summarise()` has grouped output by 'agency_name'. You can override using the\n`.groups` argument.\n\n\nCode\ndatatable(overtime_reduction, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight: Agencies with high overtime hours may benefit from hiring additional staff instead of relying on overtime.\n\n\n5.2.2 ** Overtime Cost vs. Regular Cost Savings**\nObjective: Calculate the cost difference between overtime pay and regular pay.\n\n\nCode\novertime_savings &lt;- payroll_data %&gt;%\n  group_by(agency_name, title) %&gt;%\n  summarize(\n    overtime_cost = sum(1.5 * salary * ot_hours, na.rm = TRUE),\n    regular_cost = sum(salary * (ot_hours / 40), na.rm = TRUE),\n    potential_savings = overtime_cost - regular_cost\n  ) %&gt;%\n  arrange(desc(potential_savings))\n\n\n`summarise()` has grouped output by 'agency_name'. You can override using the\n`.groups` argument.\n\n\nCode\ndatatable(overtime_savings, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight: Agencies paying excessive overtime could save significantly by hiring regular staff instead.\n\n\n5.2.3 ** Agency-Level Savings Calculation**\nObjective: Aggregate savings at the agency level to determine the most cost-effective changes.\n\n\nCode\nagency_savings &lt;- overtime_savings %&gt;%\n  group_by(agency_name) %&gt;%\n  summarize(\n    total_overtime_cost = sum(overtime_cost, na.rm = TRUE),\n    total_regular_cost = sum(regular_cost, na.rm = TRUE),\n    total_savings = sum(potential_savings, na.rm = TRUE)\n  ) %&gt;%\n  arrange(desc(total_savings))\n\ndatatable(agency_savings, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight: This helps policymakers prioritize agencies where switching from overtime to regular staffing would have the largest financial impact.\n📌 Political Feasibility: High ✅\n✔ Reduces costs, improves work-life balance.\n✖ Requires initial hiring costs."
+  },
+  {
+    "objectID": "mp01.html#policy-3-reducing-non-essential-overtime-expanding-remote-work",
+    "href": "mp01.html#policy-3-reducing-non-essential-overtime-expanding-remote-work",
+    "title": "NYC Payroll Data Analysis",
+    "section": "5.3 Policy 3: Reducing Non-Essential Overtime & Expanding Remote Work",
+    "text": "5.3 Policy 3: Reducing Non-Essential Overtime & Expanding Remote Work"
+  },
+  {
+    "objectID": "mp01.html#overview",
+    "href": "mp01.html#overview",
+    "title": "NYC Payroll Data Analysis",
+    "section": "5.4 📌 Overview",
+    "text": "5.4 📌 Overview\nThis policy explores strategies to reduce unnecessary overtime expenses and evaluate remote work opportunities.\nThe analysis consists of three parts:\n1️⃣ Identifying Non-Essential Overtime & Potential Savings\n2️⃣ Assessing Remote Work Eligibility\n3️⃣ Estimating New Hires Needed to Replace Overtime Hours\n\n5.4.1 ** Identifying Non-Essential Overtime & Potential Savings**\nObjective: Reduce overtime in administrative and support roles where excess hours are unnecessary.\n\n\nCode\nnon_essential_overtime &lt;- payroll_data %&gt;%\n  filter(title %in% c(\"Administrative Assistant\", \"Clerk\", \"Analyst\", \"IT Support\")) %&gt;%\n  group_by(agency_name, title) %&gt;%\n  summarize(\n    total_overtime_hours = sum(ot_hours, na.rm = TRUE),\n    overtime_cost = sum(1.5 * salary * ot_hours, na.rm = TRUE),\n    potential_savings = overtime_cost * 0.50\n  ) %&gt;%\n  arrange(desc(potential_savings))\n\n\n`summarise()` has grouped output by 'agency_name'. You can override using the\n`.groups` argument.\n\n\nCode\ndatatable(non_essential_overtime, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight:\nAdministrative and clerical jobs could cut overtime costs by half, saving millions in payroll expenses.\n\n\n5.4.2 ** Remote Work Eligibility**\nObjective: Determine how many employees work in remote-eligible job titles.\n\n\nCode\nremote_eligible &lt;- payroll_data %&gt;%\n  filter(title %in% c(\"IT Support\", \"Data Analyst\", \"Project Manager\", \"Accountant\")) %&gt;%\n  group_by(agency_name, title) %&gt;%\n  summarize(avg_salary = mean(salary, na.rm = TRUE), employees = n())\n\n\n`summarise()` has grouped output by 'agency_name'. You can override using the\n`.groups` argument.\n\n\nCode\ndatatable(remote_eligible, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight:\nEncouraging remote work for data-heavy and administrative roles reduces office space costs and lowers commute-driven overtime claims.\n\n\n5.4.3 ** Hiring New Employees to Replace Overtime Dependency**\nObjective: Identify how many full-time employees would be needed to replace existing overtime hours.\n\n\nCode\nnew_hires_needed &lt;- non_essential_overtime %&gt;%\n  mutate(full_time_equivalent_needed = total_overtime_hours / 2000)\ndatatable(new_hires_needed, options = list(scrollX = TRUE))\n\n\n\n\n\n\n📌 Insight:\nInstead of paying costly overtime, hiring additional full-time employees would reduce long-term payroll costs while improving work-life balance.\n📊 Final Recommendations:\n✔ Reduce overtime in non-essential roles like Clerks & Admin Assistants—50% reduction could save millions.\n✔ Expand remote work for IT, Analysts, and Project Managers to reduce office space and commute-driven overtime.\n✔ Hire full-time employees to replace reliance on overtime in high-workload agencies."
+  }
+]
