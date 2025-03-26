@@ -75,11 +75,9 @@ library(ggplot2)
 For the most part of the visualization and table i have used the same theme which is **GTA IV style colors**
 
 ```{r setup-theme}
-# 🎨 GTA IV Theme Colors
 highlight_color <- "#FF00C8"  # Hot pink
 accent_color    <- "#00CFFF"  # Neon blue
 
-# 🎨 Custom ggplot2 Theme
 theme_gta <- function(base_size = 11) {
   theme_minimal(base_size = base_size) +
     theme(
@@ -97,7 +95,6 @@ theme_gta <- function(base_size = 11) {
     )
 }
 
-# 🪄 Custom table theme (with optional 2nd column highlight)
 gta_kable_style <- function(kbl_table, caption = NULL, col2 = NULL) {
   styled <- kbl_table |>
     kable(format = "html", escape = FALSE, caption = caption) |>
@@ -116,7 +113,7 @@ gta_kable_style <- function(kbl_table, caption = NULL, col2 = NULL) {
 ```
 ## 🔌 Building EIA State Profile Table
 
-```{r build-eia-sep-report, include=FALSE, message=FALSE, warning=FALSE}
+```{r build-eia-sep-report,message=FALSE, warning=FALSE}
 get_eia_sep <- function(state, abbr) {
   state_formatted <- str_to_lower(state) |> str_replace_all("\\s", "")
   dir_name <- file.path("data", "mp02")
@@ -150,7 +147,6 @@ get_eia_sep <- function(state, abbr) {
   )
 }
 
-# 🚀 Run for all 50 states + DC + PR
 EIA_SEP_REPORT <- map2(state.name, state.abb, get_eia_sep) |> list_rbind()
 
 EIA_SEP_REPORT <- EIA_SEP_REPORT %>%
@@ -183,23 +179,19 @@ Let’s find out! 🚀
 Electricity isn’t cheap, but some states are definitely charging a *shocking* amount per megawatt-hour. Let’s find out who tops the list:
 
 ```{r most_expensive_state}
-# Get top state
 most_expensive_state <- EIA_SEP_REPORT %>%
   arrange(desc(electricity_price_MWh)) %>%
   slice_head(n = 1) %>%
   select(state, electricity_price_MWh)
 
-# Table
 gta_kable_style(most_expensive_state, caption = "💰 The Most Expensive State for Electricity")
 ```
 
 ```{r}
-# Top 5 plot data
 most_expensive_state_plot <- EIA_SEP_REPORT %>%
   arrange(desc(electricity_price_MWh)) %>%
   slice_head(n = 5)
 
-# Plot
 ggplot(most_expensive_state_plot, aes(x = reorder(state, electricity_price_MWh), y = electricity_price_MWh)) +
   geom_col(fill = highlight_color, color = accent_color) +
   coord_flip() +
@@ -224,12 +216,10 @@ dirtiest_state <- EIA_SEP_REPORT %>%
   slice_head(n = 1) %>%
   select(state, CO2_MWh, primary_source)
 
-# Table
 gta_kable_style(dirtiest_state, caption = "🌫️ The Dirtiest State for Electricity", col2 = 3)
 ```
 
 ```{r}
-# Top 5 dirtiest
 top_5_dirty <- EIA_SEP_REPORT %>%
   arrange(desc(CO2_MWh)) %>%
   slice_head(n = 5)
@@ -253,7 +243,6 @@ ggplot(top_5_dirty, aes(x = reorder(state, CO2_MWh), y = CO2_MWh)) +
 Let’s compute the **weighted average carbon emissions** across all states.
 
 ```{r weighted_avg_co2}
-# Calculate weighted average
 weighted_avg_CO2 <- weighted.mean(EIA_SEP_REPORT$CO2_MWh, EIA_SEP_REPORT$generation_MWh, na.rm = TRUE)
 
 weighted_avg_df <- data.frame(
@@ -341,7 +330,6 @@ Electricity is **not created equal** across the U.S. Some states are climate cha
 DATA_DIR <- file.path("data", "mp02")
 dir.create(DATA_DIR, showWarnings = FALSE, recursive = TRUE)
 
-# ── 📥 Download NTD ENERGY File ──
 NTD_ENERGY_FILE <- file.path(DATA_DIR, "2023_ntd_energy.xlsx")
 
 if(!file.exists(NTD_ENERGY_FILE)){
@@ -356,13 +344,10 @@ if(!file.exists(NTD_ENERGY_FILE)){
   }
 }
 
-# ── 📖 Read Raw Energy Data ──
 NTD_ENERGY_RAW <- read_xlsx(NTD_ENERGY_FILE)
 
-# Helper to replace NAs
 to_numeric_fill_0 <- function(x) replace_na(as.numeric(x), 0)
 
-# ── 🧼 Clean Wide Format ──
 NTD_ENERGY <- NTD_ENERGY_RAW |> 
   select(-c(`Reporter Type`, `Reporting Module`, `Other Fuel`, `Other Fuel Description`)) |> 
   mutate(across(-c(`Agency Name`, `Mode`, `TOS`), to_numeric_fill_0)) |> 
@@ -379,7 +364,6 @@ NTD_ENERGY <- NTD_ENERGY_RAW |>
 Understanding transit modes is crucial! Let’s transform those **cryptic codes** into human-friendly labels. 👀
 
 ```{r mode_mapping, echo=TRUE}
-# 🛠 Map Mode Codes to Full Names (NYC Subway Decoder)
 NTD_ENERGY <- NTD_ENERGY |> 
   mutate(Mode = case_when(
     Mode == "DR" ~ "Demand Response",
@@ -403,7 +387,6 @@ NTD_ENERGY <- NTD_ENERGY |>
     TRUE ~ "Unknown"
   ))
 
-# 🔁 Reshape to Long Format (for fuel analysis 🔍)
 NTD_ENERGY_LONG <- NTD_ENERGY %>%
   pivot_longer(
     cols = -c(`NTD ID`, `Agency Name`, Mode),
@@ -412,7 +395,6 @@ NTD_ENERGY_LONG <- NTD_ENERGY %>%
   ) %>%
   filter(Energy_Consumed > 0)
 
-# 🧪 Preview Sample (like GTA radar blip)
 sample_energy_table <- NTD_ENERGY_LONG %>% slice_sample(n = 10)
 gta_kable_style(sample_energy_table, caption = "🔍 Sample of NTD Energy (Long Format)", col2 = 2)
 ```
@@ -425,11 +407,9 @@ gta_kable_style(sample_energy_table, caption = "🔍 Sample of NTD Energy (Long 
 ## NTD Service Data 🚀
 
 ```{r setup-ntd-service, include=FALSE}
-# Set data directory
 DATA_DIR <- file.path("data", "mp02")
 dir.create(DATA_DIR, showWarnings = FALSE, recursive = TRUE)
 
-# 📥 Download if not exists
 NTD_SERVICE_FILE <- file.path(DATA_DIR, "2023_service.csv")
 
 if(!file.exists(NTD_SERVICE_FILE)){
@@ -445,7 +425,6 @@ if(!file.exists(NTD_SERVICE_FILE)){
   }
 }
 
-# 🧼 Clean Raw Service Data (GTA-style)
 NTD_SERVICE_RAW <- read_csv(NTD_SERVICE_FILE)
 
 NTD_SERVICE_CLEAN <- NTD_SERVICE_RAW %>%
@@ -460,12 +439,10 @@ NTD_SERVICE_CLEAN <- NTD_SERVICE_RAW %>%
 ```
 
 ```{r}
-# 🧪 Final Clean Version
 NTD_SERVICE <- NTD_SERVICE_CLEAN %>%
   select(`NTD ID`, Agency, City, State, UPT, MILES) %>%
   filter(!is.na(UPT), !is.na(MILES), UPT > 0, MILES > 0)
 
-# 🖥️ GTA-Styled Table Output
 sample_service_table <- head(NTD_SERVICE, 5)
 gta_kable_style(sample_service_table, caption = "🚍 Sample of Cleaned NTD Service Data", col2 = 2)
 ```
@@ -546,10 +523,8 @@ To calculate fuel-based emissions, we need to know **how much CO₂ (in kg)** ea
 Rather than entering values manually, we automated the process:
 
 ```{r setup-automated, include=FALSE}
-# ── 🔗 EIA CO2 emissions page ──
 url <- "https://www.eia.gov/environment/emissions/co2_vol_mass.php"
 
-# ── 📥 Scrape and Parse Table ──
 co2_fuel_factors <- read_html(url) %>%
   html_elements("table") %>%
   .[[1]] %>%
@@ -562,13 +537,10 @@ co2_fuel_factors <- read_html(url) %>%
   ) %>%
   filter(!is.na(kg_per_unit))  # Remove non-numeric rows
 
-# ── 📂 Create Output Directory ──
 dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
 
-# ── 💾 Save Clean CSV ──
 write_csv(co2_fuel_factors, "data/processed/eia_co2_fuel_factors.csv")
 
-# ── 👀 Preview ──
 co2_fuel_factors %>%
   slice_head(n = 10) %>%
   gta_kable_style(caption = "🛢️ Sample of Scraped EIA Fuel Emission Factors")
@@ -684,7 +656,7 @@ kg_per_Mile = Emissions per mile (carbon cost of distance)
 
 These are our battle stats — the CO₂ K/D ratio of transit.
 
-```{r setup-normal, include=FALSE}
+```{r setup-normal}
 normalized_emissions <- final_emissions_table %>%
   group_by(Agency, State) %>%
   summarise(
@@ -710,7 +682,7 @@ Medium: 1–10 million UPT
 
 Large: 10+ million UPT
 
-```{r setup-agency-size, include=FALSE}
+```{r setup-agency-size}
 normalized_emissions <- normalized_emissions %>%
   mutate(
     size = case_when(
@@ -786,11 +758,9 @@ greenest_agency_by_size <- emissions_data %>%
   ungroup() %>%
   select(Agency_Size, Agency, State, CO2_per_MILE)
 
-# Add formatted label column
 greenest_agency_by_size <- greenest_agency_by_size %>%
   mutate(Label = ifelse(CO2_per_MILE < 0.001, "< 0.001 kg", paste0(round(CO2_per_MILE, 3), " kg")))
 
-# Plot
 ggplot(greenest_agency_by_size, aes(x = reorder(Agency, CO2_per_MILE), y = CO2_per_MILE)) +
   geom_segment(aes(xend = Agency, y = 0, yend = CO2_per_MILE), color = accent_color, size = 1.5) +
   geom_point(aes(color = Agency_Size), size = 6) +
@@ -864,7 +834,6 @@ gta_kable_style(electrification_award_by_size, caption = "🔌 Electrification E
 ```
 
 ```{r electrification-bar}
-# ⚡ Top 5 Electrified Agencies by Size
 electrification_top5 <- emissions_data %>%
   mutate(
     Electric_Share = CO2_Electric / Total_CO2,
@@ -877,7 +846,6 @@ electrification_top5 <- emissions_data %>%
 
 library(forcats)
 
-# ✅ Clean and shorten agency names
 electrification_top5_clean <- electrification_top5 %>%
   mutate(
     Short_Label = Agency %>%
@@ -934,7 +902,6 @@ gta_kable_style(worst_agency_by_size, caption = "💀 'Yikes' Award – Worst CO
 ```
 
 ```{r yikes-radar, message=FALSE, warning=FALSE}
-# Prepare data for radar chart
 worst_agency_by_size <- emissions_data %>%
   filter(!is.na(CO2_per_MILE)) %>%
   group_by(Agency_Size) %>%
@@ -943,7 +910,6 @@ worst_agency_by_size <- emissions_data %>%
   ungroup() %>%
   select(Agency_Size, Agency, State, CO2_per_MILE)
 
-# Normalize CO₂ per mile for radar chart
 worst_agency_by_size$CO2_per_MILE <- worst_agency_by_size$CO2_per_MILE / max(worst_agency_by_size$CO2_per_MILE)
 
 if (!requireNamespace("fmsb", quietly = TRUE)) install.packages("fmsb")
@@ -1089,4 +1055,4 @@ From clean ride royalty to electrification titans, we've ranked them all. 🕹�
 
 -   FTA NTD Energy Data (2023), EIA Fuel Emission Factors (<https://www.eia.gov/environment/emissions/co2_vol_mass.php)>
 
--   The image was sourced by Chat GPT
+-   The image was sourced by Chat GPT, Which also helped me with background theme by creating a .css file
