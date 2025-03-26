@@ -74,7 +74,7 @@ library(ggplot2)
 
 For the most part of the visualization and table i have used the same theme which is **GTA IV style colors**
 
-```{r setup-theme, include=FALSE}
+```{r setup-theme}
 # 🎨 GTA IV Theme Colors
 highlight_color <- "#FF00C8"  # Hot pink
 accent_color    <- "#00CFFF"  # Neon blue
@@ -875,7 +875,6 @@ electrification_top5 <- emissions_data %>%
   slice_max(order_by = Electric_Share, n = 5, with_ties = FALSE) %>%
   ungroup()
 
-install.packages("forcats")
 library(forcats)
 
 # ✅ Clean and shorten agency names
