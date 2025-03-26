@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "STA9750 Submission Material"
+  navbar:
+    left:
+      - text: "About Me"
+        href: index.qmd
+      - text: "NYC Payroll Data Analysis"
+        href: mp01.qmd
+      - text: "Grand Transit Awards: GTA IV Edition"
+        href: mp02.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true

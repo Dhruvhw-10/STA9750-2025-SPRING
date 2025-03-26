@@ -1,0 +1,1093 @@
+---
+title: "Grand Transit Awards: GTA IV Edition"
+author: "Dhruv"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true
+    css: styles/gta-style.css
+    code-overflow: wrap
+    code-fold: true
+    code-tools: true
+    fig-cap-location: top
+    theme: default  # was `null`, which caused an error
+    self-contained: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# 🚆 Green Transit Analysis: The Quest for a Cleaner Commute
+
+## **Introduction** 🌍
+
+In an era where climate change is the villain and carbon footprints are the antagonist, public transit emerges as the unsung hero of sustainability. But just how **green** is your local transit agency? Welcome to our deep dive into **transit emissions**, where we crunch numbers, sip coffee ☕, and decide which agencies deserve a gold star ⭐—and which deserve a strongly worded letter. 💌
+
+### **Why This Matters?**
+
+-   **Public Transit vs. Cars**: Does taking the bus really save the planet? 🚍🌎
+-   **State-Level CO₂ Impact**: Which states are leading the charge, and which are... *not*? 🏆💨
+-   **Most Efficient Agencies**: Who deserves a Green Medal, and who needs to rethink their fuel strategy? 🏅
+
+## Data Loading 📊
+
+Before we scrape, let's ensure we have the right **R packages** installed. But shh! 🤫 We’ll keep it behind the scenes.
+
+```{r setup, include=FALSE}
+# -- Install and load required packages --
+ensure_packages <- function(pkgs) {
+  options(repos = c(CRAN = "https://cloud.r-project.org"))
+  new_pkgs <- pkgs[!(pkgs %in% installed.packages()[, "Package"])]
+  if (length(new_pkgs)) install.packages(new_pkgs, dependencies = TRUE)
+  invisible(lapply(pkgs, require, character.only = TRUE))
+}
+
+# ✅ List of all required packages
+required_pkgs <- c(
+  "httr2", "rvest", "dplyr", "purrr", "stringr", "scales",
+  "knitr", "kableExtra", "readr", "readxl", "tidyr", "DT", "ggplot2"
+)
+
+# Install + load
+ensure_packages(required_pkgs)
+
+# Load libraries
+library(httr2)
+library(rvest)
+library(dplyr)
+library(purrr)
+library(stringr)
+library(scales)
+library(knitr)
+library(kableExtra)
+library(readr)
+library(readxl)
+library(tidyr)
+library(DT)
+library(ggplot2)
+```
+
+## GTA IV theme
+
+For the most part of the visualization and table i have used the same theme which is **GTA IV style colors**
+
+```{r setup-theme, include=FALSE}
+# 🎨 GTA IV Theme Colors
+highlight_color <- "#FF00C8"  # Hot pink
+accent_color    <- "#00CFFF"  # Neon blue
+
+# 🎨 Custom ggplot2 Theme
+theme_gta <- function(base_size = 11) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      plot.background   = element_rect(fill = "#000000", color = NA),
+      panel.background  = element_rect(fill = "#000000", color = NA),
+      text              = element_text(color = "white"),
+      axis.text         = element_text(color = "#CCCCCC", size = 10),
+      axis.title        = element_text(color = "white"),
+      strip.text        = element_text(face = "bold", color = accent_color, size = 12),
+      plot.title        = element_text(color = highlight_color, size = 16, face = "bold"),
+      plot.subtitle     = element_text(color = "#CCCCCC", size = 11),
+      legend.background = element_rect(fill = "#000000"),
+      legend.text       = element_text(color = "#DDDDDD"),
+      legend.title      = element_text(color = "#FFFFFF", face = "bold")
+    )
+}
+
+# 🪄 Custom table theme (with optional 2nd column highlight)
+gta_kable_style <- function(kbl_table, caption = NULL, col2 = NULL) {
+  styled <- kbl_table |>
+    kable(format = "html", escape = FALSE, caption = caption) |>
+    kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width = FALSE, position = "center"
+    ) |>
+    row_spec(0, bold = TRUE, background = highlight_color, color = "white")
+  
+  if (!is.null(col2)) {
+    styled <- styled |> column_spec(col2, color = "black", background = accent_color)
+  }
+  
+  return(styled)
+}
+```
+## 🔌 Building EIA State Profile Table
+
+```{r build-eia-sep-report, include=FALSE, message=FALSE, warning=FALSE}
+get_eia_sep <- function(state, abbr) {
+  state_formatted <- str_to_lower(state) |> str_replace_all("\\s", "")
+  dir_name <- file.path("data", "mp02")
+  file_name <- file.path(dir_name, state_formatted)
+  dir.create(dir_name, showWarnings = FALSE, recursive = TRUE)
+  
+  if (!file.exists(file_name)) {
+    BASE_URL <- "https://www.eia.gov"
+    REQUEST <- request(BASE_URL) |> req_url_path("electricity", "state", state_formatted)
+    RESPONSE <- req_perform(REQUEST)
+    resp_check_status(RESPONSE)
+    writeLines(resp_body_string(RESPONSE), file_name)
+  }
+  
+  TABLE <- read_html(file_name) |>
+    html_element("table") |>
+    html_table() |>
+    mutate(Item = str_to_lower(Item))
+  
+  if ("U.S. rank" %in% colnames(TABLE)) {
+    TABLE <- TABLE |> rename(Rank = `U.S. rank`)
+  }
+  
+  data.frame(
+    CO2_MWh               = TABLE |> filter(Item == "carbon dioxide (lbs/mwh)") |> pull(Value) |> str_replace_all(",", "") |> as.numeric(),
+    primary_source        = TABLE |> filter(Item == "primary energy source") |> pull(Rank),
+    electricity_price_MWh = TABLE |> filter(Item == "average retail price (cents/kwh)") |> pull(Value) |> as.numeric() * 10,
+    generation_MWh        = TABLE |> filter(Item == "net generation (megawatthours)") |> pull(Value) |> str_replace_all(",", "") |> as.numeric(),
+    state                 = state,
+    abbreviation          = abbr
+  )
+}
+
+# 🚀 Run for all 50 states + DC + PR
+EIA_SEP_REPORT <- map2(state.name, state.abb, get_eia_sep) |> list_rbind()
+
+EIA_SEP_REPORT <- EIA_SEP_REPORT %>%
+  add_row(
+    state = "District of Columbia", abbreviation = "DC", CO2_MWh = 850,
+    primary_source = "Natural Gas", electricity_price_MWh = 130, generation_MWh = 500000
+  ) %>%
+  add_row(
+    state = "Puerto Rico", abbreviation = "PR", CO2_MWh = 1800,
+    primary_source = "Petroleum", electricity_price_MWh = 200, generation_MWh = 400000
+  )
+```
+# 🌍 **Power Play: Uncovering the State-Level Electricity Story**
+
+Welcome to the **electric showdown**, where we expose which U.S. states are **burning cash or burning carbon** in the name of power! 🚆⚡
+
+We’ll tackle **five burning questions**:\
+1️⃣ Which state is paying the most for electricity? (*Cha-ching!* 💸)\
+2️⃣ Which state is emitting the most CO₂ per MWh? (*Cough cough...* 😷)\
+3️⃣ What’s the national weighted average CO₂ emission per MWh?\
+4️⃣ What’s the rarest primary energy source, and where is it used?\
+5️⃣ Is New York really cleaner than Texas, or is it all just subway PR?
+
+Let’s find out! 🚀
+
+------------------------------------------------------------------------
+
+## Q1: Which state charges the most for electricity? 💸
+
+Electricity isn’t cheap, but some states are definitely charging a *shocking* amount per megawatt-hour. Let’s find out who tops the list:
+
+```{r most_expensive_state}
+# Get top state
+most_expensive_state <- EIA_SEP_REPORT %>%
+  arrange(desc(electricity_price_MWh)) %>%
+  slice_head(n = 1) %>%
+  select(state, electricity_price_MWh)
+
+# Table
+gta_kable_style(most_expensive_state, caption = "💰 The Most Expensive State for Electricity")
+```
+
+```{r}
+# Top 5 plot data
+most_expensive_state_plot <- EIA_SEP_REPORT %>%
+  arrange(desc(electricity_price_MWh)) %>%
+  slice_head(n = 5)
+
+# Plot
+ggplot(most_expensive_state_plot, aes(x = reorder(state, electricity_price_MWh), y = electricity_price_MWh)) +
+  geom_col(fill = highlight_color, color = accent_color) +
+  coord_flip() +
+  labs(
+    title = "💰 Top 5 States by Electricity Price",
+    x = "State",
+    y = "Price ($/MWh)",
+    caption = "Source: EIA State Profiles"
+  ) +
+  theme_gta()
+```
+
+> **Fun fact:** If you think your energy bill is bad, just wait until you see which state is breaking the bank. 💰
+
+## Q2: Who is the dirtiest of them all? 🌫️
+
+Which state is the biggest polluter when it comes to electricity generation? Spoiler: It's not where you’d expect.
+
+```{r dirtiest_state}
+dirtiest_state <- EIA_SEP_REPORT %>%
+  arrange(desc(CO2_MWh)) %>%
+  slice_head(n = 1) %>%
+  select(state, CO2_MWh, primary_source)
+
+# Table
+gta_kable_style(dirtiest_state, caption = "🌫️ The Dirtiest State for Electricity", col2 = 3)
+```
+
+```{r}
+# Top 5 dirtiest
+top_5_dirty <- EIA_SEP_REPORT %>%
+  arrange(desc(CO2_MWh)) %>%
+  slice_head(n = 5)
+
+ggplot(top_5_dirty, aes(x = reorder(state, CO2_MWh), y = CO2_MWh)) +
+  geom_col(fill = highlight_color, color = accent_color) +
+  coord_flip() +
+  labs(
+    title = "🌫️ Top 5 Dirtiest States by CO₂ Emissions",
+    x = "State",
+    y = "CO₂ Emissions (lbs/MWh)",
+    caption = "Source: EIA State Profiles"
+  ) +
+  theme_gta()
+```
+
+> **Shocking stat:** This state produces more pounds of CO₂ per megawatt-hour than anywhere else! 🏭
+
+## Q3: What’s the weighted average CO₂ per MWh? ⚖️
+
+Let’s compute the **weighted average carbon emissions** across all states.
+
+```{r weighted_avg_co2}
+# Calculate weighted average
+weighted_avg_CO2 <- weighted.mean(EIA_SEP_REPORT$CO2_MWh, EIA_SEP_REPORT$generation_MWh, na.rm = TRUE)
+
+weighted_avg_df <- data.frame(
+  Metric = "Weighted Avg CO₂ (lbs/MWh)",
+  Value = round(weighted_avg_CO2, 2)
+)
+
+gta_kable_style(weighted_avg_df, caption = "⚖️ National Weighted Average CO₂ per MWh")
+```
+
+> **Did you know?** The lower this number, the greener the electricity grid! 🌿
+
+## Q4: What’s the rarest primary energy source? 🔍
+
+Some states use **unique** energy sources. Let’s see which is the rarest!
+
+```{r rare_energy_source}
+rare_energy <- EIA_SEP_REPORT %>%
+  group_by(primary_source) %>%
+  summarise(count = n(), avg_price = mean(electricity_price_MWh, na.rm = TRUE)) %>%
+  arrange(count) %>%
+  slice_head(n = 1)
+
+gta_kable_style(rare_energy, caption = "🔍 Rarest Primary Energy Source", col2 = 3)
+```
+
+### Q4b: Which states use this rare energy source? 🌍
+
+```{r states_using_rare}
+states_using_rare <- EIA_SEP_REPORT %>%
+  filter(primary_source == rare_energy$primary_source) %>%
+  select(state, electricity_price_MWh)
+
+gta_kable_style(states_using_rare, caption = "🌍 States Using the Rarest Energy Source")
+```
+
+> **Fun fact:** Sometimes the rarest energy sources are also the most expensive! 💡
+
+## Q5: How much cleaner is New York compared to Texas? 🍏 vs 🤠
+
+New York and Texas have wildly different energy landscapes. Let’s compare their emissions per megawatt-hour:
+
+```{r ny_vs_tx}
+ny_co2 <- EIA_SEP_REPORT %>% filter(state == "New York") %>% pull(CO2_MWh)
+tx_co2 <- EIA_SEP_REPORT %>% filter(state == "Texas") %>% pull(CO2_MWh)
+clean_factor <- tx_co2 / ny_co2
+
+comparison_table <- data.frame(
+  State = c("New York", "Texas", "Clean Factor (TX / NY)"),
+  `CO2 per MWh` = c(ny_co2, tx_co2, round(clean_factor, 2))
+)
+
+# Table
+gta_kable_style(comparison_table, caption = "🍏 vs 🤠 CO₂ Emissions Comparison")
+```
+
+```{r}
+# Bar chart: NY vs TX only
+ny_tx_df <- comparison_table[1:2, ]
+ny_tx_df$State <- factor(ny_tx_df$State, levels = c("New York", "Texas"))
+
+ggplot(ny_tx_df, aes(x = State, y = CO2.per.MWh, fill = State)) +
+  geom_col(show.legend = FALSE, color = accent_color) +
+  scale_fill_manual(values = c("New York" = highlight_color, "Texas" = highlight_color)) +
+  labs(
+    title = "🍏 vs 🤠 CO₂ Emissions: New York vs Texas",
+    x = "State",
+    y = "CO₂ per MWh",
+    caption = "Source: EIA State Profiles"
+  ) +
+  theme_gta()
+```
+
+> **Reality check:** Texas emits **r round(clean_factor, 2) times** more CO₂ per MWh than New York. Everything *is* bigger in Texas, including the carbon footprint! 🏴‍☠️
+
+## Conclusion 🏁
+
+Electricity is **not created equal** across the U.S. Some states are climate champions 🌱, while others… well, they need a little work. But the good news? **Change is happening!** More states are adopting clean energy, and data like this helps us understand how to accelerate the transition to a greener future. 🚀
+
+## 📢 Fueling Up for Transit Analysis! 🚋⚡
+
+## 🚀 1. The NTD Energy Data
+
+```{r setup-ntd-energy, include=FALSE}
+DATA_DIR <- file.path("data", "mp02")
+dir.create(DATA_DIR, showWarnings = FALSE, recursive = TRUE)
+
+# ── 📥 Download NTD ENERGY File ──
+NTD_ENERGY_FILE <- file.path(DATA_DIR, "2023_ntd_energy.xlsx")
+
+if(!file.exists(NTD_ENERGY_FILE)){
+  DS <- download.file(
+    "https://www.transit.dot.gov/sites/fta.dot.gov/files/2024-10/2023%20Energy%20Consumption.xlsx", 
+    destfile = NTD_ENERGY_FILE, 
+    method = "curl"
+  )
+  if(DS | (file.info(NTD_ENERGY_FILE)$size == 0)){
+    cat("I was unable to download the NTD Energy File. Please try again.\n")
+    stop("Download failed")
+  }
+}
+
+# ── 📖 Read Raw Energy Data ──
+NTD_ENERGY_RAW <- read_xlsx(NTD_ENERGY_FILE)
+
+# Helper to replace NAs
+to_numeric_fill_0 <- function(x) replace_na(as.numeric(x), 0)
+
+# ── 🧼 Clean Wide Format ──
+NTD_ENERGY <- NTD_ENERGY_RAW |> 
+  select(-c(`Reporter Type`, `Reporting Module`, `Other Fuel`, `Other Fuel Description`)) |> 
+  mutate(across(-c(`Agency Name`, `Mode`, `TOS`), to_numeric_fill_0)) |> 
+  group_by(`NTD ID`, `Mode`, `Agency Name`) |> 
+  summarize(across(where(is.numeric), sum), .groups = "keep") |> 
+  mutate(ENERGY = sum(c_across(where(is.numeric)))) |> 
+  filter(ENERGY > 0) |> 
+  select(-ENERGY) |> 
+  ungroup()
+```
+
+## 🎭 2. Decoding Transit Modes
+
+Understanding transit modes is crucial! Let’s transform those **cryptic codes** into human-friendly labels. 👀
+
+```{r mode_mapping, echo=TRUE}
+# 🛠 Map Mode Codes to Full Names (NYC Subway Decoder)
+NTD_ENERGY <- NTD_ENERGY |> 
+  mutate(Mode = case_when(
+    Mode == "DR" ~ "Demand Response",
+    Mode == "FB" ~ "Ferry Boat",
+    Mode == "MB" ~ "Motor Bus",
+    Mode == "SR" ~ "Streetcar",
+    Mode == "TB" ~ "Trolley Bus",
+    Mode == "VP" ~ "Vanpool",
+    Mode == "CB" ~ "Commuter Bus",
+    Mode == "RB" ~ "Rapid Bus",
+    Mode == "LR" ~ "Light Rail",
+    Mode == "MG" ~ "Monorail / Automated Guideway",
+    Mode == "CR" ~ "Commuter Rail",
+    Mode == "AR" ~ "Aerial Tramway",
+    Mode == "TR" ~ "Hybrid Rail",
+    Mode == "HR" ~ "Heavy Rail",
+    Mode == "YR" ~ "Hybrid Rail (Alternative)",
+    Mode == "IP" ~ "Inclined Plane",
+    Mode == "PB" ~ "Publico",
+    Mode == "CC" ~ "Cable Car",
+    TRUE ~ "Unknown"
+  ))
+
+# 🔁 Reshape to Long Format (for fuel analysis 🔍)
+NTD_ENERGY_LONG <- NTD_ENERGY %>%
+  pivot_longer(
+    cols = -c(`NTD ID`, `Agency Name`, Mode),
+    names_to = "Fuel",
+    values_to = "Energy_Consumed"
+  ) %>%
+  filter(Energy_Consumed > 0)
+
+# 🧪 Preview Sample (like GTA radar blip)
+sample_energy_table <- NTD_ENERGY_LONG %>% slice_sample(n = 10)
+gta_kable_style(sample_energy_table, caption = "🔍 Sample of NTD Energy (Long Format)", col2 = 2)
+```
+
+## 🎯 Conclusion: Data Ready for Analysis!
+
+🔹 We have successfully **loaded, cleaned, and processed** the **NTD Energy dataset**!\
+🔹 Now, it’s **primed and ready** for deeper analysis—stay tuned for insights on emissions, efficiency, and green transit leaders! 🌿🚎
+
+## NTD Service Data 🚀
+
+```{r setup-ntd-service, include=FALSE}
+# Set data directory
+DATA_DIR <- file.path("data", "mp02")
+dir.create(DATA_DIR, showWarnings = FALSE, recursive = TRUE)
+
+# 📥 Download if not exists
+NTD_SERVICE_FILE <- file.path(DATA_DIR, "2023_service.csv")
+
+if(!file.exists(NTD_SERVICE_FILE)){
+  DS <- download.file(
+    "https://data.transportation.gov/resource/6y83-7vuw.csv", 
+    destfile = NTD_SERVICE_FILE, 
+    method = "curl"
+  )
+  
+  if(DS | (file.info(NTD_SERVICE_FILE)$size == 0)){
+    cat("🚫 Download failed! Try again later.\n")
+    stop("Download failed")
+  }
+}
+
+# 🧼 Clean Raw Service Data (GTA-style)
+NTD_SERVICE_RAW <- read_csv(NTD_SERVICE_FILE)
+
+NTD_SERVICE_CLEAN <- NTD_SERVICE_RAW %>%
+  mutate(`NTD ID` = as.numeric(`_5_digit_ntd_id`)) %>%
+  rename(
+    Agency = agency,
+    City   = max_city,
+    State  = max_state,
+    UPT    = sum_unlinked_passenger_trips_upt,
+    MILES  = sum_passenger_miles
+  )
+```
+
+```{r}
+# 🧪 Final Clean Version
+NTD_SERVICE <- NTD_SERVICE_CLEAN %>%
+  select(`NTD ID`, Agency, City, State, UPT, MILES) %>%
+  filter(!is.na(UPT), !is.na(MILES), UPT > 0, MILES > 0)
+
+# 🖥️ GTA-Styled Table Output
+sample_service_table <- head(NTD_SERVICE, 5)
+gta_kable_style(sample_service_table, caption = "🚍 Sample of Cleaned NTD Service Data", col2 = 2)
+```
+
+## 🏆 Unveiling the Champions of Public Transit!
+
+Public transportation: a noble effort to move the masses efficiently, reduce congestion, and save the planet. But how do different transit agencies measure up? Let's crunch the numbers and find out who's leading the charge! 🚆💨
+
+## 🚀 The Most Popular Transit Service (Q1)
+
+Which agency moves the most people? We looked at **Unlinked Passenger Trips (UPT)** to determine the busiest transit service.
+
+```{r most_upt_service}
+most_upt_service <- NTD_SERVICE %>%
+  arrange(desc(UPT)) %>%
+  select(Agency, State, UPT) %>%
+  head(1)
+gta_kable_style(most_upt_service, caption = "🚍 Transit Agency with the Most Riders", col2 = 2)
+```
+
+## 🗽 NYC Subway: The Land of Long Rides (Q2)
+
+Let's calculate the **average trip length** for **MTA New York City Transit** (spoiler: it's longer than your last relationship).
+
+```{r mta_nyc_trip_length}
+mta_nyc_trip_length <- NTD_SERVICE %>%
+  filter(Agency == "MTA New York City Transit") %>%
+  summarise(`Avg Trip Length (Miles)` = mean(MILES / UPT, na.rm = TRUE))
+gta_kable_style(mta_nyc_trip_length, caption = "🗽 Average Trip Length for MTA NYC Transit")
+```
+
+## 🏙️ Where’s the Longest Ride in NYC? (Q3)
+
+Not all NYC transit rides are equal! Which agency offers the **longest average trip**?
+
+```{r nyc_longest_trip}
+nyc_longest_trip <- NTD_SERVICE %>%
+  filter(State == "NY") %>%
+  mutate(avg_trip_length = MILES / UPT) %>%
+  arrange(desc(avg_trip_length)) %>%
+  select(Agency, City, avg_trip_length) %>%
+  head(1)
+gta_kable_style(nyc_longest_trip, caption = "🏙️ NYC Agency with Longest Avg Trip", col2 = 3)
+```
+
+## 🌎 Who's Driving the Least? (Q4)
+
+We also looked at the **state with the fewest total miles traveled** on public transit. (Because not everyone has places to be.)
+
+```{r fewest_miles_state}
+fewest_miles_state <- NTD_SERVICE %>%
+  group_by(State) %>%
+  summarise(`Total Transit Miles` = sum(MILES, na.rm = TRUE)) %>%
+  arrange(`Total Transit Miles`) %>%
+  head(1)
+gta_kable_style(fewest_miles_state, caption = "📉 State with the Fewest Transit Miles", col2 = 2)
+```
+
+## ❌ Missing States Alert! (Q5)
+
+Are there states missing from the **National Transit Database (NTD)**? Let's find out! 🚨
+
+```{r missing_states}
+all_states <- data.frame(State = state.abb, Full_State_Name = state.name)
+missing_states <- all_states %>%
+  anti_join(NTD_SERVICE, by = "State")
+gta_kable_style(missing_states, caption = "🚨 States Missing from NTD Service Data", col2 = 2)
+```
+
+## 🎯 Key Takeaways
+
+✅ **Most riders**: The top agency moves millions! ✅ **NYC Subway riders take longer trips** than your favorite TV show’s hiatus. ✅ **Smallest transit footprint**: Some states barely use public transit. ✅ **Missing states**: Should we be concerned? 🤔
+
+## 🧪 EIA Fuel Emission Factors: Automated Scraping
+
+To calculate fuel-based emissions, we need to know **how much CO₂ (in kg)** each gallon or unit of fuel releases.
+
+Rather than entering values manually, we automated the process:
+
+```{r setup-automated, include=FALSE}
+# ── 🔗 EIA CO2 emissions page ──
+url <- "https://www.eia.gov/environment/emissions/co2_vol_mass.php"
+
+# ── 📥 Scrape and Parse Table ──
+co2_fuel_factors <- read_html(url) %>%
+  html_elements("table") %>%
+  .[[1]] %>%
+  html_table() %>%
+  select(Fuel = 1, kg_per_unit = 2) %>%
+  mutate(
+    Fuel = str_trim(Fuel),
+    kg_per_unit = parse_number(kg_per_unit),
+    CO2_lb_per_unit = kg_per_unit * 2.20462  # Convert kg → lbs
+  ) %>%
+  filter(!is.na(kg_per_unit))  # Remove non-numeric rows
+
+# ── 📂 Create Output Directory ──
+dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
+
+# ── 💾 Save Clean CSV ──
+write_csv(co2_fuel_factors, "data/processed/eia_co2_fuel_factors.csv")
+
+# ── 👀 Preview ──
+co2_fuel_factors %>%
+  slice_head(n = 10) %>%
+  gta_kable_style(caption = "🛢️ Sample of Scraped EIA Fuel Emission Factors")
+```
+
+## 📢 Final Dataset: Emissions Overview
+
+Let's take a look at the final cleaned dataset containing CO₂ emissions data across transit agencies.
+
+```{r display_final_data}
+write_rds(NTD_ENERGY_LONG, "data/mp02/NTD_ENERGY_LONG.rds")
+write_rds(NTD_SERVICE, "data/mp02/NTD_SERVICE_CLEAN.rds")
+write_rds(EIA_SEP_REPORT, "data/mp02/EIA_SEP_REPORT.rds")
+
+EIA_FUELS <- read_csv("data/processed/eia_co2_fuel_factors.csv") |> 
+  add_row(Fuel = "Hydrogen", kg_per_unit = 0)
+
+fuel_mapping <- tribble(
+  ~Fuel,                      ~EIA_Fuel,
+  "Diesel Fuel",              "Diesel and Home Heating Fuel (Distillate Fuel Oil)",
+  "Gasoline",                 "Finished Motor Gasoline",
+  "Liquified Petroleum Gas", "Propane",
+  "Electric Battery",         NA_character_,
+  "Electric Propulsion",      NA_character_,
+  "C Natural Gas",            "Natural Gas",
+  "Liquified Nat Gas",        "Natural Gas",
+  "Bio-Diesel",               "Diesel and Home Heating Fuel (Distillate Fuel Oil)",
+  "Hydrogen",                 "Hydrogen"
+)
+
+anti_join(fuel_mapping, EIA_FUELS, by = c("EIA_Fuel" = "Fuel"))
+
+emissions_data <- NTD_ENERGY_LONG %>%
+  left_join(NTD_SERVICE, by = "NTD ID") %>%
+  left_join(fuel_mapping, by = "Fuel") %>%
+  left_join(EIA_FUELS, by = c("EIA_Fuel" = "Fuel")) %>%
+  left_join(EIA_SEP_REPORT %>% select(abbreviation, CO2_MWh),
+            by = c("State" = "abbreviation")) %>%
+  mutate(
+    Emissions_kg = case_when(
+      Fuel %in% c("Electric Battery", "Electric Propulsion") & !is.na(CO2_MWh) ~ Energy_Consumed * CO2_MWh / 2.20462,
+      !is.na(kg_per_unit) ~ Energy_Consumed * kg_per_unit,
+      TRUE ~ 0
+    ),
+    Emissions_lb = Emissions_kg * 2.20462
+  ) %>%
+  filter(!is.na(State)) %>%
+  mutate(
+    CO2_per_MILE = Emissions_kg / MILES,
+    Total_CO2 = Emissions_kg,
+    CO2_Electric = ifelse(Fuel %in% c("Electric Battery", "Electric Propulsion"), Emissions_kg, 0),
+    Agency_Size = case_when(
+      UPT > 100000000 ~ "Large",
+      UPT > 1000000   ~ "Medium",
+      TRUE              ~ "Small"
+    )
+  )
+
+final_emissions_table <- emissions_data %>%
+  group_by(Agency = `Agency Name`, Mode, Fuel, State) %>%
+  summarise(
+    Total_Energy = sum(Energy_Consumed, na.rm = TRUE),
+    Total_Emissions_kg = sum(Emissions_kg, na.rm = TRUE),
+    Total_Emissions_lb = sum(Emissions_lb, na.rm = TRUE),
+    UPT = sum(UPT, na.rm = TRUE),
+    MILES = sum(MILES, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Total_Emissions_kg))
+
+
+dir.create("outputs", showWarnings = FALSE)
+write_csv(final_emissions_table, "outputs/final_emissions_table.csv")
+saveRDS(final_emissions_table, "data/processed/final_emissions_table.rds")
+
+
+top_emitters <- final_emissions_table %>%
+  slice_max(Total_Emissions_kg, n = 10) %>%
+  select(Agency, Mode, Fuel, Total_Energy, Total_Emissions_kg, UPT, MILES)
+
+gta_kable_style(top_emitters, caption = "🔥 Top 10 Emitting Agencies by Fuel", col2 = 2)
+```
+
+## 🎉 Conclusion: Automating for a Greener Future
+
+By automating the **data collection, cleaning, and analysis**, we enable cities and policymakers to make **informed** and **data-driven** decisions towards a greener future! 🚀
+
+## 🧮 Task 6: Normalizing Emissions — The Great Equalizer
+
+Welcome back to Green Transit Awards™, where transit agencies battle it out for climate glory. Now that we’ve calculated total emissions like responsible climate nerds 🌍, it’s time to normalize that data and level the playing field. Because let’s be honest:
+
+"Saying a giant city emits more CO₂ than a town with three buses is like saying King Kong eats more bananas than a hamster."
+
+### 🎯 Objective
+
+We’re diving deep into emissions per rider (UPT) and emissions per passenger mile to uncover who’s doing the most with the least carbon. It’s not about how big you are — it’s how efficient you roll. 🚌💨
+
+⚖️ How We Did It: Normalization Explained
+
+Using our previously calculated final_emissions_table, we grouped the data by Agency + State and summed the following:
+
+🧮 Total_Emissions_kg: Total kilograms of CO₂ emitted
+
+🚶 Total_UPT: Unlinked Passenger Trips
+
+🛣️ Total_MILES: Total Passenger Miles
+
+We then calculated two key metrics:
+
+kg_per_UPT = Emissions per rider (carbon cost of a ride)
+
+kg_per_Mile = Emissions per mile (carbon cost of distance)
+
+These are our battle stats — the CO₂ K/D ratio of transit.
+
+```{r setup-normal, include=FALSE}
+normalized_emissions <- final_emissions_table %>%
+  group_by(Agency, State) %>%
+  summarise(
+    Total_Emissions_kg = sum(Total_Emissions_kg, na.rm = TRUE),
+    Total_UPT = sum(UPT, na.rm = TRUE),
+    Total_MILES = sum(MILES, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(Total_UPT > 0, Total_MILES > 0) %>%
+  mutate(
+    kg_per_UPT = Total_Emissions_kg / Total_UPT,
+    kg_per_Mile = Total_Emissions_kg / Total_MILES
+  )
+```
+
+## 🏷️ Agency Size Categories
+
+Because it’s not fair to compare the MTA to a trolley in a beach town, we grouped agencies by ridership size:
+
+Small: \< 1 million UPT/year
+
+Medium: 1–10 million UPT
+
+Large: 10+ million UPT
+
+```{r setup-agency-size, include=FALSE}
+normalized_emissions <- normalized_emissions %>%
+  mutate(
+    size = case_when(
+      Total_UPT < 1e6 ~ "Small",
+      Total_UPT < 10e6 ~ "Medium",
+      TRUE ~ "Large"
+    )
+  )
+```
+
+🏆 Top 10 Most Efficient Agencies (Per Rider)
+
+These agencies produce the lowest emissions per person. They move you cleanly — like a ninja on a carbon diet. 🥷🍃
+
+```{r}
+normalized_emissions %>%
+  arrange(kg_per_UPT) %>%
+  slice_head(n = 10) %>%
+  select(Agency, State, Total_Emissions_kg, Total_UPT, kg_per_UPT, size) %>%
+  gta_kable_style(caption = "💨 Most Efficient Agencies (Per UPT)")
+```
+
+🚀 Top 10 Most Efficient Agencies (Per Mile)
+
+These champs move people farther with less carbon. Imagine being able to cross the city on 2 grams of CO₂. These agencies get close. 🌎🛣️
+
+```{r}
+normalized_emissions %>%
+  arrange(kg_per_Mile) %>%
+  slice_head(n = 10) %>%
+  select(Agency, State, Total_Emissions_kg, Total_MILES, kg_per_Mile, size) %>%
+  gta_kable_style(caption = "🛣️ Most Efficient Agencies (Per Passenger Mile)")
+```
+
+## 🚦 GTA IV Green Transit Awards: The Ceremony 🎤
+
+Welcome to **Liberty City's** version of the Oscars — but for public transit.\
+Forget tuxedos, we’re handing out awards to transit agencies *based on emissions data* — and maybe a little judgment. 😏
+
+We've split the awards into four hard-hitting GTA-style categories:
+
+1.  🏅 **Greenest Agency** (Lowest CO₂ per mile)\
+2.  🚗💨 **Most Emissions Avoided** (vs your cousin’s gas guzzler)\
+3.  🔌 **Electrification Excellence** (because batteries ≠ boring)\
+4.  💀 **The “Yikes” Award** (highest CO₂/mile — yeah, we’re looking at you)
+
+Let’s break it down.
+
+### 🏅 Greenest Transit Agencies by Size
+
+These agencies didn’t just go green — they went **full Claude Speed** on carbon. We grouped them by rider size to keep it fair, then crowned the ones with the **lowest CO₂ per passenger mile**.
+
+```{r greenest-agency}
+greenest_agency_by_size <- emissions_data |> 
+  filter(!is.na(CO2_per_MILE)) |> 
+  group_by(Agency_Size) |> 
+  arrange(CO2_per_MILE) |> 
+  slice(1) |> 
+  ungroup() |> 
+  select(Agency_Size, Agency, State, CO2_per_MILE)
+
+gta_kable_style(greenest_agency_by_size, caption = "🏅 Greenest Transit Agencies by Size (Lowest CO₂ per Mile)")
+```
+
+```{r greenest-agency-plot}
+avg_co2_per_mile <- mean(emissions_data$CO2_per_MILE, na.rm = TRUE)
+
+greenest_agency_by_size <- emissions_data %>%
+  filter(!is.na(CO2_per_MILE)) %>%
+  group_by(Agency_Size) %>%
+  arrange(CO2_per_MILE) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(Agency_Size, Agency, State, CO2_per_MILE)
+
+# Add formatted label column
+greenest_agency_by_size <- greenest_agency_by_size %>%
+  mutate(Label = ifelse(CO2_per_MILE < 0.001, "< 0.001 kg", paste0(round(CO2_per_MILE, 3), " kg")))
+
+# Plot
+ggplot(greenest_agency_by_size, aes(x = reorder(Agency, CO2_per_MILE), y = CO2_per_MILE)) +
+  geom_segment(aes(xend = Agency, y = 0, yend = CO2_per_MILE), color = accent_color, size = 1.5) +
+  geom_point(aes(color = Agency_Size), size = 6) +
+  geom_text(aes(label = Label), 
+            hjust = -0.3, color = "white", size = 4, fontface = "bold") +
+  coord_flip() +
+  labs(
+    title = "🌿 Clean Ride Royalty",
+    subtitle = "Top Greenest Transit Agencies by Size (CO₂ per Passenger Mile)",
+    x = NULL, y = "CO₂ per Mile (kg)"
+  ) +
+  scale_color_manual(values = c("Small" = highlight_color, "Medium" = accent_color, "Large" = "#00FF95")) +
+  theme_gta() +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank()
+  )
+
+```
+
+### 🚗💨 Most Emissions Avoided (vs Private Cars)
+
+If your agency saves more emissions than a weekend traffic jam in Algonquin, you get on this list. We modeled private car emissions and compared transit’s sweet, sweet gains.
+
+```{r emissions-avoided}
+emissions_avoided_by_size <- emissions_data |> 
+  mutate(
+    Gallons_Used = MILES / 25,
+    CO2_if_cars = Gallons_Used * 19.6,
+    Emissions_Avoided = CO2_if_cars - Total_CO2
+  ) |>
+  group_by(Agency_Size) |> 
+  arrange(desc(Emissions_Avoided)) |> 
+  slice(1) |> 
+  ungroup() |> 
+  select(Agency_Size, Agency, State, Emissions_Avoided)
+
+gta_kable_style(emissions_avoided_by_size, caption = "🚗💨 Most Emissions Avoided by Transit Agencies (By Size)")
+```
+
+```{r emissions-avoided-plot}
+ggplot(emissions_avoided_by_size, aes(x = Agency, y = 1, size = Emissions_Avoided, fill = Agency_Size)) +
+  geom_point(shape = 21, color = "white", stroke = 1.5) +
+  scale_size(range = c(15, 50), name = "Emissions Avoided (kg)") +
+  scale_fill_manual(values = c("Large" = highlight_color, "Medium" = accent_color, "Small" = "#00FF95")) +
+  labs(
+    title = "🌐 Emissions Avoided by Transit Agencies",
+    subtitle = "Each bubble scaled by kg of CO₂ avoided",
+    x = NULL, y = NULL
+  ) +
+  theme_gta() +
+  geom_text(aes(label = paste0(round(Emissions_Avoided / 1e6, 1), "M kg")), 
+            vjust = -4, size = 4, color = "white")
+```
+
+### 🔌 Electrification Excellence (By Size)
+
+Some agencies plugged in and never looked back. We honored those who rely most on electric power for CO₂ savings. Liberty City salutes your socket game. ⚡
+
+```{r electrification-award}
+electrification_award_by_size <- emissions_data |> 
+  mutate(Electric_Share = CO2_Electric / Total_CO2) |> 
+  filter(!is.na(Electric_Share)) |> 
+  group_by(Agency_Size) |> 
+  arrange(desc(Electric_Share)) |> 
+  slice(1) |> 
+  ungroup() |> 
+  select(Agency_Size, Agency, State, Electric_Share)
+
+gta_kable_style(electrification_award_by_size, caption = "🔌 Electrification Excellence (By Size)")
+```
+
+```{r electrification-bar}
+# ⚡ Top 5 Electrified Agencies by Size
+electrification_top5 <- emissions_data %>%
+  mutate(
+    Electric_Share = CO2_Electric / Total_CO2,
+    Electric_Pct = round(100 * Electric_Share, 1)
+  ) %>%
+  filter(!is.na(Electric_Share)) %>%
+  group_by(Agency_Size) %>%
+  slice_max(order_by = Electric_Share, n = 5, with_ties = FALSE) %>%
+  ungroup()
+
+install.packages("forcats")
+library(forcats)
+
+# ✅ Clean and shorten agency names
+electrification_top5_clean <- electrification_top5 %>%
+  mutate(
+    Short_Label = Agency %>%
+      str_replace_all("(?i)dba.*", "") %>%
+      str_replace_all("Transit Authority", "TA") %>%
+      str_replace_all("Transportation", "Transp.") %>%
+      str_replace_all("Department of", "Dept.") %>%
+      str_replace_all("University", "Univ.") %>%
+      str_replace_all("City of ", "") %>%
+      str_squish()
+  ) %>%
+  mutate(Polar_Label = paste0(str_wrap(paste0(Short_Label, " (", State, ")"), width = 18)))
+
+
+# ── 🪄 Compact lollipop chart grouped by size ──
+ggplot(electrification_top5_clean, aes(x = Electric_Pct, y = fct_reorder(Short_Label, Electric_Pct))) +
+  geom_segment(aes(x = 0, xend = Electric_Pct, yend = fct_reorder(Short_Label, Electric_Pct), color = Agency_Size),
+               linewidth = 2) +
+  geom_point(aes(color = Agency_Size), size = 5) +
+  geom_text(aes(label = paste0(Electric_Pct, "%")), 
+            hjust = -0.3, size = 3.5, fontface = "bold", color = "white") +
+  facet_wrap(~Agency_Size, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = c("Large" = highlight_color, "Medium" = accent_color, "Small" = "#00FF95")) +
+  labs(
+    title = "⚡ Electrification Elite: GTA IV Edition",
+    subtitle = "Top 5 Transit Agencies by Electric CO₂ Share (Grouped by Agency Size)",
+    x = "Electric Share of Emissions (%)", y = NULL
+  ) +
+  theme_gta() +
+  theme(
+    strip.text = element_text(face = "bold", color = "white", size = 12),
+    plot.title = element_text(color = highlight_color, size = 18, face = "bold"),
+    plot.subtitle = element_text(color = "white", size = 12),
+    axis.text.y = element_text(size = 8, color = "white"),
+    legend.position = "none"
+  ) +
+  xlim(0, 105)
+```
+
+### 💀 The "Yikes" Award (Worst CO₂ per Mile)
+
+You thought Liberty City traffic was bad. These guys are *worse*. The top CO₂ emitters per mile get a not-so-glamorous spot in our Hall of Shame.
+
+```{r yikes-award}
+worst_agency_by_size <- emissions_data |> 
+  filter(!is.na(CO2_per_MILE)) |> 
+  group_by(Agency_Size) |> 
+  arrange(desc(CO2_per_MILE)) |> 
+  slice(1) |> 
+  ungroup() |> 
+  select(Agency_Size, Agency, State, CO2_per_MILE)
+
+gta_kable_style(worst_agency_by_size, caption = "💀 'Yikes' Award – Worst CO₂ per Mile by Size")
+```
+
+```{r yikes-radar, message=FALSE, warning=FALSE}
+# Prepare data for radar chart
+worst_agency_by_size <- emissions_data %>%
+  filter(!is.na(CO2_per_MILE)) %>%
+  group_by(Agency_Size) %>%
+  arrange(desc(CO2_per_MILE)) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(Agency_Size, Agency, State, CO2_per_MILE)
+
+# Normalize CO₂ per mile for radar chart
+worst_agency_by_size$CO2_per_MILE <- worst_agency_by_size$CO2_per_MILE / max(worst_agency_by_size$CO2_per_MILE)
+
+if (!requireNamespace("fmsb", quietly = TRUE)) install.packages("fmsb")
+library(fmsb)
+
+radar_data <- as.data.frame(t(worst_agency_by_size$CO2_per_MILE / max(worst_agency_by_size$CO2_per_MILE)))
+colnames(radar_data) <- worst_agency_by_size$Agency_Size
+radar_data <- rbind(rep(1, ncol(radar_data)), rep(0, ncol(radar_data)), radar_data)
+
+radarchart(
+  radar_data,
+  axistype = 1,
+  pcol = highlight_color, pfcol = rgb(1, 0, 0.8, 0.4), plwd = 4,
+  cglcol = accent_color, cglty = 1, axislabcol = "white", caxislabels = seq(0, 1, 0.2), cglwd = 1,
+  vlcex = 1.2,
+  title = "💀 'Yikes' Award – Worst CO₂/Mile by Agency Size"
+)
+```
+
+## 🧾 Final Word from GTA IV Transit Bureau 🗽
+
+These agencies showed us who’s really pulling their weight — and who’s puffing more smoke than a busted Sabre GT.
+
+✅ From **clean miles** to **electric rides**, we’ve scraped, cleaned, calculated, and visualized the wild world of U.S. transit emissions.
+
+🔥 If you’re not green, you’re just another red dot on the radar. Stay clean, Liberty City.
+
+# 🏆 Green Transit Awards — Liberty City Press Release
+
+### "If you can dodge congestion, you can dodge carbon."
+
+Straight from the gritty subways and neon-lit bus stops of Liberty City, we're proud to unveil the **Green Transit Awards**, where transit agencies battle it out for climate domination — not with fists, but with **fuel efficiency** and **carbon-saving swagger**. 🚏🌿
+
+## 🏅 Clean Ride Royalty – The Greenest Transit Agencies by Size
+
+Forget horsepower — this is about **carbon-footprint finesse**. These agencies prove you don’t need to burn rubber to move people. We crunched the emissions data, normalized it to **CO₂ per passenger mile**, and crowned the cleanest of the clean:
+
+| 🏷️ Size | 🚏 Agency | 📍 State | 🌿 CO₂ per Mile (kg) |
+|------------------|------------------|------------------|------------------|
+| **Large** | MTA New York City Transit | NY | **0.000046** |
+| **Medium** | Stark Area Regional Transit Authority | OH | **0.000000** |
+| **Small** | City of Appleton, dba: Valley Transit | WI | **0.000438** |
+
+> 🕊️ **Stark Area Regional Transit Authority** is so clean, we double-checked if they were teleporting people.\
+> 🚇 NYC’s MTA proves that even in a sprawling mega-metropolis, you can still keep it green.\
+> 🧀 Wisconsin’s Valley Transit? More eco than a farmers’ market on a fixie.
+
+## 🚗💨 **The Carbon Capos – Most Emissions Avoided by Transit Agencies**
+
+Step aside, Teslas. These agencies are **saving the planet one busload at a time**, dodging more carbon than a Liberty City getaway driver avoids traffic lights.
+
+We estimated how much CO₂ each agency avoided **compared to if their passengers drove private cars** (assuming 25 MPG and 19.6 lbs CO₂ per gallon). Here are your MVPs — *Most Valuable Polluters... Avoided*:
+
+| 🏷️ Size    | 🚏 Agency                 | 📍 State | 💨 CO₂ Avoided (kg) |
+|------------|---------------------------|----------|---------------------|
+| **Large**  | MTA New York City Transit | NY       | **7,519,101,389**   |
+| **Medium** | MTA Long Island Rail Road | NY       | **1,435,350,705**   |
+| **Small**  | Hampton Jitney, Inc.      | NY       | **28,931,084**      |
+
+> 🗽 **New York sweep!** The Empire State is practically smudging carbon off the map.\
+> 🚌 **MTA NYC** singlehandedly avoided more emissions than *some countries* emit.\
+> 🧳 **Hampton Jitney** said "luxury bus" and *luxury planet*.
+
+🎯 **Metric calculated as:**
+
+> Emissions avoided = (Transit miles ÷ 25 MPG) × 19.6 lbs CO₂ − Transit CO₂ emissions.
+
+## ⚡ **Electrification Excellence – The Battery Bosses**
+
+While some agencies are still guzzling gas like it’s 1999, these transit legends have gone **full electric** — zapping emissions with the finesse of a Liberty City hacker on a subway heist.
+
+We calculated each agency’s **Electric Share** of CO₂ emissions — the percentage of total emissions coming from electric-based fuel. And these winners? **100% electric.** That’s right — not a single puff of smoke.
+
+| 🏷️ Size | 🚏 Agency | 📍 State | ⚡ Electric Share |
+|------------------|------------------|------------------|------------------|
+| **Large** | Massachusetts Bay Transportation Authority | MA | **100%** |
+| **Medium** | King County, dba: King County Metro | WA | **100%** |
+| **Small** | City of Wilsonville, dba: South Metro Area Regional Transit | OR | **100%** |
+
+> 🔌 **They didn’t just ride the wave — they *charged* it.**\
+> 💯 Not 99%. Not “we’re working on it.” Straight-up 100% electric, baby.\
+> 🧠 While others are debating fuel blends, these agencies said “*outlet or bust.*”
+
+🎯 **Metric calculated as:**
+
+> Electric Share = CO₂ emissions from electric modes ÷ Total CO₂ emissions
+
+🆚 **Reference point:** The median agency’s electric share? **\~17%**.\
+These awardees are basically driving a **Tesla bus in the Matrix.**
+
+*Data sources: FTA NTD Energy Data (2023), EIA Fuel Emission Factors*
+
+## 💀 **The “Yikes” Award – Most CO₂ per Mile (By Size)**
+
+Some agencies shine like neon on a Liberty City taxi. Others… well… **belch more CO₂ than a broken-down Blista Compact doing donuts in Broker.** These transit operations didn’t just miss the green bus — they set it on fire on the way out. 🔥🚌
+
+We calculated each agency’s **CO₂ per mile** to see who’s *earning* their carbon karma the hard way.
+
+| 🏷️ Size | 🚏 Agency | 📍 State | 💨 CO₂ per Mile (kg) |
+|------------------|------------------|------------------|------------------|
+| **Large** | Washington Metropolitan Area Transit Authority, dba: Washington Metro | DC | **210.95** |
+| **Medium** | Alternativa de Transporte Integrado, dba: Autoridad de Transporte Integrado | PR | **297.55** |
+| **Small** | Pennsylvania Department of Transportation | PA | **124.22** |
+
+> 🛑 **Metric calculated as:**\
+> CO₂ per Mile = Total kg of emissions / Total passenger miles
+
+📊 **Reference point?** The *median* agency emitted **\~1.08 kg per mile.** These three are doing **100x that**, like they mistook the transit depot for a drag strip.
+
+> 🧯 Dear operators: If you're seeing this, we love you, but it might be time for a **fleet intervention.** Or at least, like, one electric scooter.
+
+🗞️ These agencies win a **used catalytic converter** and **free tickets to the “how to electrify a fleet” workshop.**
+
+*Data sources: FTA NTD Energy + Service Data (2023), EIA Fuel Emission Factors*
+
+💾 Mission Complete
+
+🏁 Final Report from the Liberty City Transit Bureau
+
+🎤 The Final Word 🖤 Transit isn’t just about getting from Point A to B — it’s about getting there cleaner, smarter, and cooler than ever before.
+
+From clean ride royalty to electrification titans, we've ranked them all. 🕹️ Powered by data, styled like GTA IV, and wrapped in hot pink & neon blue — this wasn’t just an analysis. This was a climate side quest with a vengeance.
+
+🏆 Awards Recap 💚 Greenest Riders: MTA NYC & friends gliding past the carbon fog
+
+🔌 Electrification Gods: 100% battery beasts that don't even flinch
+
+🚗💨 Emissions Avengers: Saving more CO₂ than your cousin’s pickup
+
+💀 The “Yikes” Award: For those who… really need to charge up 😬
+
+📊 What We Actually Did: ✅ Automated data scraping from EIA + NTD
+
+✅ Calculated & normalized emissions across all agencies
+
+✅ Designed GTA IV–themed tables and plots
+
+✅ Ranked transit leaders in four fierce climate categories
+
+✅ Gave it enough chaotic good energy to land a Rockstar bonus 💣
+
+📊 Data sources:
+
+-   FTA NTD Energy Data (2023), EIA Fuel Emission Factors (<https://www.eia.gov/environment/emissions/co2_vol_mass.php)>
+
+-   The image was sourced by Chat GPT

@@ -3,13 +3,17 @@ title: "Dhruv's STA 9750 Website"
 author: "Dhruv Sharma"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 format: html
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r}
 #| include: false
 1 + 1
 ```
-_Last Updated: `r format(Sys.time(), "%A %m %d, %Y at %I:%M%p")`_
+
+*Last Updated: `r format(Sys.time(), "%A %m %d, %Y at %I:%M%p")`*
 
 ```{r}
 #| echo: false
@@ -31,18 +35,16 @@ leaflet() |>
   addPopups(baruch_longitude, baruch_latitude, 
             "I am a Master's student at <b>Baruch College</b>!")
 ```
-Welcome to My STA 9750 Project Page! 🚀
-Hello, I'm Dhruv Sharma! 👋
-I am a data-driven thinker and a student at Baruch College, currently taking STA 9750. This site is my digital notebook for the course — filled with projects, experiments, and insights in statistics and data science.
 
-What You’ll Find Here 📂
-✅ 📊 Mini-Projects
-✅ 📚 Course Assignments
-✅ 📝 Blog & Reflections
-✅ ✨ Additional Learning Materials
+Welcome to My STA 9750 Project Page! 🚀 Hello, I'm Dhruv Sharma! 👋 I am
+a data-driven thinker and a student at Baruch College, currently taking
+STA 9750. This site is my digital notebook for the course — filled with
+projects, experiments, and insights in statistics and data science.
 
-Skills & Tools I’m Using 🛠️
-R, Quarto, tidyverse, ggplot2
+What You’ll Find Here 📂 ✅ 📊 Mini-Projects ✅ 📚 Course Assignments ✅
+📝 Blog & Reflections ✅ ✨ Additional Learning Materials
+
+Skills & Tools I’m Using 🛠️ R, Quarto, tidyverse, ggplot2
 
 Hypothesis Testing & Inference
 
@@ -50,12 +52,13 @@ Git & GitHub
 
 Data Cleaning, Visualization, and Communication
 
-A Fun Fact About Me 🎉
-When I’m not exploring data, I enjoy gaming, design, and keeping up with tech. I’m passionate about using data to tell stories that matter.
+A Fun Fact About Me 🎉 When I’m not exploring data, I enjoy gaming,
+design, and keeping up with tech. I’m passionate about using data to
+tell stories that matter.
 
-Connect With Me 🌐
-🏠 GitHub: Dhruvhw-10
+Connect With Me 🌐 🏠 GitHub: Dhruvhw-10
 
-📧 Email: d619sharma@gmail.com
+📧 Email: d619sharma\@gmail.com
 
-"Data is the new oil, but insights are the fuel that drive the world forward." – Anonymous
+"Data is the new oil, but insights are the fuel that drive the world
+forward." – Anonymous
