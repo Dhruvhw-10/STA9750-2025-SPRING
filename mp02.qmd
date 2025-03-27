@@ -522,7 +522,7 @@ To calculate fuel-based emissions, we need to know **how much CO₂ (in kg)** ea
 
 Rather than entering values manually, we automated the process:
 
-```{r setup-automated, include=FALSE}
+```{r setup-automated}
 url <- "https://www.eia.gov/environment/emissions/co2_vol_mass.php"
 
 co2_fuel_factors <- read_html(url) %>%
