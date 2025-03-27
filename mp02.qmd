@@ -326,7 +326,7 @@ Electricity is **not created equal** across the U.S. Some states are climate cha
 
 ## 🚀 1. The NTD Energy Data
 
-```{r setup-ntd-energy, include=FALSE}
+```{r setup-ntd-energy}
 DATA_DIR <- file.path("data", "mp02")
 dir.create(DATA_DIR, showWarnings = FALSE, recursive = TRUE)
 
