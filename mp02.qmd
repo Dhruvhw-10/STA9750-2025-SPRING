@@ -550,7 +550,7 @@ co2_fuel_factors %>%
 
 Let's take a look at the final cleaned dataset containing CO₂ emissions data across transit agencies.
 
-```{r display_final_data,echo=FALSE, warning=FALSE, message=FALSE}
+```{r display_final_data, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
 write_rds(NTD_ENERGY_LONG, "data/mp02/NTD_ENERGY_LONG.rds")
 write_rds(NTD_SERVICE, "data/mp02/NTD_SERVICE_CLEAN.rds")
 write_rds(EIA_SEP_REPORT, "data/mp02/EIA_SEP_REPORT.rds")
