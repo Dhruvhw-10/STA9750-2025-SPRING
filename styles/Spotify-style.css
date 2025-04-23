@@ -1,0 +1,125 @@
+/* 🌑 Base Styles */
+body {
+  background-image: url("../images/spotify_bg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: contain;
+  background-position: left center;
+  background-color: #000000;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  min-height: 100%;
+}
+
+/* 🍃 Main Content Container */
+main {
+  background: linear-gradient(135deg, rgba(20, 40, 20, 0.95), rgba(10, 30, 10, 0.95));
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.25);
+  max-width: 900px;
+  margin: 2rem auto;
+  z-index: 1;
+}
+
+/* 🎧 Glowing Button */
+.pulse-button {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background-color: #1DB954;
+  color: white;
+  border-radius: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px #1DB954;
+  transition: all 0.3s ease;
+  animation: pulse-glow 2s infinite;
+}
+.pulse-button:hover {
+  background-color: #1ed760;
+  box-shadow: 0 0 20px #1ed760;
+  transform: scale(1.05);
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px #1DB954; }
+  50% { box-shadow: 0 0 25px #1DB954; }
+}
+
+/* 🧾 Code Blocks */
+pre,
+div.sourceCode,
+.cell-output pre,
+.cell-output code,
+.cell-output .sourceCode,
+div.sourceCode pre {
+  background-color: #111111 !important;
+  color: white !important;
+  border-left: 4px solid #1DB954;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(29, 185, 84, 0.3);
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.95rem;
+  overflow-x: auto;
+}
+code {
+  background-color: #1e1e1e !important;
+  color: #b9fbc0 !important;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+}
+
+/* 🎵 Playlist Cards */
+.spotify-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  border-left: 5px solid #1DB954;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(29, 185, 84, 0.2);
+}
+.spotify-card:hover {
+  background-color: rgba(29, 185, 84, 0.08);
+  box-shadow: 0 0 12px rgba(29, 185, 84, 0.35);
+}
+.spotify-player {
+  margin-top: 0.7em;
+}
+.spotify-player iframe {
+  margin-top: 0.4em;
+  border: none;
+}
+.track-number {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1DB954;
+}
+.track-title {
+  font-size: 1.2rem;
+  color: white;
+}
+.track-artist {
+  font-style: italic;
+  color: #cccccc;
+  font-size: 0.95rem;
+}
+.track-tags {
+  font-size: 1rem;
+  color: #ff7f50;
+  margin-top: 0.3em;
+}
+
+/* 🧭 Table of Contents override */
+nav.sidebar, .toc-left, .toc-right {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+nav.sidebar ul li a {
+  color: white !important;
+}
