@@ -12,7 +12,8 @@ website:
         href: mp01.qmd
       - text: "Grand Transit Awards: GTA IV Edition"
         href: mp02.qmd
-
+      - text: "Ultimate Playlist: Hustle and Heart"
+        href: mp03.qmd
 format:
   html:
     theme: cosmo

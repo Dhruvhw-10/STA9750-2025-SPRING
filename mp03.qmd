@@ -1,0 +1,816 @@
+---
+title: "The Ultimate Playlist - Hustle & Heart 🎶🎧"
+author: Dhruv Sharma
+date: "2025-04-22"
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-title: "Table of Contents"
+    toc-depth: 3
+    smooth-scroll: true
+    code-overflow: wrap
+    code-fold: true
+    code-tools: true
+    css: styles/spotify-style.css
+    theme: default
+    self-contained: true
+    embed-resources: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# 🎧 Introduction
+
+From millions of Spotify tracks and playlists, *Hustle & Heart* emerges as a curated sound journey built on energy, emotion, and authenticity. This project explores what makes songs stick — analyzing popularity, danceability, and musical DNA — before distilling it all into a final 12-track playlist that hits with both data and vibe.
+
+::: {style="text-align: center; margin-top: 2em;"}
+<a href="#playlist" class="pulse-button"> 🎶 Just here for the playlist? Tap here </a>
+:::
+
+# ⚙️ Setup: Load & Install Required Packages
+
+This chunk ensures all necessary R packages are installed and loaded before running the rest of the analysis. ✅📦
+
+```{r}
+#| label: setup-packages
+#| include: true
+
+ensure_package <- function(pkg){
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, repos = "https://cloud.r-project.org")
+  }
+  library(pkg, character.only = TRUE)
+}
+
+required_packages <- c(
+  "dplyr", "stringr", "tidyr", "purrr", "readr", "jsonlite",
+  "ggplot2", "scales", "DT", "rvest", "httr2", "tibble"
+)
+
+invisible(lapply(required_packages, ensure_package))
+
+options(dplyr.summarise.inform = FALSE)
+```
+
+### 🎧 Spotify Style Setup
+
+This chunk sets a custom Spotify-themed style for all plots and tables to give the report a bold, immersive aesthetic. 🎨🟢🖤
+
+```{r}
+#| label: plot-style
+#| include: true
+
+library(ggplot2)
+library(kableExtra)
+
+theme_spotify <- function() {
+  theme_minimal(base_family = "Arial") +
+    theme(
+      plot.background = element_rect(fill = "#191414", color = NA),
+      panel.background = element_rect(fill = "#191414", color = NA),
+      panel.grid = element_line(color = "#1DB954", linewidth = 0.1),
+      text = element_text(color = "white"),
+      axis.title = element_text(face = "bold", color = "white"),
+      axis.text = element_text(color = "#b3b3b3"),
+      plot.title = element_text(size = 16, face = "bold", color = "#1DB954"),
+      plot.subtitle = element_text(size = 12, color = "#b3b3b3")
+    )
+}
+
+spotify_table <- function(df, caption_text = "") {
+  knitr::kable(df, format = "html", caption = caption_text) |>
+    kableExtra::kable_styling(
+      full_width = TRUE,
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      position = "left"
+    ) |>
+    kableExtra::row_spec(0, background = "#1DB954", color = "white") |>
+    kableExtra::kable_styling(font_size = 14)
+}
+```
+
+# 🎧 Task 1: Load Spotify Song Characteristics
+
+In this first task, we download and clean a Spotify song characteristics dataset made available via GitHub. The dataset includes song-level features such as danceability, energy, valence, and more. Our goal is to create a clean, rectangular dataset where each row corresponds to a single artist-song pair.
+
+```{r}
+#| label: task1-load-songs
+#| echo: false
+load_songs <- function() {
+  dir.create("data/mp03", showWarnings = FALSE, recursive = TRUE)
+  file_path <- "data/mp03/songs.csv"
+  url <- "https://raw.githubusercontent.com/gabminamedez/spotify-data/master/data.csv"
+  
+  if (!file.exists(file_path)) {
+    download.file(url, destfile = file_path, mode = "wb")
+  }
+  
+  songs_raw <- readr::read_csv(file_path, show_col_types = FALSE)
+  
+  clean_artist_string <- function(x) {
+    stringr::str_replace_all(x, "\\['", "") |>
+      stringr::str_replace_all("'\\]", "") |>
+      stringr::str_replace_all("'", "") |>
+      stringr::str_trim()
+  }
+  
+  songs_cleaned <- songs_raw %>%
+    tidyr::separate_longer_delim(artists, ",") %>%
+    mutate(artist = clean_artist_string(artists)) %>%
+    select(-artists)
+  
+  return(songs_cleaned)
+}
+
+SONGS <- load_songs()
+
+spotify_table(head(SONGS, 10))
+```
+
+# Task 2: Import Playlist Dataset
+
+We responsibly download and combine all JSON playlist slices into a single list for future processing.
+
+```{r}
+#| label: task-2-playlists
+#| echo: true
+#| message: false
+#| warning: false
+#| results: "hide"
+
+load_playlists <- function() {
+  library(jsonlite)
+  library(purrr)
+  
+  dir_path <- "data/mp03/data1"
+  if (!dir.exists(dir_path)) dir.create(dir_path, recursive = TRUE)
+  
+  base_url <- "https://raw.githubusercontent.com/DevinOgrady/spotify_million_playlist_dataset/main/data1/"
+  starts <- seq(0, 999000, by = 1000)
+  file_names <- sprintf("mpd.slice.%d-%d.json", starts, starts + 999)
+  file_paths <- file.path(dir_path, file_names)
+  
+  for (i in seq_along(file_names)) {
+    if (!file.exists(file_paths[i])) {
+      url <- paste0(base_url, file_names[i])
+      tryCatch({
+        download.file(url, destfile = file_paths[i], mode = "wb", timeout = 300)
+      }, error = function(e) {
+        message("⚠️ Failed to download: ", file_names[i])
+      })
+    }
+  }
+
+  read_playlist_file <- function(path) {
+    tryCatch(
+      fromJSON(path)$playlists,
+      error = function(e) {
+        message("❌ Skipping corrupted file: ", path)
+        return(NULL)
+      }
+    )
+  }
+
+  valid_paths <- file_paths[file.exists(file_paths)]
+  playlists_list <- map(valid_paths, read_playlist_file)
+  playlists_list <- compact(playlists_list)
+  
+  return(playlists_list)
+}
+
+PLAYLISTS_LIST <- load_playlists()
+all_playlists <- PLAYLISTS_LIST %>% list_rbind()
+DT::datatable(
+  head(all_playlists, 10),
+  options = list(
+    pageLength = 6,
+    dom = 'tip',
+    scrollX = TRUE
+  ),
+  class = "display compact stripe hover",
+  rownames = FALSE
+)
+```
+
+# 🎼 Task 3: Rectify Playlist Data to Track-Level Format
+
+We flatten the hierarchical playlist JSONs into a clean, rectangular track-level format, stripping unnecessary prefixes and standardizing column names.
+
+```{r}
+#| label: task-3-rectangle-playlist
+#| warning: false
+#| message: false
+#| echo: true
+#| collapse: true
+
+strip_spotify_prefix <- function(x){
+  str_extract(x, ".*:.*:(.*)")
+}
+
+rectified_data <- all_playlists %>%
+  select(
+    playlist_name = name,
+    playlist_id = pid,
+    playlist_followers = num_followers,
+    tracks
+  ) %>%
+  unnest(tracks) %>%
+  mutate(
+    playlist_position = row_number(),
+    artist_name = map_chr(artist_name, 1, .default = NA_character_),
+    artist_id = strip_spotify_prefix(artist_uri),
+    track_name = track_name,
+    track_id = strip_spotify_prefix(track_uri),
+    album_name = album_name,
+    album_id = strip_spotify_prefix(album_uri),
+    duration = duration_ms
+  ) %>%
+  select(
+    playlist_name, playlist_id, playlist_position, playlist_followers,
+    artist_name, artist_id, track_name, track_id,
+    album_name, album_id, duration
+  )
+spotify_table(head(rectified_data, 10))
+```
+
+# 🎧 Task 4: Initial Exploration of Track & Playlist Data
+
+This section investigates core statistics of the combined playlist + song characteristics data set.
+
+```{r}
+strip_spotify_prefix <- function(x){
+  stringr::str_replace(x, "spotify:track:", "")
+}
+
+rectified_data <- rectified_data %>%
+  mutate(track_id = strip_spotify_prefix(track_id)) %>%
+  filter(!is.na(track_id) & track_id != "")
+
+SONGS <- SONGS %>%
+  filter(!is.na(id) & id != "")
+
+joined_data <- inner_join(rectified_data, SONGS, by = c("track_id" = "id"))
+```
+
+### 🎵 Q1: How many distinct tracks and artists?
+
+```{r distinct-counts, message=FALSE, warning=FALSE}
+distinct_tracks <- joined_data %>% distinct(track_id) %>% nrow()
+distinct_artists <- joined_data %>% distinct(artist_id) %>% nrow()
+
+spotify_table(
+  tibble(Metric = c("Distinct Tracks", "Distinct Artists"),
+         Count = c(distinct_tracks, distinct_artists))
+)
+```
+
+📝 Analysis: The dataset contains a rich collection of unique tracks and artists, showcasing Spotify's extensive catalog diversity across user playlists.
+
+### 🔥 Q2: What are the 5 most common tracks?
+
+```{r}
+top_tracks <- joined_data %>%
+  group_by(track_name) %>%
+  summarise(Appearances = n(), .groups = "drop") %>%
+  arrange(desc(Appearances)) %>%
+  slice_head(n = 5)
+
+spotify_table(top_tracks)
+```
+
+📝 Analysis: The most frequently appearing songs offer insight into widely loved and repeat-worthy tracks across millions of playlists.
+
+### ❓ Q3: Most Popular Track Not in SONGS
+
+```{r}
+missing_tracks <- rectified_data %>%
+  filter(!(track_id %in% SONGS$id)) %>%
+  group_by(track_name, track_id) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  arrange(desc(count)) %>%
+  slice_head(n = 1)
+
+spotify_table(missing_tracks)
+```
+
+📝 Analysis: This track, though highly featured on playlists, is not captured in the SONGS dataset, suggesting data lags or catalog discrepancies.
+
+### 💃 Q4: Most Danceable Track
+
+```{r}
+most_danceable <- SONGS %>% arrange(desc(danceability)) %>% slice_head(n = 1)
+
+danceable_count <- rectified_data %>%
+  filter(track_id == most_danceable$id) %>%
+  nrow()
+
+spotify_table(most_danceable %>% 
+  select(name, artist, danceability, popularity) %>% 
+  mutate(`# of Playlists` = danceable_count))
+```
+
+📝 Analysis: With high danceability and moderate popularity, this track captures rhythmic excellence while still being somewhat niche.
+
+### ⏱️ Q5: Playlist with Longest Average Track Duration
+
+```{r}
+longest_avg_playlist <- joined_data %>%
+  group_by(playlist_name, playlist_id) %>%
+  summarise(avg_duration = mean(duration, na.rm = TRUE), .groups = "drop") %>%
+  arrange(desc(avg_duration)) %>%
+  slice_head(n = 1)
+
+longest_avg_playlist %>%
+  mutate(avg_duration_min = round(avg_duration / 60000, 2)) %>%
+  select(playlist_name, playlist_id, avg_duration_min) %>%
+  spotify_table()
+```
+
+📝 Analysis: This playlist favors longer-form listening experiences—perfect for chill or storytelling-heavy sessions.
+
+### ⭐ Q6: Most Followed Playlist
+
+```{r}
+most_followed <- joined_data %>%
+  select(playlist_id, playlist_name, playlist_followers) %>%
+  distinct() %>%
+  arrange(desc(playlist_followers)) %>%
+  slice_head(n = 1)
+
+spotify_table(most_followed)
+```
+
+📝 Analysis: High follower count reflects strong user trust and playlist curation quality—these often become global listening staples.
+
+# 🎧 Task 5: Visually Identifying Characteristics of Popular Songs
+
+We explore audio features to discover what makes songs popular, including trends over time, genre markers, and playlist impact.
+
+------------------------------------------------------------------------
+
+### 📈 Q1: Is Popularity Correlated with Playlist Appearances?
+
+```{r}
+#| label: q1-popularity-vs-playlist
+#| code-fold: true
+#| warning: false
+#| message: false
+
+track_popularity <- joined_data %>%
+  group_by(track_id, name, popularity) %>%
+  summarise(playlist_appearances = n(), .groups = "drop")
+
+ggplot(track_popularity, aes(x = playlist_appearances, y = popularity)) +
+  geom_point(alpha = 0.3, color = "#1DB954") +
+  geom_smooth(method = "lm", se = FALSE, color = "white") +
+  labs(
+    title = "Popularity vs Playlist Appearances",
+    x = "Playlist Appearances",
+    y = "Popularity"
+  ) +
+  theme_spotify()
+```
+
+#### 📊 Analysis: Popularity vs Playlist Appearances
+
+While there's a general trend that more playlist appearances boost popularity, the effect flattens at the top — even tracks in 20K+ playlists rarely reach max popularity. Many mid-popularity songs appear in far fewer playlists, suggesting other drivers like artist fame or viral trends. A few standout hits dominate both metrics, but overall, exposure alone doesn’t guarantee peak popularity. This reveals a diminishing return effect beyond a certain playlist count.
+
+### 📅 Q2: When Were Popular Songs Released?
+
+```{r}
+#| label: q2-popular-by-year
+#| code-fold: true
+
+joined_data %>%
+  filter(popularity >= 70, !is.na(year)) %>%
+  count(year) %>%
+  ggplot(aes(x = year, y = n)) +
+  geom_col(fill = "#1DB954") +
+  scale_y_continuous(labels = label_comma()) +
+  labs(title = "Release Year of Popular Songs", x = "Year", y = "Count") +
+  theme_spotify()
+```
+
+####📊 Analysis: Release Year of Popular Songs Most popular songs in the dataset were released post-2010, with an explosive surge after 2015. This spike likely reflects both Spotify's growth and a preference bias in playlist curation toward newer tracks. Songs from earlier decades exist but are underrepresented — possibly due to lower streaming metadata or user nostalgia filters. The sharp rise suggests that recency plays a major role in determining which songs become popular on modern playlists.
+
+### 💃 Q3: When Did Danceability Peak?
+
+```{r}
+#| label: q3-danceability-over-years
+#| code-fold: true
+
+joined_data %>%
+  group_by(year) %>%
+  summarise(avg_danceability = mean(danceability, na.rm = TRUE)) %>%
+  ggplot(aes(x = year, y = avg_danceability)) +
+  geom_line(color = "#F1C40F", linewidth = 1.2) +
+  labs(title = "Danceability Over Time", x = "Year", y = "Average Danceability") +
+  theme_spotify()
+```
+
+#### 🎶 Analysis: Danceability Over Time
+
+Danceability levels show considerable fluctuation before the 1950s, likely due to sparse data and inconsistent genre tracking. From the 1970s onward, there’s a noticeable and steady increase in average danceability, suggesting a shift in musical production toward rhythm-centric, movement-friendly tracks. This trend accelerates post-2000, aligning with the rise of pop, hip-hop, and electronic genres that dominate modern playlists. Overall, the data reflects how music has evolved to favor groove and energy.
+
+### 📀 Q4: Most Represented Decade
+
+```{r}
+#| label: q4-most-common-decade
+#| code-fold: true
+
+joined_data %>%
+  mutate(decade = (year %/% 10) * 10) %>%
+  count(decade) %>%
+  ggplot(aes(x = as.factor(decade), y = n)) +
+  geom_col(fill = "#3498DB") +
+  scale_y_continuous(labels = label_comma()) +
+  labs(title = "Songs by Decade", x = "Decade", y = "Number of Tracks") +
+  theme_spotify()
+```
+
+#### 📊 Analysis: Songs by Decade
+
+The number of tracks released per decade has exploded in the digital era. While growth remained modest from the 1950s through the 1990s, the 2000s saw a sharp climb—likely due to the rise of digital recording and online distribution. The 2010s alone account for over **6 million** tracks, highlighting how accessible music production and publishing have become. This reinforces the modern trend of music abundance and democratized creation.
+
+### 🎹 Q5: Key Frequency (Polar Plot)
+
+```{r}
+#| label: q5-key-polar
+#| code-fold: true
+
+joined_data %>%
+  count(key) %>%
+  mutate(key = as.factor(key)) %>%
+  ggplot(aes(x = key, y = n)) +
+  geom_col(fill = "#8E44AD") +
+  coord_polar() +
+  labs(title = "Distribution of Musical Keys", x = "Key", y = "Count") +
+  theme_spotify()
+```
+
+#### 🎼 Analysis: Distribution of Musical Keys
+
+This polar plot shows the frequency of tracks in each musical key (0–11), where each number corresponds to a semitone in the chromatic scale (e.g., 0 = C, 1 = C♯/D♭, ... 11 = B). Keys like **C major (0)** and **G♯/A♭ (8)** appear to be the most common, likely due to their favorable sound and playability. Meanwhile, less common keys like **F♯ (6)** and **B♭ (10)** are underrepresented. This trend may reflect production preferences in pop and hip-hop, where easier or more resonant keys dominate.
+
+### ⏱️ Q6: Most Common Track Lengths
+
+```{r}
+#| label: q6-track-durations
+#| code-fold: true
+
+joined_data %>%
+  mutate(duration_min = duration / 60000) %>%
+  filter(duration_min <= 10) %>%  # 🎯 Limit x-axis to songs ≤ 10 minutes
+  ggplot(aes(x = duration_min)) +
+  geom_histogram(binwidth = 0.25, fill = "#E67E22", color = "black") +
+  scale_y_continuous(labels = scales::label_comma()) +
+  labs(
+    title = "Track Duration Distribution",
+    x = "Duration (minutes)",
+    y = "Count"
+  ) +
+  theme_spotify()
+```
+
+#### Analysis: ⏱️ Track Duration Distribution
+
+Most songs cluster between **2.5 to 4.5 minutes**, which aligns with the standard radio-friendly length. The distribution is tightly packed, and tracks beyond 6 minutes are rare. Outliers likely include remixes, intros, or live recordings. This confirms that shorter durations remain the norm for high engagement and replayability on platforms like Spotify.
+
+### 🎼 Q7: Tempo vs Danceability (Popular Songs)
+
+```{r}
+#| label: q7-tempo-vs-danceability
+#| code-fold: true
+
+popular_songs <- joined_data %>% 
+  filter(popularity >= 70)
+
+cor_val <- cor(popular_songs$tempo, popular_songs$danceability, use = "complete.obs")
+
+ggplot(popular_songs, aes(x = tempo, y = danceability)) +
+  geom_point(alpha = 0.4, color = "#1DB954") +
+  geom_smooth(method = "lm", se = TRUE, color = "white") +
+  labs(
+    title = "Tempo vs Danceability (Popular Songs)",
+    subtitle = paste0("Correlation: ", round(cor_val, 2)),
+    x = "Tempo (BPM)",
+    y = "Danceability"
+  ) +
+  theme_spotify()
+```
+
+#### 🕺 Analysis: Tempo vs Danceability
+
+The scatterplot reveals a **slight negative correlation** (r = -0.15) between tempo and danceability among popular songs. Contrary to what one might expect, faster tempos do not necessarily lead to higher danceability. Many highly danceable tracks fall in the **90–120 BPM** range, suggesting that groove and rhythm matter more than speed. Extremely fast or slow songs often sacrifice the steady beat that encourages dancing.
+
+### 📊 Q8: Playlist Followers vs Avg. Popularity
+
+```{r}
+#| label: q8-followers-vs-popularity
+#| code-fold: true
+
+followers_vs_popularity <- joined_data %>%
+  group_by(playlist_id, playlist_name, playlist_followers) %>%
+  summarise(avg_popularity = mean(popularity, na.rm = TRUE), .groups = "drop")
+
+cor_val <- cor(log1p(followers_vs_popularity$playlist_followers), 
+               followers_vs_popularity$avg_popularity, use = "complete.obs")
+
+ggplot(followers_vs_popularity, aes(x = playlist_followers, y = avg_popularity)) +
+  geom_point(alpha = 0.2, size = 1.2, color = "#1DB954") +
+  geom_smooth(method = "lm", se = TRUE, color = "white") +
+  scale_x_log10() +
+  labs(
+    title = "Followers vs. Avg. Popularity",
+    subtitle = paste0("Correlation: ", round(cor_val, 2)),
+    x = "Followers (log scale)",
+    y = "Average Popularity"
+  ) +
+  theme_spotify()
+```
+
+#### 📉 Analyze: Followers vs. Average Popularity
+
+Despite the wide range of follower counts (on a log scale), there's almost **no correlation** between how many followers a playlist has and how popular its songs are (correlation = -0.01).\
+This suggests that **playlist influence doesn't directly boost track popularity**, or that popular songs are just as likely to appear in smaller playlists.\
+The dense vertical lines at low follower counts show a long tail of smaller, niche playlists contributing to the ecosystem.
+
+# 🔍 Task 6: Finding Related Songs
+
+We now build a playlist around two anchor tracks — *Drop The World* and *No Role Modelz* — using five custom heuristics to find compatible songs across tempo, mood, popularity, and year.
+
+------------------------------------------------------------------------
+
+### 🎵 Identify Anchor Tracks
+
+```{r}
+#| label: anchor-track-filter
+#| code-fold: true
+#| warning: false
+#| message: false
+
+anchor_names <- c("Drop The World", "No Role Modelz")
+popular_threshold <- 70
+
+anchor_tracks <- joined_data %>%
+  filter(track_name %in% anchor_names)
+
+cat("🎵 Anchor Songs Found:", nrow(anchor_tracks), "\n")
+```
+
+### 🎧 Heuristic 1: Co-occurring Songs in a Random Playlist
+
+```{r}
+#| label: heuristic1-co-occurring
+#| code-fold: true
+
+both_anchors_playlists <- joined_data %>%
+  filter(track_name %in% anchor_names) %>%
+  group_by(playlist_id) %>%
+  summarise(anchor_count = n()) %>%
+  filter(anchor_count >= 2) %>%
+  pull(playlist_id)
+
+set.seed(1010)
+chosen_id <- sample(both_anchors_playlists, 1)
+
+co_occurring <- joined_data %>%
+  filter(playlist_id == chosen_id, !(track_name %in% anchor_names)) %>%
+  distinct(track_id, .keep_all = TRUE)
+
+cat("🎧 Heuristic 1 - Playlist", chosen_id, "→", nrow(co_occurring), "tracks found\n")
+```
+
+🎧 Heuristic 1 applied to Playlist 974361 yielded 97 closely related track candidates based on shared playlist co-occurrence.
+
+### 🎚️ Heuristic 2: Similar Tempo & Key
+
+```{r}
+#| label: heuristic2-tempo-key
+#| code-fold: true
+
+tempo_key_match <- joined_data %>%
+  filter(
+    key %in% anchor_tracks$key,
+    abs(tempo - mean(anchor_tracks$tempo, na.rm = TRUE)) <= 5,
+    !(track_name %in% anchor_names)
+  ) %>%
+  distinct(track_id, .keep_all = TRUE)
+
+cat("🎚️ Heuristic 2 - Tempo/Key:", nrow(tempo_key_match), "matches\n")
+```
+
+These tracks are musically smooth transitions for DJs.
+
+### 🧑‍🎤 Heuristic 3: Same Artist
+
+```{r}
+#| label: heuristic3-same-artist
+#| code-fold: true
+
+same_artist <- joined_data %>%
+  filter(artist_name %in% anchor_tracks$artist_name, !(track_name %in% anchor_names)) %>%
+  distinct(track_id, .keep_all = TRUE)
+
+cat("🧑‍🎤 Heuristic 3 - Same Artist:", nrow(same_artist), "matches\n")
+```
+
+Curating songs from Eminem, J. Cole, or Lil Wayne’s discographies.
+
+### 🎛️ Heuristic 4: Acoustic / Energy Profile Match
+
+```{r}
+#| label: heuristic4-acoustic-energy
+#| code-fold: true
+
+anchor_year <- unique(anchor_tracks$year)
+
+acoustic_features <- joined_data %>%
+  filter(year %in% anchor_year, !(track_name %in% anchor_names)) %>%
+  mutate(sim_score = abs(danceability - mean(anchor_tracks$danceability, na.rm = TRUE)) +
+           abs(energy - mean(anchor_tracks$energy, na.rm = TRUE)) +
+           abs(acousticness - mean(anchor_tracks$acousticness, na.rm = TRUE))) %>%
+  arrange(sim_score) %>%
+  distinct(track_id, .keep_all = TRUE) %>%
+  slice_head(n = 20)
+
+cat("🎛️ Heuristic 4 - Acoustic Profile:", nrow(acoustic_features), "best matches\n")
+```
+
+Tunes that “feel” similar to our anchors in vibe and intensity.
+
+### 🎚️ Heuristic 5: Valence & Loudness
+
+```{r}
+#| label: heuristic5-valence-loudness
+#| code-fold: true
+
+valence_match <- joined_data %>%
+  filter(
+    abs(valence - mean(anchor_tracks$valence, na.rm = TRUE)) < 0.1,
+    abs(loudness - mean(anchor_tracks$loudness, na.rm = TRUE)) < 2,
+    !(track_name %in% anchor_names)
+  ) %>%
+  distinct(track_id, .keep_all = TRUE)
+
+cat("🎚️ Heuristic 5 - Valence + Loudness:", nrow(valence_match), "\n")
+```
+
+For emotional and volume consistency in listening flow.
+
+### 🎼 Combine Playlist Candidates
+
+```{r}
+#| label: final-candidates
+#| code-fold: true
+
+final_playlist <- bind_rows(
+  co_occurring,
+  tempo_key_match,
+  same_artist,
+  acoustic_features,
+  valence_match
+) %>%
+  distinct(track_id, .keep_all = TRUE) %>%
+  mutate(popular = popularity >= popular_threshold)
+
+cat("🎼 Final Playlist Candidates:", nrow(final_playlist), "\n")
+cat("📉 Non-popular (<", popular_threshold, "):", sum(!final_playlist$popular), "\n")
+```
+
+### 📋 Preview of Final Playlist Candidates
+
+```{r}
+#| label: final-preview
+#| code-fold: true
+
+final_playlist %>%
+  select(track_name, artist_name, popularity, playlist_name) %>%
+  distinct() %>%
+  slice_head(n = 20) %>%
+  spotify_table("🎧 Top 20 Playlist Candidates Based on 5 Heuristics")
+```
+
+# 🎧 Task 7: Curate and Analyze Your Ultimate Playlist – *"Hustle & Heart"*
+
+> ***Twelve tracks. One vibe. Built from raw energy, emotional drive, and underdog spirit. Featuring rap heavyweights, slept-on gems, and genre-bending transitions, "Hustle & Heart" was crafted using 5 analytical heuristics and a whole lot of gut.***
+
+```{r}
+#| label: task7-final-playlist
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "🎶 Evolution of Audio Features in 'Hustle & Heart' Playlist"
+#| fig-align: center
+#| theme: spotify
+
+# Curated Playlist
+final_curated <- final_playlist %>%
+  filter(track_name %in% c(
+    "Drop The World", "No Role Modelz", "A Milli", "Beautiful Girls",
+    "Rock Your Body", "Lollipop", "Power Trip",
+    "Young, Wild & Free (feat. Bruno Mars) - feat. Bruno Mars",
+    "Love Me", "Crooked Smile", "Battle Scars", "Mercy"
+  )) %>%
+  distinct(track_id, .keep_all = TRUE) %>%
+  mutate(order = row_number())
+
+# Evolution Plot
+library(tidyr)
+audio_plot_data <- final_curated %>%
+  select(order, track_name, energy, danceability, valence) %>%
+  pivot_longer(cols = c("energy", "danceability", "valence"), names_to = "feature", values_to = "value")
+
+ggplot(audio_plot_data, aes(x = order, y = value, color = feature, group = feature)) +
+  geom_line(size = 1.5) +
+  geom_point(size = 2.5) +
+  scale_x_continuous(breaks = final_curated$order, labels = final_curated$track_name) +
+  labs(
+    title = "🎶 Evolution of Audio Features in 'Hustle & Heart'",
+    x = "Track Order",
+    y = "Feature Value (0–1 Scale)",
+    color = "Feature"
+  ) +
+  theme_spotify()
+```
+
+## Hustle and Heart 🎧 {#playlist}
+
+> 🧠 **Note**: While most tracks in *Hustle & Heart* were selected using a data-driven similarity score, two foundational songs — **"Drop the World"** and **"No Role Modelz"** — were manually included as thematic anchors due to their lyrical intensity and motivational energy as they were included in data but was dropped down during popularity ranking.
+
+```{r}
+#| label: task7-spotify-playlist
+#| echo: false
+#| warning: false
+#| message: false
+#| results: asis
+#| output: html
+
+track_info <- final_curated %>%
+  filter(!(track_name == "Beautiful Girls" & artist_name == "Van Halen")) %>%
+  filter(!(track_name == "Battle Scars" & artist_name == "Paradise Fears")) %>%
+  mutate(
+    preview = case_when(
+      track_name == "Drop The World" ~ NA_character_,
+      track_name == "No Role Modelz" ~ NA_character_,
+      track_name == "A Milli" ~ "https://open.spotify.com/embed/track/3uqinR4FCjLv28bkrTdNX5?utm_source=generator",
+      track_name == "Rock Your Body" ~ "https://open.spotify.com/embed/track/1AWQoqb9bSvzTjaLralEkT?utm_source=generator",
+      track_name == "Lollipop" ~ "https://open.spotify.com/embed/track/4P7VFiaZb3xrXoqGwZXC3J?utm_source=generator",
+      track_name == "Power Trip" ~ "https://open.spotify.com/embed/track/2uwnP6tZVVmTovzX5ELooy?utm_source=generator",
+      track_name == "Young, Wild & Free (feat. Bruno Mars) - feat. Bruno Mars" ~ "https://open.spotify.com/embed/track/5HQVUIKwCEXpe7JIHyY734?utm_source=generator",
+      track_name == "Love Me" ~ "https://open.spotify.com/embed/track/2XHzzp1j4IfTNp1FTn7YFg?utm_source=generator",
+      track_name == "Crooked Smile" ~ "https://open.spotify.com/embed/track/5gFoAVTN9YlM9uJCrFZtgl?utm_source=generator",
+      track_name == "Mercy" ~ "https://open.spotify.com/embed/track/4qikXelSRKvoCqFcHLB2H2?utm_source=generator",
+      track_name == "Beautiful Girls" & artist_name == "Sean Kingston" ~ "https://open.spotify.com/embed/track/1hGy2eLcmC8eKx7qr1tOqx?utm_source=generator",
+      track_name == "Battle Scars" & artist_name == "Lupe Fiasco" ~ "https://open.spotify.com/embed/track/1hWYT0w2R0J19rlVkiez7X?utm_source=generator",
+      TRUE ~ NA_character_
+    ),
+    new_discovery = ifelse(track_name %in% c("Mercy"), "🧠 New Discovery", ""),
+    not_popular = ifelse(popularity < popular_threshold, "📉 Hidden Gem", ""),
+    preview_embed = ifelse(!is.na(preview),
+      paste0('<iframe style="border-radius:12px" src="', preview, '" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'),
+      NA_character_
+    ),
+    annotation = paste0("**", track_name, "** — *", artist_name, "*<br>", new_discovery, " ", not_popular)
+  )
+
+anchor_tracks <- tibble(
+  track_name = c("Drop the World", "No Role Modelz"),
+  artist_name = c("Eminem, Lil Wayne", "J. Cole"),
+  preview = c(
+    '<iframe width="100%" height="80" src="https://www.youtube.com/embed/ErCAOMi5EGM?si=y5NLiN0RK6x6anDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    '<iframe width="100%" height="80" src="https://www.youtube.com/embed/0EnRK5YvBwU?si=rZtIwrXl4G5YKVic" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+  ),
+  preview_embed = preview,
+  new_discovery = "",
+  not_popular = "📉 Hidden Gem",
+  annotation = c(
+    "**Drop the World** — *Eminem, Lil Wayne*",
+    "**No Role Modelz** — *J. Cole*"
+  )
+)
+
+
+
+track_info <- bind_rows(track_info, anchor_tracks)
+
+for (i in 1:nrow(track_info)) {
+  cat(glue::glue(
+    '<div class="spotify-card">
+      <div class="track-number">{i}</div>
+      <div class="track-meta">
+        <div class="track-title"><strong>{track_info$track_name[i]}</strong></div>
+        <div class="track-artist"><em>{track_info$artist_name[i]}</em></div>
+        <div class="track-tags">{track_info$new_discovery[i]} {track_info$not_popular[i]}</div>
+      </div>'
+  ))
+  if (!is.na(track_info$preview_embed[i])) {
+    cat(glue::glue('<div class="spotify-player">{track_info$preview_embed[i]}</div>'))
+  }
+  cat('</div>\n\n')
+}
+```
