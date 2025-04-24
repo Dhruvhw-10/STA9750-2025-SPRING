@@ -63,12 +63,12 @@ div.sourceCode pre {
   font-size: 0.95rem;
   overflow-x: auto;
 }
-code {
-  background-color: #1e1e1e !important;
-  color: #b9fbc0 !important;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'Fira Code', monospace;
+pre, code {
+  background-color: #f5f5f5; /* Light gray background */
+  color: #333333; /* Dark text */
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
 }
 
 /* 🎵 Playlist Cards */
@@ -122,4 +122,46 @@ nav.sidebar, .toc-left, .toc-right {
 }
 nav.sidebar ul li a {
   color: white !important;
+}
+
+/* ✅ White background for code blocks with default syntax highlighting */
+pre, code, pre code {
+  background-color: #ffffff !important;  /* White background */
+  color: black !important;               /* Fallback color */
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.95rem;
+  padding: 1em;
+  border-radius: 8px;
+  border-left: 4px solid #1DB954;        /* Optional Spotify-green line */
+  overflow-x: auto;
+  white-space: pre-wrap;
+  box-shadow: none;
+}
+
+/* ✅ Reset previously applied dark theme on sourceCode blocks */
+div.sourceCode,
+.cell-output pre,
+.cell-output code,
+.cell-output .sourceCode,
+div.sourceCode pre {
+  background-color: #ffffff !important;
+  color: black !important;
+  box-shadow: none !important;
+  border-left: 4px solid #1DB954;
+}
+/* ✅ Spotify-themed styling for R output results */
+.cell-output pre,
+.cell-output code,
+.cell-output .sourceCode,
+.cell-output {
+  background-color: #0d0d0d !important;
+  color: white !important;
+  padding: 1em;
+  border-left: 4px solid #1DB954;
+  border-radius: 8px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  box-shadow: 0 0 8px rgba(29, 185, 84, 0.2);
 }
