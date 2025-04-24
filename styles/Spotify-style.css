@@ -19,137 +19,21 @@ main {
   box-shadow: 0 0 20px rgba(29, 185, 84, 0.25);
   max-width: 900px;
   margin: 2rem auto;
-  z-index: 1;
-}
-
-/* 🎧 Glowing Button */
-.pulse-button {
-  display: inline-block;
-  padding: 0.75em 1.5em;
-  background-color: #1DB954;
-  color: white;
-  border-radius: 30px;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 0 15px #1DB954;
-  transition: all 0.3s ease;
-  animation: pulse-glow 2s infinite;
-}
-.pulse-button:hover {
-  background-color: #1ed760;
-  box-shadow: 0 0 20px #1ed760;
-  transform: scale(1.05);
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 10px #1DB954; }
-  50% { box-shadow: 0 0 25px #1DB954; }
 }
 
 /* 🧾 Code Blocks */
-pre,
-div.sourceCode,
-.cell-output pre,
-.cell-output code,
-.cell-output .sourceCode,
-div.sourceCode pre {
-  background-color: #111111 !important;
-  color: white !important;
-  border-left: 4px solid #1DB954;
-  padding: 1em;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.3);
-  font-family: 'Fira Code', 'Courier New', monospace;
-  font-size: 0.95rem;
-  overflow-x: auto;
-}
-pre, code {
-  background-color: #f5f5f5; /* Light gray background */
-  color: #333333; /* Dark text */
-  padding: 1em;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-/* 🎵 Playlist Cards */
-.spotify-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 1.2em 1.5em;
-  margin: 1.5em 0;
-  border-left: 5px solid #1DB954;
-  border-radius: 12px;
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.2);
-}
-.spotify-card:hover {
-  background-color: rgba(29, 185, 84, 0.08);
-  box-shadow: 0 0 12px rgba(29, 185, 84, 0.35);
-}
-.spotify-player {
-  margin-top: 0.7em;
-}
-.spotify-player iframe {
-  margin-top: 0.4em;
-  border: none;
-}
-.track-number {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #1DB954;
-}
-.track-title {
-  font-size: 1.2rem;
-  color: white;
-}
-.track-artist {
-  font-style: italic;
-  color: #cccccc;
-  font-size: 0.95rem;
-}
-.track-tags {
-  font-size: 1rem;
-  color: #ff7f50;
-  margin-top: 0.3em;
-}
-
-/* 🧭 Table of Contents override */
-nav.sidebar, .toc-left, .toc-right {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  color: white !important;
-}
-nav.sidebar ul li a {
-  color: white !important;
-}
-
-/* ✅ White background for code blocks with default syntax highlighting */
 pre, code, pre code {
-  background-color: #ffffff !important;  /* White background */
-  color: black !important;               /* Fallback color */
+  background-color: #ffffff !important;
+  color: black !important;
   font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 0.95rem;
   padding: 1em;
   border-radius: 8px;
-  border-left: 4px solid #1DB954;        /* Optional Spotify-green line */
+  border-left: 4px solid #1DB954;
   overflow-x: auto;
   white-space: pre-wrap;
   box-shadow: none;
 }
-
-/* ✅ Reset previously applied dark theme on sourceCode blocks */
-div.sourceCode,
-.cell-output pre,
-.cell-output code,
-.cell-output .sourceCode,
-div.sourceCode pre {
-  background-color: #ffffff !important;
-  color: black !important;
-  box-shadow: none !important;
-  border-left: 4px solid #1DB954;
-}
-/* ✅ Spotify-themed styling for R output results */
 .cell-output pre,
 .cell-output code,
 .cell-output .sourceCode,
@@ -164,4 +48,52 @@ div.sourceCode pre {
   white-space: pre-wrap;
   overflow-x: auto;
   box-shadow: 0 0 8px rgba(29, 185, 84, 0.2);
+}
+
+/* 🧭 TOC Styling */
+nav.sidebar, .toc-left, .toc-right {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+nav.sidebar ul li a {
+  color: white !important;
+}
+
+/* 🎧 Remove all player/card styling */
+.spotify-player,
+.video,
+.spotify-card,
+.youtube-card {
+  all: unset;
+}
+
+.play-now {
+  display: inline-block;
+  padding: 0.8em 1.8em;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #1DB954;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 0 12px #1DB954;
+  animation: pulse-glow 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.play-now:hover {
+  background-color: #1ed760;
+  box-shadow: 0 0 20px #1ed760;
+  transform: scale(1.05);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px #1DB954;
+  }
+  50% {
+    box-shadow: 0 0 25px #1DB954;
+  }
 }
