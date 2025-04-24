@@ -1,7 +1,7 @@
 ---
 title: "The Ultimate Playlist - Hustle & Heart 🎶🎧"
-author: Dhruv Sharma
-date: "2025-04-22"
+author: "Dhruv"
+date: "2025-04-23"
 format:
   html:
     toc: true
@@ -16,6 +16,7 @@ format:
     theme: default
     self-contained: true
     embed-resources: true
+    highlight-style: github
 editor: visual
 execute:
   echo: true
@@ -781,11 +782,10 @@ track_info <- final_curated %>%
 anchor_tracks <- tibble(
   track_name = c("Drop the World", "No Role Modelz"),
   artist_name = c("Eminem, Lil Wayne", "J. Cole"),
-  preview = c(
+  preview_embed = c(
     '<iframe width="100%" height="80" src="https://www.youtube.com/embed/ErCAOMi5EGM?si=y5NLiN0RK6x6anDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     '<iframe width="100%" height="80" src="https://www.youtube.com/embed/0EnRK5YvBwU?si=rZtIwrXl4G5YKVic" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
   ),
-  preview_embed = preview,
   new_discovery = "",
   not_popular = "📉 Hidden Gem",
   annotation = c(
@@ -793,8 +793,6 @@ anchor_tracks <- tibble(
     "**No Role Modelz** — *J. Cole*"
   )
 )
-
-
 
 track_info <- bind_rows(track_info, anchor_tracks)
 
