@@ -2,6 +2,7 @@
 title: "The Ultimate Playlist - Hustle & Heart 🎶🎧"
 author: "Dhruv"
 date: "2025-04-23"
+
 format:
   html:
     toc: true
@@ -13,15 +14,17 @@ format:
     code-fold: true
     code-tools: true
     css: styles/spotify-style.css
-    theme: default
-    self-contained: true
+    self-contained: false
     embed-resources: true
     highlight-style: github
-editor: visual
+    allow-html : true
+
 execute:
   echo: true
   warning: false
   message: false
+  output: true
+  freeze: auto
 ---
 
 # 🎧 Introduction
@@ -29,7 +32,7 @@ execute:
 From millions of Spotify tracks and playlists, *Hustle & Heart* emerges as a curated sound journey built on energy, emotion, and authenticity. This project explores what makes songs stick — analyzing popularity, danceability, and musical DNA — before distilling it all into a final 12-track playlist that hits with both data and vibe.
 
 ::: {style="text-align: center; margin-top: 2em;"}
-<a href="#playlist" class="pulse-button"> 🎶 Just here for the playlist? Tap here </a>
+<a href="#playlist" class="play-now"> 🎶 Just here for the playlist? Tap here </a>
 :::
 
 # ⚙️ Setup: Load & Install Required Packages
@@ -563,6 +566,31 @@ anchor_tracks <- joined_data %>%
 cat("🎵 Anchor Songs Found:", nrow(anchor_tracks), "\n")
 ```
 
+## 🎬 Anchor Tracks – YouTube Preview
+
+These tracks defined the tone of *Hustle & Heart*. Watch their official drops below. 👇
+
+#### Drop the world- By Lil Wayne and eminem
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/ErCAOMi5EGM?si=3vevgxfMpfcUAX9F"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+</iframe>
+
+#### No role modelz- J.Cole
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yNk8OoBpQMI?si=Myi2ka_iEdx3alJm"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+</iframe>
+
+
 ### 🎧 Heuristic 1: Co-occurring Songs in a Random Playlist
 
 ```{r}
@@ -701,15 +729,13 @@ final_playlist %>%
 > ***Twelve tracks. One vibe. Built from raw energy, emotional drive, and underdog spirit. Featuring rap heavyweights, slept-on gems, and genre-bending transitions, "Hustle & Heart" was crafted using 5 analytical heuristics and a whole lot of gut.***
 
 ```{r}
-#| label: task7-final-playlist
 #| echo: false
 #| message: false
 #| warning: false
 #| fig-cap: "🎶 Evolution of Audio Features in 'Hustle & Heart' Playlist"
 #| fig-align: center
-#| theme: spotify
 
-# Curated Playlist
+# Prepare playlist
 final_curated <- final_playlist %>%
   filter(track_name %in% c(
     "Drop The World", "No Role Modelz", "A Milli", "Beautiful Girls",
@@ -718,10 +744,16 @@ final_curated <- final_playlist %>%
     "Love Me", "Crooked Smile", "Battle Scars", "Mercy"
   )) %>%
   distinct(track_id, .keep_all = TRUE) %>%
-  mutate(order = row_number())
+  mutate(
+    order = row_number(),
+    track_label = case_when(
+      track_name == "Young, Wild & Free (feat. Bruno Mars) - feat. Bruno Mars" ~ "Young, Wild & Free",
+      TRUE ~ track_name
+    )
+  )
 
-# Evolution Plot
-library(tidyr)
+
+# Reshape for plotting
 audio_plot_data <- final_curated %>%
   select(order, track_name, energy, danceability, valence) %>%
   pivot_longer(cols = c("energy", "danceability", "valence"), names_to = "feature", values_to = "value")
@@ -729,86 +761,33 @@ audio_plot_data <- final_curated %>%
 ggplot(audio_plot_data, aes(x = order, y = value, color = feature, group = feature)) +
   geom_line(size = 1.5) +
   geom_point(size = 2.5) +
-  scale_x_continuous(breaks = final_curated$order, labels = final_curated$track_name) +
+  scale_x_continuous(breaks = final_curated$order, labels = final_curated$track_label) +  # 👈 USE track_label
   labs(
     title = "🎶 Evolution of Audio Features in 'Hustle & Heart'",
     x = "Track Order",
     y = "Feature Value (0–1 Scale)",
     color = "Feature"
   ) +
-  theme_spotify()
+  theme_spotify() +
+  theme(
+    axis.text.x = element_text(angle = 35, hjust = 1, size = 9),
+    plot.margin = margin(10, 20, 50, 20),
+    legend.title = element_text(size = 11),
+    legend.text = element_text(size = 10)
+  )
 ```
 
 ## Hustle and Heart 🎧 {#playlist}
 
 > 🧠 **Note**: While most tracks in *Hustle & Heart* were selected using a data-driven similarity score, two foundational songs — **"Drop the World"** and **"No Role Modelz"** — were manually included as thematic anchors due to their lyrical intensity and motivational energy as they were included in data but was dropped down during popularity ranking.
 
-```{r}
-#| label: task7-spotify-playlist
-#| echo: false
-#| warning: false
-#| message: false
-#| results: asis
-#| output: html
+Click ▶️ and enjoy the full curated soundtrack — no skips, no scrolls. 🔥
 
-track_info <- final_curated %>%
-  filter(!(track_name == "Beautiful Girls" & artist_name == "Van Halen")) %>%
-  filter(!(track_name == "Battle Scars" & artist_name == "Paradise Fears")) %>%
-  mutate(
-    preview = case_when(
-      track_name == "Drop The World" ~ NA_character_,
-      track_name == "No Role Modelz" ~ NA_character_,
-      track_name == "A Milli" ~ "https://open.spotify.com/embed/track/3uqinR4FCjLv28bkrTdNX5?utm_source=generator",
-      track_name == "Rock Your Body" ~ "https://open.spotify.com/embed/track/1AWQoqb9bSvzTjaLralEkT?utm_source=generator",
-      track_name == "Lollipop" ~ "https://open.spotify.com/embed/track/4P7VFiaZb3xrXoqGwZXC3J?utm_source=generator",
-      track_name == "Power Trip" ~ "https://open.spotify.com/embed/track/2uwnP6tZVVmTovzX5ELooy?utm_source=generator",
-      track_name == "Young, Wild & Free (feat. Bruno Mars) - feat. Bruno Mars" ~ "https://open.spotify.com/embed/track/5HQVUIKwCEXpe7JIHyY734?utm_source=generator",
-      track_name == "Love Me" ~ "https://open.spotify.com/embed/track/2XHzzp1j4IfTNp1FTn7YFg?utm_source=generator",
-      track_name == "Crooked Smile" ~ "https://open.spotify.com/embed/track/5gFoAVTN9YlM9uJCrFZtgl?utm_source=generator",
-      track_name == "Mercy" ~ "https://open.spotify.com/embed/track/4qikXelSRKvoCqFcHLB2H2?utm_source=generator",
-      track_name == "Beautiful Girls" & artist_name == "Sean Kingston" ~ "https://open.spotify.com/embed/track/1hGy2eLcmC8eKx7qr1tOqx?utm_source=generator",
-      track_name == "Battle Scars" & artist_name == "Lupe Fiasco" ~ "https://open.spotify.com/embed/track/1hWYT0w2R0J19rlVkiez7X?utm_source=generator",
-      TRUE ~ NA_character_
-    ),
-    new_discovery = ifelse(track_name %in% c("Mercy"), "🧠 New Discovery", ""),
-    not_popular = ifelse(popularity < popular_threshold, "📉 Hidden Gem", ""),
-    preview_embed = ifelse(!is.na(preview),
-      paste0('<iframe style="border-radius:12px" src="', preview, '" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'),
-      NA_character_
-    ),
-    annotation = paste0("**", track_name, "** — *", artist_name, "*<br>", new_discovery, " ", not_popular)
-  )
+<iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/playlist/5RSu69HBe8GjUFJMTojKCP?utm_source=generator"
+        width="100%" height="800"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+</iframe>
 
-anchor_tracks <- tibble(
-  track_name = c("Drop the World", "No Role Modelz"),
-  artist_name = c("Eminem, Lil Wayne", "J. Cole"),
-  preview_embed = c(
-    '<iframe width="100%" height="80" src="https://www.youtube.com/embed/ErCAOMi5EGM?si=y5NLiN0RK6x6anDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
-    '<iframe width="100%" height="80" src="https://www.youtube.com/embed/0EnRK5YvBwU?si=rZtIwrXl4G5YKVic" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-  ),
-  new_discovery = "",
-  not_popular = "📉 Hidden Gem",
-  annotation = c(
-    "**Drop the World** — *Eminem, Lil Wayne*",
-    "**No Role Modelz** — *J. Cole*"
-  )
-)
-
-track_info <- bind_rows(track_info, anchor_tracks)
-
-for (i in 1:nrow(track_info)) {
-  cat(glue::glue(
-    '<div class="spotify-card">
-      <div class="track-number">{i}</div>
-      <div class="track-meta">
-        <div class="track-title"><strong>{track_info$track_name[i]}</strong></div>
-        <div class="track-artist"><em>{track_info$artist_name[i]}</em></div>
-        <div class="track-tags">{track_info$new_discovery[i]} {track_info$not_popular[i]}</div>
-      </div>'
-  ))
-  if (!is.na(track_info$preview_embed[i])) {
-    cat(glue::glue('<div class="spotify-player">{track_info$preview_embed[i]}</div>'))
-  }
-  cat('</div>\n\n')
-}
-```
