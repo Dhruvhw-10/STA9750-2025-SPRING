@@ -1,30 +1,21 @@
 ---
-title: "The Ultimate Playlist - Hustle & Heart 🎶🎧"
+title: "The Ultimate Playlist - Hustle & Heart 🎶"
 author: "Dhruv"
-date: "2025-04-23"
-
+date: "2025-04-25"
 format:
   html:
+    css: styles/spotify-style.css
     toc: true
     toc-location: left
-    toc-title: "Table of Contents"
-    toc-depth: 3
-    smooth-scroll: true
-    code-overflow: wrap
     code-fold: true
-    code-tools: true
-    css: styles/spotify-style.css
-    self-contained: false
-    embed-resources: true
-    highlight-style: github
-    allow-html : true
-
+    page-layout: full
+    allow-html: true
+    smooth-scroll: true 
 execute:
-  echo: true
+  echo: true  
+  eval: true 
   warning: false
   message: false
-  output: true
-  freeze: auto
 ---
 
 # 🎧 Introduction
@@ -479,7 +470,6 @@ joined_data %>%
   ) +
   theme_spotify()
 ```
-
 #### Analysis: ⏱️ Track Duration Distribution
 
 Most songs cluster between **2.5 to 4.5 minutes**, which aligns with the standard radio-friendly length. The distribution is tightly packed, and tracks beyond 6 minutes are rare. Outliers likely include remixes, intros, or live recordings. This confirms that shorter durations remain the norm for high engagement and replayability on platforms like Spotify.
@@ -785,9 +775,8 @@ Click ▶️ and enjoy the full curated soundtrack — no skips, no scrolls. �
 
 <iframe style="border-radius:12px"
         src="https://open.spotify.com/embed/playlist/5RSu69HBe8GjUFJMTojKCP?utm_source=generator"
-        width="100%" height="800"
+        width="100%" height="850"
         frameborder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy">
 </iframe>
-
