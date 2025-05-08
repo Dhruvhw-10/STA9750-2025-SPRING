@@ -16,9 +16,9 @@ website:
         href: mp03.qmd
       - text: "MP04: County-Level U.S. Election Analysis (2020 vs 2024)"
         href: mp04.qmd
+
 format:
   html:
-    theme: cosmo
     toc: true
     toc-depth: 3
     smooth-scroll: true
