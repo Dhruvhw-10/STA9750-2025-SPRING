@@ -1,0 +1,97 @@
+/* ===== MP04 Patriotic Theme ===== */
+
+/* Background with centered flag leaders */
+body {
+  background-image: url("../images/us_patriotic_background.png");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #111;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+/* Main content panel */
+main {
+  max-width: 850px;
+  margin: 60px auto;
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 2em;
+  border-radius: 18px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #111 !important;
+  font-weight: 700;
+}
+
+/* Code chunks */
+.cell.code {
+  background-color: #f9f9f9;
+  color: black;
+  border-left: 4px solid #3C3B6E;
+  padding: 1em;
+  border-radius: 6px;
+  font-family: Consolas, monospace;
+  overflow-x: auto;
+}
+
+/* Code output */
+.cell-output, .cell-output pre, .cell-output code {
+  background-color: #ffffff;
+  color: #000000;
+  border-left: 4px solid #B22234;
+  padding: 1em;
+  border-radius: 6px;
+  margin-top: 1em;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+  color: black;
+  margin: 1em 0;
+}
+table, th, td {
+  border: 1px solid #999;
+  padding: 0.6em;
+  text-align: left;
+}
+
+/* TOC floating on right */
+nav#TOC {
+  position: fixed;
+  top: 80px;
+  right: -220px;
+  width: 240px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 1em;
+  border-radius: 10px 0 0 10px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  color: white;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+nav#TOC:hover {
+  right: 0;
+}
+nav#TOC a {
+  color: #FFD700;
+  text-decoration: none;
+}
+nav#TOC a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Captions */
+.caption {
+  font-style: italic;
+  color: #555;
+  margin-top: 0.2em;
+}
