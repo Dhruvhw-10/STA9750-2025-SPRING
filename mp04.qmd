@@ -1018,7 +1018,7 @@ In this final phase, we spotlight the counties that didn’t just vote — they 
 > More than half of U.S. counties shifted right in 2024 — this isn’t spin, it’s a seismic shift.
 
 > **Op-Ed Style Note:**\
-> Forget the talking heads on cable. The numbers don’t lie: over **60% of American counties** moved toward Donald Trump in 2024. This wasn’t a fluke — it was a wave. From suburbs to swing counties, the red tide surged. And we’re not talking about minor flickers — these were meaningful, measurable shifts. The base is energized, the ground game delivered, and the map just got redder.
+> Forget the talking heads on cable. The numbers don’t lie: over **90% of American counties** moved toward Donald Trump in 2024. This wasn’t a fluke — it was a wave. From suburbs to swing counties, the red tide surged. And we’re not talking about minor flickers — these were meaningful, measurable shifts. The base is energized, the ground game delivered, and the map just got redder.
 
 ```{r}
 # 🔴🔵 Define colors
