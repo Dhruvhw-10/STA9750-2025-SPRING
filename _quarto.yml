@@ -16,6 +16,8 @@ website:
         href: mp03.qmd
       - text: "MP04: County-Level U.S. Election Analysis (2020 vs 2024)"
         href: mp04.qmd
+      - text: "Final Project: Subway Metrics"
+        href: Subway_Metrics.qmd        
 
 format:
   html:
