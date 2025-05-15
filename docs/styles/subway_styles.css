@@ -1,0 +1,179 @@
+body {
+  background-image: url("../images/subway_background.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #111827; /* ✨ Deep gray-blue for body text */
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+main {
+  background-color: rgba(255, 255, 255, 0.85);  /* Light background with opacity */
+  color: #000;                                  /* Black text for contrast */
+  padding: 2em;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2, h3 {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+a {
+  color: #0039A6;
+  font-weight: 600;
+}
+
+code {
+  background-color: #f2f2f2;
+  color: #000;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.cell-output, .cell-output pre, .cell-output code {
+  background-color: #e6e6e6 !important;
+  color: #000 !important;
+  border-left: 4px solid #0039A6;
+}
+
+/* 🔁 Subway Animation Container */
+.subway-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100vh;
+  background: transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* 🛤 Track */
+.subway-track {
+  position: absolute;
+  top: 0;
+  left: 65px;
+  width: 8px;
+  height: 100%;
+  background-color: #FFD300;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 🚏 Subway Stop Dots */
+.subway-stop {
+  position: absolute;
+  left: 60px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #FFD300;
+  border: 2px solid white;
+  box-shadow: 0 0 4px white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  pointer-events: auto;
+  transition: transform 0.2s;
+}
+
+.subway-stop:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 8px #fff;
+}
+
+/* 🎯 Station labels aligned RIGHT of track and black */
+.subway-stop a {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: bold;
+  color: #00FF99 !important;
+  text-shadow: 0 0 5px black;
+  white-space: nowrap;
+  pointer-events: auto;
+  z-index: 9999;
+}
+
+/* 🎯 Position stops (adjust as needed) */
+.subway-stop.stop-1 { top: 5%; }
+.subway-stop.stop-2 { top: 15%; }
+.subway-stop.stop-3 { top: 25%; }
+.subway-stop.stop-4 { top: 35%; }
+.subway-stop.stop-5 { top: 50%; }
+.subway-stop.stop-6 { top: 62%; }
+.subway-stop.stop-7 { top: 75%; }
+.subway-stop.stop-8 { top: 90%; }
+
+/* 🛤 Flip subway train to vertical with window stack */
+.subway-train {
+  position: absolute;
+  top: 0;
+  left: 49px;
+  width: 32px;
+  height: 40px;
+  background-color: #FFD300;
+  border: 2px solid #0039A6;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  animation: trainPause 32s linear infinite;
+  z-index: 9999;
+}
+
+
+/* 🚉 Train windows now stacked */
+.train-window {
+  width: 12px;
+  height: 6px;
+  background-color: #e0f0ff;
+  border: 1px solid #0039A6;
+  border-radius: 2px;
+  margin: 2px 0;
+}
+
+@keyframes trainPause {
+  0%    { top: 0%; }
+
+  5%    { top: 5%; }
+  10%   { top: 5%; }
+
+  15%   { top: 15%; }
+  20%   { top: 15%; }
+
+  25%   { top: 25%; }
+  30%   { top: 25%; }
+
+  35%   { top: 35%; }
+  40%   { top: 35%; }
+
+  50%   { top: 50%; }
+  55%   { top: 50%; }
+
+  65%   { top: 62%; }
+  70%   { top: 62%; }
+
+  80%   { top: 75%; }
+  85%   { top: 75%; }
+
+  95%   { top: 90%; }
+  100%  { top: 90%; }
+}
+
+
+
+
+
+
+

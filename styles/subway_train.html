@@ -1,0 +1,24 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const container = document.createElement('div');
+  container.className = 'subway-container';
+  container.innerHTML = `
+    <div class="subway-track"></div>
+    <div class="subway-stop stop-1"><a href="#task1">Load</a></div>
+    <div class="subway-stop stop-2"><a href="#task2">Clean</a></div>
+    <div class="subway-stop stop-3"><a href="#task3">Aggregate</a></div>
+    <div class="subway-stop stop-4"><a href="#subq1">🕘 Weekday</a></div>
+    <div class="subway-stop stop-5"><a href="#subq2">⏱ Hourly</a></div>
+    <div class="subway-stop stop-6"><a href="#subq3">📉 Stations</a></div>
+    <div class="subway-stop stop-7"><a href="#subq4">🏘 ZIP</a></div>
+    <div class="subway-stop stop-8"><a href="#summary">🧠 Summary</a></div>
+
+    <div class="subway-train">
+      <div class="train-window"></div>
+      <div class="train-window"></div>
+      <div class="train-window"></div>
+    </div>
+  `;
+  document.body.insertBefore(container, document.body.firstChild);
+});
+</script>
