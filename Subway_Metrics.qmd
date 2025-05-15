@@ -8,7 +8,6 @@ format:
       - styles/subway_train.html
     theme: cosmo
     css: 
-      - styles/subway_train.css
       - styles/subway_styles.css
     toc: false
     code-fold: true
