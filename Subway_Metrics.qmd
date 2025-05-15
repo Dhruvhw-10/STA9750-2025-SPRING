@@ -28,6 +28,8 @@ This report explores the question:
 
 > 🧠 **How has the rise of remote work since COVID-19 influenced subway ridership patterns across NYC by time and geography?**
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XqLVCMaYw94?si=OvW6SNBbkz-O1KMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 We use cleaned hourly MTA ridership data (2020–2023), ZIP-level census data on remote work (2019 & 2023), and official MTA station-level annual reports. Our goal is to quantify where and how ridership has rebounded — or failed to — and what role the remote work revolution played in shaping this trend.
 
 To answer this overarching question, our team tackled four specific subquestions:
