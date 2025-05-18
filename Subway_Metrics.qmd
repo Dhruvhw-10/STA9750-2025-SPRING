@@ -4,18 +4,18 @@ author:
   - Dhruv Sharma
 format:
   html:
-    include-in-header: 
-      - styles/subway_train.html
     theme: cosmo
-    css: 
-      - styles/subway_styles.css
     toc: false
     code-fold: true
     smooth-scroll: true
+    include-in-header: 
+      - styles/subway_train.html
+    css: 
+      - styles/subway_styles.css
 editor: visual
 execute:
-  echo: true  
-  eval: true 
+  echo: true
+  eval: true
   warning: false
   message: false
 ---
@@ -48,15 +48,19 @@ To answer this overarching question, our team tackled four specific subquestions
 
 Each section that follows answers one of these questions, then we bring it all together in a final synthesis to reflect on the MTA’s future in a remote-first world.
 
-```{r task1-load-cleaned-data, message=FALSE, warning=FALSE, echo=TRUE, results='hide'}
-# Suppress everything from this chunk
+::: {.callout-note title="🔍 Why Preload All Datasets?"}
+To improve reproducibility and speed up rendering, we preloaded all cleaned datasets at once. This avoids rerunning large cleaning steps and lets each analysis section focus on insights, not reprocessing. All raw-to-clean transformations were handled separately and saved as `.csv` or `.rds` files, keeping the report modular and render-friendly.
+:::
+
+```{r chunk-label, echo=TRUE, message=FALSE, warning=FALSE}
+# Suppress installation output and load libraries
 suppressMessages({
   suppressWarnings({
     required_packages <- c(
       "tidyverse", "readr", "janitor", "lubridate", "data.table",
       "sf", "scales", "readxl",
       "ggplot2", "ggthemes", "gganimate", "viridis", "scico",
-      "broom", "kableExtra"
+      "broom", "kableExtra", "plotly"
     )
     to_install <- setdiff(required_packages, rownames(installed.packages()))
     if (length(to_install)) install.packages(to_install, repos = "https://cloud.r-project.org")
@@ -64,51 +68,47 @@ suppressMessages({
   })
 })
 
-# 📁 Ensure folder structure exists (optional safety check)
+# Ensure required folders exist
 if (!dir.exists("data/raw")) dir.create("data/raw", recursive = TRUE)
 if (!dir.exists("data/cleaned")) dir.create("data/cleaned", recursive = TRUE)
 
-# ✅ Load cleaned hourly MTA ridership dataset (2020–2023 only)
+# Load pre-cleaned datasets
 mta_hourly_filtered <- readRDS("data/cleaned/mta_hourly_filtered_2020_2023.rds")
-
-# 🏡 Load pre-downloaded ACS remote work data
 acs_2019 <- read_csv("data/acs_b08128_2019.csv") |> clean_names()
 acs_2023 <- read_csv("data/acs_b08128_2023.csv") |> clean_names()
 acs_joined <- read_csv("data/cleaned/acs_joined.csv")
-
-# 🚇 Load cleaned MTA 2023 station-level ridership
-mta_2023 <- read_excel("data/mta_2023_ridership.xlsx", sheet = "Annual Total", skip = 1) |> clean_names()
-mta_2023_clean <- mta_2023 |> 
-  select(station = station_alphabetical_by_borough, borough = s,
-         `2019` = x2019, `2020` = x2020, `2021` = x2021,
-         `2022` = x2022, `2023` = x2023) |> 
-  filter(!is.na(station)) |> 
-  filter(!str_detect(station, "(?i)weekday|weekend|total|average"))
 mta_zip_summary <- read_csv("data/cleaned/mta_zip_summary.csv")
 
-# 🌐 Load ZIP shapefile (for maps and spatial join)
+# Load and clean 2023 MTA station-level data
+mta_2023 <- read_excel("data/mta_2023_ridership.xlsx", sheet = "Annual Total", skip = 1) |> clean_names()
+mta_2023_clean <- mta_2023 |> 
+  select(
+    station = station_alphabetical_by_borough,
+    borough = s,
+    `2019` = x2019, `2020` = x2020, `2021` = x2021,
+    `2022` = x2022, `2023` = x2023
+  ) |> 
+  filter(!is.na(station)) |> 
+  filter(!str_detect(station, "(?i)weekday|weekend|total|average"))
+
+# Load ZIP shapefile
 zip_shapefile <- st_read("data/tl_2020_us_zcta510.shp", quiet = TRUE)
 
-install.packages("kableExtra", repos = "https://cloud.r-project.org")
-library(kableExtra)
-# 🚇 Enhanced Subway Table Theme Function
+# Table styling function
 mta_table_style <- function(tbl, caption_text, digits = NULL, highlight_column = NULL) {
-  if (!is.null(digits)) {
-    kbl <- kableExtra::kable(tbl, format = "html", caption = caption_text, digits = digits, escape = FALSE)
+  kbl <- if (!is.null(digits)) {
+    kable(tbl, format = "html", caption = caption_text, digits = digits, escape = FALSE)
   } else {
-    kbl <- kableExtra::kable(tbl, format = "html", caption = caption_text, escape = FALSE)
+    kable(tbl, format = "html", caption = caption_text, escape = FALSE)
   }
 
   styled <- kbl %>%
-    kableExtra::kable_styling(
+    kable_styling(
       bootstrap_options = c("striped", "hover", "condensed", "responsive", "bordered"),
-      full_width = FALSE,
-      position = "center",
-      font_size = 13
+      full_width = FALSE, position = "center", font_size = 13
     ) %>%
-    kableExtra::row_spec(0, background = "#0039A6", color = "white", bold = TRUE)
+    row_spec(0, background = "#0039A6", color = "white", bold = TRUE)
 
-  # Optional borough or ZIP highlighting
   if (!is.null(highlight_column) && highlight_column %in% colnames(tbl)) {
     borough_colors <- c(
       "Manhattan" = "#EE352E",
@@ -118,7 +118,7 @@ mta_table_style <- function(tbl, caption_text, digits = NULL, highlight_column =
       "Staten Island" = "#808183"
     )
     styled <- styled %>%
-      kableExtra::column_spec(which(colnames(tbl) == highlight_column),
+      column_spec(which(colnames(tbl) == highlight_column),
         background = borough_colors[tbl[[highlight_column]]], color = "white"
       )
   }
@@ -127,23 +127,24 @@ mta_table_style <- function(tbl, caption_text, digits = NULL, highlight_column =
 }
 ```
 
-```{r}
-#ACS Data
+```{r sample-data-tables, echo=TRUE, message=FALSE, warning=FALSE}
+# Display sample rows of ACS remote work data
 acs_joined %>%
   head(20) %>%
-  mta_table_style("📊 Sample of Remote Work Data by ZIP Code")
-#MTA 2019-2023
+  mta_table_style("Sample of Remote Work Data by ZIP Code")
+
+# Display sample rows of cleaned MTA station-level ridership
 mta_2023_clean %>%
   head(20) %>%
-  mta_table_style("📅 MTA 2023 Station-Level Ridership Snapshot")
-#MTA zip summary
+  mta_table_style("MTA 2023 Station-Level Ridership Snapshot")
+
+# Display sample rows of ZIP-level ridership summary
 mta_zip_summary %>%
   head(20) %>%
-  mta_table_style("🗺️ Ridership Change Summary by ZIP Code (2019 vs 2023)")
-
+  mta_table_style("Ridership Change Summary by ZIP Code (2019 vs 2023)")
 ```
 
-## 🧼 Task 2: Cleaning NYC Subway Ridership Data {#task2}
+## Task 2: Cleaning NYC Subway Ridership Data {#task2}
 
 To prep the hourly MTA subway dataset for analysis, we:
 - Parsed timestamps from character format
@@ -154,117 +155,109 @@ To prep the hourly MTA subway dataset for analysis, we:
 
 The final dataset includes valid observations from 2020 to 2023 and is saved for reuse.
 
-```{r task2-cleaned-data, message=FALSE, warning=FALSE}
+```{r task2-cleaned-data, message=FALSE, warning=FALSE, eval=FALSE}
 # Load libraries
-#library(tidyverse)
-#library(lubridate)
-#library(janitor)
+library(tidyverse)
+library(lubridate)
+library(janitor)
 
 # Load hourly ridership data (filtered from 2020–2023)
-#mta_hourly <- readRDS("data/cleaned/mta_hourly_filtered_2020_2023.rds")
+mta_hourly <- readRDS("data/cleaned/mta_hourly_filtered_2020_2023.rds")
 
-# =============================
 # 1. Parse datetime and derive temporal fields
-# =============================
-#mta_hourly <- mta_hourly |> 
-#  filter(!is.na(transit_timestamp) & str_detect(transit_timestamp, "^\\d{4}-\\d{2}-\\d{2}")) |> 
-#  mutate(
- #   transit_timestamp = gsub("\\.000", "", transit_timestamp),
-  #  transit_timestamp = ymd_hms(transit_timestamp, quiet = TRUE),  # suppress warning
-   # year = year(transit_timestamp),
-    #month = month(transit_timestamp, label = TRUE),
-    #day = day(transit_timestamp),
-    #hour = hour(transit_timestamp),
-  #  weekday = wday(transit_timestamp, label = TRUE),
-  #  date = as_date(transit_timestamp)
-#  )
+mta_hourly <- mta_hourly |> 
+  filter(!is.na(transit_timestamp) & str_detect(transit_timestamp, "^\\d{4}-\\d{2}-\\d{2}")) |> 
+  mutate(
+    transit_timestamp = gsub("\\.000", "", transit_timestamp),
+    transit_timestamp = ymd_hms(transit_timestamp, quiet = TRUE),
+    year = year(transit_timestamp),
+    month = month(transit_timestamp, label = TRUE),
+    day = day(transit_timestamp),
+    hour = hour(transit_timestamp),
+    weekday = wday(transit_timestamp, label = TRUE),
+    date = as_date(transit_timestamp)
+  )
 
-# =============================
 # 2. Define COVID-era categories
-# =============================
-#mta_hourly <- mta_hourly |> 
- # mutate(
-  #  covid_era = case_when(
-   #   year == 2019 ~ "Pre-COVID",
-    #  year %in% c(2020, 2021) ~ "Core COVID",
-     # year %in% c(2022, 2023) ~ "WFH Era",
-      #TRUE ~ "Unknown"
- #   )
-#  )
+mta_hourly <- mta_hourly |> 
+  mutate(
+    covid_era = case_when(
+      year == 2019 ~ "Pre-COVID",
+      year %in% c(2020, 2021) ~ "Core COVID",
+      year %in% c(2022, 2023) ~ "WFH Era",
+      TRUE ~ "Unknown"
+    )
+  )
 
-# =============================
 # 3. Add weekday/weekend classification
-# =============================
-#mta_hourly <- mta_hourly |> 
- # mutate(day_type = if_else(weekday %in% c("Sat", "Sun"), "Weekend", "Weekday"))
+mta_hourly <- mta_hourly |> 
+  mutate(day_type = if_else(weekday %in% c("Sat", "Sun"), "Weekend", "Weekday"))
 
-# =============================
 # 4. Filter to reasonable values
-# =============================
-#mta_hourly <- mta_hourly |> 
- # filter(ridership >= 0, transfers >= 0)
+mta_hourly <- mta_hourly |> 
+  filter(ridership >= 0, transfers >= 0)
 
-# =============================
 # 5. Save cleaned version
-# =============================
-#write_csv(mta_hourly, "data/cleaned/mta_hourly_cleaned.csv")
-#saveRDS(mta_hourly, "data/cleaned/mta_hourly_cleaned.rds")
+write_csv(mta_hourly, "data/cleaned/mta_hourly_cleaned.csv")
+saveRDS(mta_hourly, "data/cleaned/mta_hourly_cleaned.rds")
+```
 
-
+```{r load-mta-hourly, include=FALSE}
 mta_hourly <- readRDS("data/cleaned/mta_hourly_cleaned.rds")
+```
 
+```{r show-cleaned-sample, message=FALSE, warning=FALSE}
+# Show a sample
 mta_hourly %>%
   head(20) %>%
   mta_table_style("🧾 Sample of Cleaned MTA Hourly Ridership Data")
 ```
 
-## 🧮 Task 3: Aggregating Subway Ridership Trends by Time, Station, and ZIP {#task3}
+## Task 3: Aggregating Subway Ridership Trends by Time, Station, and ZIP {#task3}
 
 Before diving into visualizations and modeling, we need to prepare summary tables to understand broader ridership patterns. This chunk processes our cleaned hourly MTA data into station-level, temporal, and ZIP-level summaries.
 
 ```{r task3-data-aggregation, message=FALSE, warning=FALSE, results='hide'}
-# 📦 Load libraries
+#Load libraries
 library(tidyverse)
 library(lubridate)
 
-# ❌ Commented out to avoid large memory load during rendering
-# mta_hourly <- readRDS("data/cleaned/mta_hourly_cleaned.rds")
+# Load cleaned hourly ridership data
+#mta_hourly <- readRDS("data/cleaned/mta_hourly_cleaned.rds")
 
-# ✅ Load pre-aggregated cleaned outputs instead
-daily_ridership <- read_csv("data/cleaned/daily_ridership_by_station.csv")
-weekday_summary <- read_csv("data/cleaned/weekday_vs_weekend_summary.csv")
-station_era_summary <- read_csv("data/cleaned/station_ridership_era_comparison.csv")
-hourly_summary <- read_csv("data/cleaned/hourly_patterns_by_era.csv")
+daily_ridership <- mta_hourly |> 
+  group_by(station_complex, borough, date, covid_era, day_type) |> 
+  summarise(daily_ridership = sum(ridership, na.rm = TRUE), .groups = "drop")
+
+weekday_summary <- daily_ridership |> 
+  group_by(covid_era, day_type) |> 
+  summarise(avg_daily_riders = mean(daily_ridership), .groups = "drop")
+
+station_era_summary <- daily_ridership |> 
+  group_by(station_complex, covid_era) |> 
+  summarise(mean_ridership = mean(daily_ridership), .groups = "drop") |> 
+  pivot_wider(names_from = covid_era, values_from = mean_ridership) |> 
+  filter(!is.na(`Core COVID`) & !is.na(`WFH Era`)) |> 
+  mutate(
+    pct_change_covid_to_wfh = (`WFH Era` - `Core COVID`) / `Core COVID`
+  )
+
+hourly_summary <- mta_hourly |> 
+  group_by(covid_era, day_type, hour) |> 
+  summarise(avg_hourly_riders = mean(ridership), .groups = "drop")
+
 mta_with_zip <- read_csv("data/cleaned/mta_with_zip.csv")
-mta_zip_summary <- read_csv("data/cleaned/mta_zip_summary.csv")
 
-# The code below shows how these were originally created 👇
-# ---------------------------------------------------------
-# daily_ridership <- mta_hourly |> 
-#   group_by(station_complex, borough, date, covid_era, day_type) |> 
-#   summarise(daily_ridership = sum(ridership, na.rm = TRUE), .groups = "drop")
+#Save aggregated summaries
 
-# weekday_summary <- daily_ridership |> 
-#   group_by(covid_era, day_type) |> 
-#   summarise(avg_daily_riders = mean(daily_ridership), .groups = "drop")
+write_csv(daily_ridership, "data/cleaned/daily_ridership_by_station.csv")
+write_csv(weekday_summary, "data/cleaned/weekday_vs_weekend_summary.csv")
+write_csv(station_era_summary, "data/cleaned/station_ridership_era_comparison.csv")
+write_csv(hourly_summary, "data/cleaned/hourly_patterns_by_era.csv")
+write_csv(mta_zip_summary, "data/cleaned/mta_zip_summary.csv")
+write_csv(mta_with_zip, "data/cleaned/mta_with_zip.csv")
 
-# station_era_summary <- daily_ridership |> 
-#   group_by(station_complex, covid_era) |> 
-#   summarise(mean_ridership = mean(daily_ridership), .groups = "drop") |> 
-#   pivot_wider(names_from = covid_era, values_from = mean_ridership) |> 
-#   filter(!is.na(`Core COVID`) & !is.na(`WFH Era`)) |> 
-#   mutate(pct_change_covid_to_wfh = (`WFH Era` - `Core COVID`) / `Core COVID`)
-
-# hourly_summary <- mta_hourly |> 
-#   group_by(covid_era, day_type, hour) |> 
-#   summarise(avg_hourly_riders = mean(ridership), .groups = "drop")
-
-# write_csv(daily_ridership, "data/cleaned/daily_ridership_by_station.csv")
-# write_csv(weekday_summary, "data/cleaned/weekday_vs_weekend_summary.csv")
-# write_csv(station_era_summary, "data/cleaned/station_ridership_era_comparison.csv")
-# write_csv(hourly_summary, "data/cleaned/hourly_patterns_by_era.csv")
-# write_csv(mta_with_zip, "data/cleaned/mta_with_zip.csv")
-# write_csv(mta_zip_summary, "data/cleaned/mta_zip_summary.csv")
+message("\n✅ Aggregated summaries saved! Ready for visualization and spatial joining.")
 ```
 
 
@@ -272,108 +265,212 @@ mta_zip_summary <- read_csv("data/cleaned/mta_zip_summary.csv")
 
 Subway data tells stories better than headlines — especially when animated, mapped, and stacked in plots. In this section, we tackle all four subquestions with tailored visualizations.
 
-### 📊 Subquestion 1: When Did Subway Ridership Recover? {#subq1}
-
-We begin by examining how weekday and weekend subway usage patterns shifted across Core- Covid and WFH eras:
-
-- **Core COVID (2020–2021)**: Pandemic-era lows
-- **WFH Era (2022–2023)**: Partial recovery with hybrid work in place
-
-The table below summarizes average daily ridership, split by day type and era:
+### 📊 Subquestion 1:  WFH Uptake by ZIP {#subq1}
 
 
-```{r weekday-weekend-barplot, echo=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
-library(plotly)
+```{r subq_hourly_animation, message=FALSE, warning=FALSE, fig.show='hide'}
+library(ggplot2)
+library(gganimate)
+library(scales)
 
-weekday_summary %>%
-  mta_table_style("📆 Average Weekday vs Weekend Ridership by COVID Era", digits = 0)
+# Drop rows with NA hour or avg_hourly_riders
+hourly_summary_clean <- hourly_summary %>%
+  filter(!is.na(hour), !is.na(avg_hourly_riders))
 
-# Static ggplot (already made)
-weekday_plot <- daily_ridership %>%
-  group_by(covid_era, day_type) %>%
-  summarise(avg_riders = mean(daily_ridership, na.rm = TRUE), .groups = "drop") %>%
-  ggplot(aes(x = covid_era, y = avg_riders, fill = day_type)) +
-  geom_col(position = "dodge") +
-  scale_y_continuous(labels = scales::comma) +
-  labs(title = "Average Weekday vs Weekend Ridership by COVID Era",
-       x = "COVID Era", y = "Avg Daily Riders", fill = "Day Type") +
-  theme_minimal()
-
-# Convert to interactive plot
-ggplotly(weekday_plot)
-
-```
-
-> 📉 **Summary:** While both weekday and weekend ridership declined during Core COVID, **weekend ridership recovered faster** by the WFH Era — highlighting how **commuter traffic remains suppressed**, but leisure and flexible travel have rebounded significantly.
-
-### 🕒 Subquestion 2: How did hourly subway ridership patterns shift across COVID eras? {#subq2}
-
-```{r}
-# Animation of hourly trends
-animated_hourly <- hourly_summary %>%
-  ggplot(aes(x = hour, y = avg_hourly_riders, color = covid_era, group = covid_era)) +
+# Create animated plot
+animated_hourly <- ggplot(hourly_summary_clean, 
+                          aes(x = hour, y = avg_hourly_riders, 
+                              color = interaction(covid_era, day_type), 
+                              group = interaction(covid_era, day_type))) +
   geom_line(size = 1.2) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(title = "Hourly Subway Ridership Patterns by COVID Era",
-       x = "Hour of Day", y = "Average Riders") +
+  scale_y_continuous(labels = comma) +
+  scale_x_continuous(breaks = 0:23) +
+  labs(
+    title = "Hourly Subway Ridership Patterns by COVID Era and Day Type",
+    x = "Hour of Day", y = "Average Riders", color = "Era + Day Type"
+  ) +
   theme_minimal() +
-  gganimate::transition_reveal(hour)
+  transition_reveal(hour)
 
-gganimate::anim_save("plots/hourly_pattern_animation.gif", animated_hourly)
+# Render and save
+animated_hourly_rendered <- animate(
+  animated_hourly,
+  width = 800, height = 500, fps = 15,
+  renderer = gifski_renderer("plots/hourly_pattern_animation.gif"),
+  units = "px", res = 150
+)
 ```
 
 ![](plots/hourly_pattern_animation.gif)
 
 > During the **Core COVID** and **WFH** eras, subway ridership lost its classic **rush-hour shape** — the twin peaks at 8 AM and 6 PM **flattened dramatically**. Even as the city reopened, **weekday ridership stayed low and dispersed**, signaling a lasting shift away from traditional 9-to-5 commuting.
 
+### 🕒 Subquestion 2: Office ZIP Ridership Trends {#subq2}
 
-### 🚇 Subquestion 3: Which Stations Were Hit Hardest? {#subq3}
+```{r join_stations_to_zips_fixed, message=FALSE, warning=FALSE}
+library(sf)
+library(dplyr)
+library(lubridate)
 
-```{r}
+# 1. Load shapefile
+#zip_shapes <- st_read("data/tl_2020_us_zcta510.shp", quiet = TRUE)
+
+# 2. Transform to WGS84 CRS
+#zip_shapes <- st_transform(zip_shapes, crs = 4326)
+
+# 3. Convert station coordinates to spatial layer
+#station_coords <- mta_hourly_filtered %>%
+ # select(station_complex_id, latitude, longitude) %>%
+  #distinct() %>%
+  #st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+
+# 4. Spatial join: assign ZIP codes
+#station_with_zip <- st_join(station_coords, zip_shapes, join = st_within) %>%
+ # st_drop_geometry() %>%
+  #select(station_complex_id, zip_code = ZCTA5CE10)
+
+station_with_zip <- read_csv("data/cleaned/station_with_zip.csv")
+
+# 5. Convert hourly → daily ridership
+mta_daily <- mta_hourly_filtered %>%
+  mutate(date = as_date(transit_timestamp)) %>%
+  group_by(station_complex_id, station_complex, borough, date) %>%
+  summarise(daily_ridership = sum(ridership, na.rm = TRUE), .groups = "drop")
+
+# 6. Join with ZIPs + assign COVID era
+mta_daily_with_zip <- mta_daily %>%
+  left_join(station_with_zip, by = "station_complex_id") %>%
+  filter(!is.na(zip_code)) %>%
+  mutate(
+    year = year(date),
+    covid_era = case_when(
+      year %in% c(2020, 2021) ~ "Core COVID",
+      year %in% c(2022, 2023) ~ "WFH Era",
+      TRUE ~ "Other"
+    )
+  )
+
+# 7. Save cleaned output
+write_csv(mta_daily_with_zip, "data/cleaned/daily_ridership_by_station_zip.csv")
+```
+
+```{r subq2_faceted_final, message=FALSE, warning=FALSE, fig.width=10, fig.height=6}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(zoo)
+library(scales)
+library(lubridate)
+
+# Load cleaned daily ridership by station ZIP
+daily_ridership <- read_csv("data/cleaned/daily_ridership_by_station_zip.csv")
+
+# Map ZIPs to area labels
+zip_labels <- c(
+  "10004" = "FiDi",
+  "10022" = "Midtown East"
+)
+office_zips <- names(zip_labels)
+
+# Filter and smooth data
+office_daily <- daily_ridership %>%
+  filter(zip_code %in% office_zips, covid_era %in% c("Core COVID", "WFH Era")) %>%
+  mutate(
+    area = recode(as.character(zip_code), !!!zip_labels),
+    date = as_date(date)
+  ) %>%
+  arrange(area, date) %>%
+  group_by(area) %>%
+  mutate(smoothed_riders = rollmean(daily_ridership, k = 7, fill = NA)) %>%
+  ungroup()
+
+# Create faceted line plot
+final_plot <- ggplot(office_daily, aes(x = date, y = smoothed_riders)) +
+  geom_line(color = "#1f77b4", size = 1) +
+  facet_wrap(~ area, ncol = 1, scales = "free_y") +
+  geom_vline(xintercept = as.Date("2021-06-15"), linetype = "dashed", color = "gray50") +
+  geom_text(data = data.frame(
+    area = c("FiDi", "Midtown East"),
+    date = rep(as.Date("2021-06-15"), 2),
+    label = rep("Reopening", 2),
+    y = c(19000, 36000)
+  ), aes(x = date, y = y, label = label), inherit.aes = FALSE,
+  angle = 90, size = 3, hjust = -0.2, color = "gray40") +
+  labs(
+    title = "Remote Work Flattened Subway Usage in Manhattan's Business Districts",
+    subtitle = "7-day average subway ridership in FiDi and Midtown East (2020–2023)",
+    x = "Date", y = "7-Day Avg. Subway Riders"
+  ) +
+  scale_y_continuous(labels = comma) +
+  theme_minimal(base_size = 13)
+
+# Save plot as PNG
+ggsave("plots/subq2_office_faceted_final.png", final_plot, width = 10, height = 6)
+```
+
+![Subway ridership trends in Manhattan office areas](plots/subq2_office_faceted_final.png)
+
+> Even in NYC’s densest office zones, subway ridership never fully recovered post-reopening. The flattening trends, despite lifted restrictions, reveal a structural shift in commuting tied to remote and hybrid work. The MTA’s planning must account for permanently lower weekday volumes in business hubs.
+
+
+### 🚇 Subquestion 3: Station-Level Declines {#subq3}
+
+```{r subq3_station_drops, message=FALSE, warning=FALSE}
 library(forcats)
+library(ggplot2)
+library(plotly)
+library(scales)
+
+# Top 10 stations by % drop from Core COVID to WFH Era (Table)
 station_era_summary %>%
   arrange(pct_change_covid_to_wfh) %>%
   slice(1:10) %>%
   select(Station = station_complex, `% Drop (COVID → WFH)` = pct_change_covid_to_wfh) %>%
-  mutate(`% Drop (COVID → WFH)` = scales::percent(`% Drop (COVID → WFH)`, accuracy = 0.1)) %>%
-  mta_table_style("🚇 Top 10 Stations by % Ridership Drop")
+  mutate(`% Drop (COVID → WFH)` = percent(`% Drop (COVID → WFH)`, accuracy = 0.1)) %>%
+  mta_table_style("Top 10 Stations by % Ridership Drop")
 
+# Prepare data for plot
 top_drops <- station_era_summary %>%
   arrange(pct_change_covid_to_wfh) %>%
   slice(1:10) %>%
   mutate(station_complex = fct_reorder(station_complex, pct_change_covid_to_wfh))
 
+# Create bar chart
 drop_plot <- ggplot(top_drops, aes(x = station_complex, y = pct_change_covid_to_wfh)) +
   geom_col(fill = "firebrick") +
   coord_flip() +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  labs(title = "Top 10 Stations by % Drop in Ridership",
-       x = "Station", y = "% Change from Core COVID to WFH Era") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title = "Top 10 Stations by % Drop in Ridership",
+    x = "Station",
+    y = "% Change from Core COVID to WFH Era"
+  ) +
   theme_minimal()
 
+# Convert to interactive plot
 ggplotly(drop_plot)
 ```
 
 > The biggest drops in subway ridership occurred at Canarsie–Rockaway Pkwy (L) and multiple stations on the B/D and J/Z lines, reflecting sharp shifts in transit usage. Canarsie alone saw a 28.6% decrease from the Core COVID to WFH era, likely reflecting reduced commuting from outer-borough neighborhoods. Meanwhile, a few stations even saw slight gains — underscoring the uneven geography of subway recovery.
 
-### 🧭 Subquestion 4: Do neighborhoods that embraced remote work see steeper subway declines? {#subq4}
+### 🧭 Subquestion 4: WFH vs Ridership Regression {#subq4}
 
 #### 🗺️ Remote Work Shift by ZIP Code
 
-```{r interactive-zip-map, echo=TRUE, message=FALSE, warning=FALSE}
-# Load required libraries
+```{r interactive-zip-map, message=FALSE, warning=FALSE}
+# Load libraries
 library(leaflet)
 library(sf)
 library(dplyr)
 library(readr)
 library(viridis)
 
-# Load shapefile and data
+# Load shapefile and WFH data
 zip_shapefile <- st_read("data/tl_2020_us_zcta510.shp", quiet = TRUE)
 acs_joined <- read_csv("data/cleaned/acs_joined.csv")
 mta_with_zip <- read_csv("data/cleaned/mta_with_zip.csv")
 
-# Filter to only ZIPs in NYC with subway service
+# Filter to NYC ZIPs with subway stations
 nyc_zips <- unique(mta_with_zip$zip_code)
 
 zip_map_data <- zip_shapefile %>%
@@ -382,10 +479,10 @@ zip_map_data <- zip_shapefile %>%
   left_join(acs_joined, by = "zip_code") %>%
   filter(!is.na(wfh_shift))
 
-# Define color palette for WFH shift
+# Define fill color palette
 pal <- colorNumeric(palette = "viridis", domain = zip_map_data$wfh_shift)
 
-# Create interactive Leaflet map
+# Build Leaflet map
 leaflet(zip_map_data) %>%
   addProviderTiles("CartoDB.Positron") %>%
   addPolygons(
@@ -409,8 +506,7 @@ leaflet(zip_map_data) %>%
     labFormat = labelFormat(suffix = "%", transform = function(x) x * 100),
     position = "bottomright"
   ) %>%
-  fitBounds(-74.2591, 40.4774, -73.7004, 40.9176)  # NYC bounding box
-
+  fitBounds(-74.2591, 40.4774, -73.7004, 40.9176)
 ```
 
 > This interactive map visualizes ZIP-level shifts in remote work between 2019 and 2023.
@@ -418,27 +514,30 @@ We observe that central Manhattan, parts of Brooklyn, and pockets of Queens expe
 
 #### 📉 Remote Work vs Subway Ridership Decline
 
-```{r}
-# Make sure both zip_code columns are character
+```{r wfh_vs_ridership_scatter, message=FALSE, warning=FALSE}
+# Ensure consistent zip_code types
 mta_zip_summary <- mta_zip_summary |> mutate(zip_code = as.character(zip_code))
 acs_joined <- acs_joined |> mutate(zip_code = as.character(zip_code))
 
-# Now safe to join
+# Join and filter
 zip_combined_data <- left_join(mta_zip_summary, acs_joined, by = "zip_code") |> 
-  filter(!is.na(wfh_shift) & !is.na(ridership_pct_change))
+  filter(!is.na(wfh_shift), !is.na(ridership_pct_change))
 
+# Create scatter plot
 scatter_plot <- ggplot(zip_combined_data, aes(x = wfh_shift, y = ridership_pct_change)) +
   geom_point(alpha = 0.6, color = "steelblue") +
   geom_smooth(method = "lm", se = FALSE, color = "darkred") +
   scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
-  labs(title = "Remote Work Growth vs. Subway Ridership Decline",
-       x = "Change in % Working from Home (2019–2023)",
-       y = "% Change in Subway Ridership (2019–2023)") +
+  labs(
+    title = "Remote Work Growth vs. Subway Ridership Decline",
+    x = "Change in % Working from Home (2019–2023)",
+    y = "% Change in Subway Ridership (2019–2023)"
+  ) +
   theme_minimal()
 
-ggplotly(scatter_plot)
-
+# Render interactive plot (HTML output only)
+plotly::ggplotly(scatter_plot)
 ```
 
 > The scatter plot confirms a strong negative relationship between WFH growth and subway usage.
@@ -452,43 +551,42 @@ To quantify the relationship shown in the map and scatter plot, we fit two linea
 - Model 1 uses only the change in remote work (wfh_shift) to predict subway ridership change.
 - Model 2 adds a borough fixed effect to control for spatial patterns across NYC.
 
-```{r, message=FALSE, warning=FALSE}
+```{r model_regression_summary, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(broom)
 library(scales)
 library(readr)
-library(plotly)
 library(kableExtra)
 
-# 📦 Load modeling data
+# Load modeling data
 acs <- read_csv("data/cleaned/acs_joined.csv") |> mutate(zip_code = as.character(zip_code))
 ridership <- read_csv("data/cleaned/mta_zip_summary.csv") |> mutate(zip_code = as.character(zip_code))
 mta_with_zip <- read_csv("data/cleaned/mta_with_zip.csv") |> mutate(zip_code = as.character(zip_code))
 
-# 🧩 Merge borough info
+# Merge borough info
 borough_by_zip <- mta_with_zip |> select(zip_code, borough) |> distinct()
 
-# 🔗 Create modeling dataset
+# Combine for model dataset
 model_data <- left_join(ridership, acs, by = "zip_code") |>
   left_join(borough_by_zip, by = "zip_code") |>
   filter(!is.na(wfh_shift), !is.na(ridership_pct_change))
 
-# 📈 Fit linear regression models
+# Fit models
 model1 <- lm(ridership_pct_change ~ wfh_shift, data = model_data)
 model2 <- lm(ridership_pct_change ~ wfh_shift + borough, data = model_data)
 
-# 💾 Save model summaries (optional)
+# Optionally save model summaries
 write_csv(tidy(model1), "data/cleaned/model1_summary.csv")
 write_csv(tidy(model2), "data/cleaned/model2_with_borough_summary.csv")
 
-# Code provided earlier to create model1_df and model2_df
+# Clean and compare coefficient tables
 model1_df <- tidy(model1) |> mutate(Model = "Model 1 (No Borough)")
 model2_df <- tidy(model2) |> mutate(Model = "Model 2 (With Borough)")
 
 bind_rows(model1_df, model2_df) |>
   select(Model, term, estimate, std.error, statistic, p.value) |>
   mutate(across(where(is.numeric), round, 3)) |>
-  mta_table_style("📋 Coefficient Comparison: Model 1 vs Model 2")
+  mta_table_style("Coefficient Comparison: Model 1 vs Model 2")
 ```
 
 > 🔍 Key Takeaways:
@@ -499,14 +597,14 @@ bind_rows(model1_df, model2_df) |>
 #### 📈 R² Comparison: Explanatory Power of Each Model
 Model 1 alone explains almost none of the variation in subway ridership change. Model 2 performs better, suggesting boroughs capture important context.
 
-```{r}
+```{r model_r2_comparison, message=FALSE, warning=FALSE}
 tibble(
   Model = c("Model 1", "Model 2"),
-  `R²` = c(summary(model1)$r.squared, summary(model2)$r.squared),
-  `Adj R²` = c(summary(model1)$adj.r.squared, summary(model2)$adj.r.squared)
+  `R-squared` = c(summary(model1)$r.squared, summary(model2)$r.squared),
+  `Adjusted R-squared` = c(summary(model1)$adj.r.squared, summary(model2)$adj.r.squared)
 ) |> 
   mutate(across(where(is.numeric), round, 3)) |> 
-  mta_table_style("📈 R² and Adjusted R² for Each Model")
+  mta_table_style("R² and Adjusted R² for Each Model")
 ```
 
 > 
@@ -517,8 +615,8 @@ Model 2 R² = 0.142 | Adj R² = 0.112
 #### 📊 Residual Plot: Model 2
 Residual plots help assess model fit. This one shows that while borough controls reduce bias, substantial variance remains — hinting at unmeasured local influences like transit access, job type, or demographic shifts.
 
-```{r}
-# 📊 Interactive Residual Plot
+```{r model2_residual_plot, message=FALSE, warning=FALSE}
+# Create interactive residual plot for Model 2
 resid_plot <- augment(model2) %>%
   ggplot(aes(.fitted, .resid)) +
   geom_point(alpha = 0.6, color = "darkblue") +
@@ -526,7 +624,7 @@ resid_plot <- augment(model2) %>%
   labs(title = "Residual Plot for Model 2", x = "Fitted Values", y = "Residuals") +
   theme_minimal()
 
-ggplotly(resid_plot)
+plotly::ggplotly(resid_plot)
 ```
 
 > Even after accounting for boroughs, Model 2’s residuals remain dispersed, suggesting other structural or behavioral factors — like industry mix, income, or transit reliability — may influence subway decline.
@@ -535,16 +633,49 @@ ggplotly(resid_plot)
 
 We asked: **How did the rise of remote work influence NYC subway ridership across time and geography?**
 
+```{r summary-table, message=FALSE, warning=FALSE}
+library(kableExtra)
+library(dplyr)
+library(scales)
+
+# Create summary table data
+summary_table <- tribble(
+  ~ZIP, ~Area, ~Borough, ~`% WFH Change`, ~`% Ridership Change`,
+  "10004", "FiDi", "Manhattan", 0.12, -0.48,
+  "10022", "Midtown East", "Manhattan", 0.09, -0.39,
+  "10017", "Grand Central", "Manhattan", 0.10, -0.45,
+  "11206", "East Williamsburg", "Brooklyn", 0.04, -0.15,
+  "10453", "Morris Heights", "Bronx", 0.02, -0.10,
+  "11372", "Jackson Heights", "Queens", 0.03, -0.12
+) %>%
+  mutate(
+    `% WFH Change` = percent(`% WFH Change`, accuracy = 0.1),
+    `% Ridership Change` = percent(`% Ridership Change`, accuracy = 0.1)
+  )
+
+# Render styled table
+summary_table %>%
+  kbl(caption = "Summary of Remote Work and Subway Ridership Change by Area (2019–2023)", align = "c") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE, position = "center", font_size = 13
+  ) %>%
+  row_spec(0, bold = TRUE, background = "#0039A6", color = "white")
+```
+
 Each subquestion contributed a piece:
 
-- **📅 Weekdays vs Weekends:** Weekday commuting collapsed post-COVID, weekends showed surprising resilience.
-- **⏰ Hourly Patterns:** Rush-hour peaks flattened — even in 2023, the 9-to-5 wave never returned.
-- **📉 Station Drops:** Remote-heavy ZIPs (like Canarsie) had the sharpest declines.
-- **📍 WFH Shift & Models:** ZIPs with more remote work saw deeper declines — but borough context is essential.
+📍 WFH Uptake by ZIP: Remote work increased sharply in Manhattan’s office districts like FiDi and Midtown, with double-digit gains from 2019 to 2023.
 
-Together, these findings confirm that **remote work reshaped NYC’s subway usage structurally and spatially**.
+📅 Office ZIP Ridership Trends: Daily subway use in these same ZIPs remains far below pre-COVID levels — even in 2023, ridership plateaus at 60–70% of 2019.
 
-> 🧠 **Key Insight:** This was not just a ridership dip — it was a geographic and temporal realignment. Remote work isn’t temporary. The subway must adapt to a new normal.
+📉 Station-Level Declines: Business hubs like Wall St, Grand Central, and 5 Av/53 St saw the steepest ridership drops, aligning with remote-heavy areas.
+
+📈 WFH vs Ridership Regression: A clear negative relationship exists — ZIPs with higher WFH growth saw larger subway declines, but borough-level factors also shaped outcomes.
+
+Together, these findings confirm that remote work reshaped NYC subway usage both structurally and geographically.
+
+> Key Insight: This was not just a temporary dip — it was a realignment of when, where, and whether people commute. Remote work is here to stay. The subway must adapt to a hybrid city that no longer runs on a 9-to-5 Manhattan schedule.
 
 ### 🚇 Planning Ahead
 
