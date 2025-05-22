@@ -33,9 +33,10 @@ execute:
 
 ## 🚇 Introduction
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 In a city defined by motion, the COVID-19 pandemic brought New York to a sudden halt — and with it, transformed how, when, and **if** people commute. Among the most visible disruptions was the dramatic shift to **remote work**, which changed not only office culture but also the daily rhythms of the **NYC subway system**.
 
@@ -43,31 +44,31 @@ This project investigates **The Impact of Remote Work on NYC Subway Dynamics** f
 
 Our team of four researchers explored this central question from distinct but connected perspectives:
 
-::: {.metro-card}
-**Dhruv Sharma**  
-_Subquestion 1: COVID Era Ridership Trends_  
-Focus: How weekday vs. weekend subway usage evolved across Pre-COVID, Core-COVID, and WFH eras  
+::: metro-card
+**Dhruv Sharma**\
+*Subquestion 1: COVID Era Ridership Trends*\
+Focus: How weekday vs. weekend subway usage evolved across Pre-COVID, Core-COVID, and WFH eras\
 [View Analysis](https://dhruvhw-10.github.io/STA9750-2025-SPRING/Subway_Metrics.html)
 :::
 
-::: {.metro-card}
-**Vihan Raghuvanshi**  
-_Subquestion 2: Fare Revenue Impact_  
-Focus: Estimating financial losses to the MTA from ridership decline  
+::: metro-card
+**Vihan Raghuvanshi**\
+*Subquestion 2: Fare Revenue Impact*\
+Focus: Estimating financial losses to the MTA from ridership decline\
 [View Analysis](https://vihan-raghuvanshi.github.io/STA9750-2025-SPRING/Final-Project.html)
 :::
 
-::: {.metro-card}
-**Devarshi Lala**  
-_Subquestion 3: ZIP Code & Agency Trends_  
-Focus: How remote-heavy ZIP codes and MTA agencies varied in recovery  
-[View Analysis](subq3_dev.html)
+::: metro-card
+**Devarshi Lala**\
+*Subquestion 3: ZIP Code & Agency Trends*\
+Focus: How remote-heavy ZIP codes and MTA agencies varied in recovery\
+[View Analysis](https://devarshi2011.github.io/STA9750-2025-SPRING/final-Project.html)
 :::
 
-::: {.metro-card}
-**Shubh Goyal**  
-_Subquestion 4: Geographic Recovery Patterns_  
-Focus: Mapping spatial ridership rebound and borough-level shifts  
+::: metro-card
+**Shubh Goyal**\
+*Subquestion 4: Geographic Recovery Patterns*\
+Focus: Mapping spatial ridership rebound and borough-level shifts\
 [View Analysis](https://shubh1133.github.io/STA9750-2025-SPRING/final-project.html)
 :::
 
@@ -75,9 +76,10 @@ Each team member explored four subquestions that built toward a comprehensive un
 
 ## The Data
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 For this report, a variety of datasets were used to analyze how remote work has reshaped transit ridership patterns across New York City between 2019 and 2023.
 
@@ -85,23 +87,24 @@ To examine subway usage over time, we used the **MTA Subway Hourly Ridership** d
 
 To assess geographic patterns and commuting behavior, we used the **American Community Survey (ACS) 5-Year Estimates**, specifically Table B08128: “Means of Transportation to Work.” This dataset, provided by the U.S. Census Bureau, includes ZIP-level estimates of remote work adoption from 2019 and 2023. It helped us compare pre- and post-pandemic work behavior and explore correlations with subway recovery.
 
-For financial analysis, we referenced the **MTA Fare Information** page, using a flat fare of $2.90 per ride as a baseline to estimate fare revenue losses. While this does not account for unlimited passes or transfers, it offers a consistent measure of lost revenue attributable to reduced ridership.
+For financial analysis, we referenced the **MTA Fare Information** page, using a flat fare of \$2.90 per ride as a baseline to estimate fare revenue losses. While this does not account for unlimited passes or transfers, it offers a consistent measure of lost revenue attributable to reduced ridership.
 
 Finally, to visualize spatial patterns and match station locations to ZIP codes, we used **NYC Subway Station Coordinates** and **ZIP Code Boundary Shapefiles**, both from NYC OpenData. These spatial datasets enabled us to perform geographic joins, map recovery rates by ZIP code, and conduct borough-level comparisons.
 
 Together, these datasets allowed us to explore the relationship between remote work, subway usage, agency-level recovery, and revenue loss — offering a multi-layered view of how the pandemic transformed urban mobility in New York City.
 
-## 🕒 COVID Era Ridership Trends  
+## 🕒 COVID Era Ridership Trends
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 ### 🎯 Overview
 
 This section investigates how weekday and weekend subway ridership evolved across the **Pre-COVID (2019)**, **Core COVID (2020–2021)**, and **Work-from-Home (WFH, 2022–2023)** eras. The goal is to assess how **remote work adoption** influenced transit behavior, with a focus on hourly, spatial, and station-level patterns.
 
----
+------------------------------------------------------------------------
 
 ### 📊 1. Hourly Ridership Animation
 
@@ -109,12 +112,9 @@ This section investigates how weekday and weekend subway ridership evolved acros
 
 This animated plot compares average ridership by **hour of day**, separated by **era and day type (weekday vs weekend)**.
 
-**Insights:**
-- During **Core COVID weekdays**, ridership collapsed across all hours, especially in morning and evening commuting peaks (7–10 AM and 4–7 PM).
-- In the **WFH era**, weekend ridership nearly returned to normal, while weekday patterns **remained flat**, suggesting fewer people commute into offices.
-- The traditional **“M” shape of commute peaks** has largely disappeared — replaced by flatter, off-peak travel during weekdays.
+**Insights:** - During **Core COVID weekdays**, ridership collapsed across all hours, especially in morning and evening commuting peaks (7–10 AM and 4–7 PM). - In the **WFH era**, weekend ridership nearly returned to normal, while weekday patterns **remained flat**, suggesting fewer people commute into offices. - The traditional **“M” shape of commute peaks** has largely disappeared — replaced by flatter, off-peak travel during weekdays.
 
----
+------------------------------------------------------------------------
 
 ### 🏙️ 2. Office ZIP Code Recovery: FiDi & Midtown East
 
@@ -122,12 +122,9 @@ This animated plot compares average ridership by **hour of day**, separated by *
 
 This faceted plot tracks ridership recovery in **FiDi** and **Midtown East**, two of NYC’s most office-dense ZIP codes.
 
-**Interpretation:**
-- FiDi (top) shows a slow but steady climb post-2021, with persistent dips in winter months (likely seasonal + remote holidays).
-- Midtown East (bottom) has slightly higher usage, but still **20–30% below pre-pandemic levels** in late 2023.
-- Despite citywide recovery, **workplace-heavy areas are lagging** — confirming that **remote work is not a temporary blip**.
+**Interpretation:** - FiDi (top) shows a slow but steady climb post-2021, with persistent dips in winter months (likely seasonal + remote holidays). - Midtown East (bottom) has slightly higher usage, but still **20–30% below pre-pandemic levels** in late 2023. - Despite citywide recovery, **workplace-heavy areas are lagging** — confirming that **remote work is not a temporary blip**.
 
----
+------------------------------------------------------------------------
 
 ### 🚉 3. Top 10 Stations by Ridership Decline (COVID → WFH)
 
@@ -135,48 +132,35 @@ This faceted plot tracks ridership recovery in **FiDi** and **Midtown East**, tw
 
 This bar chart highlights stations with the largest drops in **average weekday ridership** between the Core COVID and WFH periods.
 
-**Findings:**
-- Bronx stations (e.g., 170 St, 167 St, Norwood) dominate the list — reflecting broader socio-economic shifts in commuting.
-- These stations served essential workers during the pandemic, and likely saw ridership drop as **local WFH flexibility expanded**.
-- Other stations like **Aqueduct Racetrack** and **Canarsie–Rockaway Pkwy** show persistent underuse, indicating structural decline.
+**Findings:** - Bronx stations (e.g., 170 St, 167 St, Norwood) dominate the list — reflecting broader socio-economic shifts in commuting. - These stations served essential workers during the pandemic, and likely saw ridership drop as **local WFH flexibility expanded**. - Other stations like **Aqueduct Racetrack** and **Canarsie–Rockaway Pkwy** show persistent underuse, indicating structural decline.
 
----
+------------------------------------------------------------------------
 
 ### 📉 4. Remote Work vs. Ridership Change
 
 ![](plots/wfh_vs_ridership_scatter.png)
 
-Each dot here represents a ZIP code, comparing:
-- **X-axis**: % increase in remote work (from 2019 to 2023)
-- **Y-axis**: % change in subway ridership
+Each dot here represents a ZIP code, comparing: - **X-axis**: % increase in remote work (from 2019 to 2023) - **Y-axis**: % change in subway ridership
 
 ![](plots/zip_map_wfh_shift.png)
 
-**Interpretation:**
-- The **negative slope** confirms a modest inverse relationship: higher remote work → larger subway drop.
-- But there’s **high variance**, especially in outer boroughs — suggesting **other factors (income, bus access, hybrid schedules)** also play major roles.
-- **Conclusion**: Remote work explains part of the decline — but it’s not the full story.
+**Interpretation:** - The **negative slope** confirms a modest inverse relationship: higher remote work → larger subway drop. - But there’s **high variance**, especially in outer boroughs — suggesting **other factors (income, bus access, hybrid schedules)** also play major roles. - **Conclusion**: Remote work explains part of the decline — but it’s not the full story.
 
----
+------------------------------------------------------------------------
 
 ### 📌 Final Synthesis: Remote Work’s Transit Footprint
 
-
-
 This table summarizes remote work shifts and subway declines for key ZIP codes:
 
-| ZIP | Area | WFH Change | Ridership Drop |
-|-----|------|-------------|----------------|
-| 10004 | FiDi | +12.0% | -48.0%  
-| 10022 | Midtown East | +9.0% | -39.0%  
-| 10017 | Grand Central | +10.0% | -45.0%  
+| ZIP   | Area          | WFH Change | Ridership Drop |
+|-------|---------------|------------|----------------|
+| 10004 | FiDi          | +12.0%     | -48.0%         |
+| 10022 | Midtown East  | +9.0%      | -39.0%         |
+| 10017 | Grand Central | +10.0%     | -45.0%         |
 
-**Summary:**
-- Manhattan business districts experienced **the highest remote work growth** and **deepest transit losses**.
-- Neighborhoods like **East Williamsburg or Jackson Heights** had lower WFH rates and milder ridership drops.
-- This reinforces the **ZIP-level geographic inequality** in subway recovery.
+**Summary:** - Manhattan business districts experienced **the highest remote work growth** and **deepest transit losses**. - Neighborhoods like **East Williamsburg or Jackson Heights** had lower WFH rates and milder ridership drops. - This reinforces the **ZIP-level geographic inequality** in subway recovery.
 
----
+------------------------------------------------------------------------
 
 ### 🧠 Takeaway
 
@@ -184,11 +168,12 @@ Remote work didn’t just shift working habits — it **reshaped the city's tran
 
 As MTA looks to modernize its service plans, understanding these localized and temporal ridership shifts will be **critical for equitable and efficient transit planning**.
 
-## 💰 Fare Revenue Loss Attributable to Remote Work  
+## 💰 Fare Revenue Loss Attributable to Remote Work
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 ### 🎯 Overview
 
@@ -196,7 +181,7 @@ Remote work didn’t just change when people commute — it changed **whether** 
 
 This section explores the **economic impact** of that shift, specifically quantifying how much revenue the MTA lost due to pandemic-induced ridership declines, and isolating the portion attributable to **remote work** between 2019 and 2023.
 
----
+------------------------------------------------------------------------
 
 ### 📈 1. Overall Ridership Recovery (2019–2023)
 
@@ -204,12 +189,9 @@ This section explores the **economic impact** of that shift, specifically quanti
 
 This chart tracks **total subway ridership by year**, broken down by weekday vs weekend averages.
 
-**Key Observations:**
-- As of 2023, the MTA had only regained about **70% of its pre-COVID ridership**.
-- **Weekdays recovered more slowly** than weekends: only **67.1%** weekday recovery compared to **77.3%** on weekends.
-- This signals a profound structural change in commuting behavior — one where subway usage is no longer driven by a five-day office routine.
+**Key Observations:** - As of 2023, the MTA had only regained about **70% of its pre-COVID ridership**. - **Weekdays recovered more slowly** than weekends: only **67.1%** weekday recovery compared to **77.3%** on weekends. - This signals a profound structural change in commuting behavior — one where subway usage is no longer driven by a five-day office routine.
 
----
+------------------------------------------------------------------------
 
 ### 📊 2. Weekday vs Weekend Patterns
 
@@ -217,11 +199,9 @@ This chart tracks **total subway ridership by year**, broken down by weekday vs 
 
 This barplot underscores the stark divide in weekday vs weekend recovery.
 
-**Interpretation:**
-- Weekday usage remained stunted in 2022 and 2023, even as offices technically reopened.
-- In contrast, **weekend ridership rebounded faster**, suggesting that subways are now used more for leisure and non-commute purposes — a reversal of historic patterns.
+**Interpretation:** - Weekday usage remained stunted in 2022 and 2023, even as offices technically reopened. - In contrast, **weekend ridership rebounded faster**, suggesting that subways are now used more for leisure and non-commute purposes — a reversal of historic patterns.
 
----
+------------------------------------------------------------------------
 
 ### ⏰ 3. Shifting Commuting Time Slots
 
@@ -229,58 +209,51 @@ This barplot underscores the stark divide in weekday vs weekend recovery.
 
 This plot compares ridership across time slots: **morning (6–10 AM)**, **midday (10 AM–3 PM)**, and **evening (3–7 PM)**.
 
-**Insights:**
-- **Morning rush hour suffered the most** — with recovery hovering around 50–60% in 2023.
-- Evening trips saw stronger recovery, likely driven by **non-work activities** or reverse commuting.
-- The midday block showed surprising stability — possibly reflecting remote workers making off-peak trips for errands, dining, or hybrid days in the office.
+**Insights:** - **Morning rush hour suffered the most** — with recovery hovering around 50–60% in 2023. - Evening trips saw stronger recovery, likely driven by **non-work activities** or reverse commuting. - The midday block showed surprising stability — possibly reflecting remote workers making off-peak trips for errands, dining, or hybrid days in the office.
 
----
+------------------------------------------------------------------------
 
 ### 💸 4. Estimating the Financial Impact
 
 ![](images/fare_loss_trendline.png)
 
-Based on fare assumptions ($2.90 per swipe), average ridership drops, and weekday/weekend breakdowns, the MTA is estimated to have lost:
+Based on fare assumptions (\$2.90 per swipe), average ridership drops, and weekday/weekend breakdowns, the MTA is estimated to have lost:
 
-- **$8.8 billion in cumulative subway fare revenue (2020–2023)**
-- **$2.5 to $3.0 billion directly due to remote work’s impact**
-- In **2023 alone**, **$379.8 million** in lost revenue can be attributed to remote work, equivalent to **541,540 fewer daily riders** on average.
+-   **\$8.8 billion in cumulative subway fare revenue (2020–2023)**
+-   **\$2.5 to \$3.0 billion directly due to remote work’s impact**
+-   In **2023 alone**, **\$379.8 million** in lost revenue can be attributed to remote work, equivalent to **541,540 fewer daily riders** on average.
 
-**Methodology Notes:**
-- Daily ridership figures were matched to average weekday and weekend recovery ratios.
-- Fare revenue loss was calculated under a flat $2.90 per ride assumption (without transfers or MetroCard bonuses).
+**Methodology Notes:** - Daily ridership figures were matched to average weekday and weekend recovery ratios. - Fare revenue loss was calculated under a flat \$2.90 per ride assumption (without transfers or MetroCard bonuses).
 
----
+------------------------------------------------------------------------
 
 ### 📌 Summary of Estimated Remote Work Impact
 
 | Year | Estimated Remote Work Riders Lost/Day | Annual Revenue Loss |
-|------|---------------------------------------|----------------------|
-| 2020 | 935,000+                              | $615M – $700M        |
-| 2021 | 750,000+                              | $560M – $630M        |
-| 2022 | 600,000+                              | $475M – $520M        |
-| 2023 | 541,540                               | **$379.8M**          |
+|------|---------------------------------------|---------------------|
+| 2020 | 935,000+                              | \$615M – \$700M     |
+| 2021 | 750,000+                              | \$560M – \$630M     |
+| 2022 | 600,000+                              | \$475M – \$520M     |
+| 2023 | 541,540                               | **\$379.8M**        |
 
-Even in the fourth post-COVID year, the MTA is losing **over $1 million in fare revenue every day** due to reduced weekday ridership.
+Even in the fourth post-COVID year, the MTA is losing **over \$1 million in fare revenue every day** due to reduced weekday ridership.
 
----
+------------------------------------------------------------------------
 
 ### 🧠 Takeaway
 
 This analysis reveals that **remote work has permanently weakened the MTA’s weekday fare base**. The typical commuter — once the backbone of the system — no longer rides five days a week. That drop, driven not by transit dissatisfaction but by a broader shift in work culture, has erased **billions in fare revenue**.
 
-Unless service models and funding mechanisms adapt, the MTA will continue to face structural budget gaps. Future policy may need to consider:
-- Fare reform or congestion pricing
-- More weekend-focused service investments
-- Employer-based subsidies for part-time commuting
+Unless service models and funding mechanisms adapt, the MTA will continue to face structural budget gaps. Future policy may need to consider: - Fare reform or congestion pricing - More weekend-focused service investments - Employer-based subsidies for part-time commuting
 
 New York’s economy is recovering — but its **commute revenue model is not**. And remote work is the new reality driving that change.
 
-## 🗂️ ZIP Code & MTA Agency Recovery Trends  
+## 🗂️ ZIP Code & MTA Agency Recovery Trends
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 ### 🎯 Overview
 
@@ -288,7 +261,7 @@ The geography of remote work adoption has fundamentally reshaped the way New Yor
 
 Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, we examine whether areas with higher remote work rates experienced deeper transit declines — and whether those patterns varied by mode of transportation. By analyzing both agency-level recovery and ZIP-level ridership shifts, we uncover critical differences in how subways, buses, and commuter rails responded to the long tail of the pandemic. This analysis helps pinpoint **where transit has bounced back — and where it's still waiting for riders to return.**
 
----
+------------------------------------------------------------------------
 
 ### 🧨 1. Which Agencies Suffered Most?
 
@@ -296,13 +269,13 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 **Transit Ridership Drop and Recovery by MTA Agency**
 
-- **Biggest Drops**: Metro-North Railroad (MNR, -66.6%) and SIR (-66.4%) experienced the most severe declines from Pre-COVID to Core-COVID.
-- **Strongest Recoveries**: MNR (88.3%) and LIRR (80.2%) showed the most dramatic rebounds from Core to Post-COVID.
-- **Subways**: Despite a 58.8% drop, subways rebounded 54.7% — making them relatively stable compared to buses or commuter rails.
+-   **Biggest Drops**: Metro-North Railroad (MNR, -66.6%) and SIR (-66.4%) experienced the most severe declines from Pre-COVID to Core-COVID.
+-   **Strongest Recoveries**: MNR (88.3%) and LIRR (80.2%) showed the most dramatic rebounds from Core to Post-COVID.
+-   **Subways**: Despite a 58.8% drop, subways rebounded 54.7% — making them relatively stable compared to buses or commuter rails.
 
 🧠 **Insight**: Recovery wasn’t uniform — agencies with **high weekday commuter dependency** fell furthest and rebounded fastest once offices reopened, but **weekday subway traffic remains structurally lower**.
 
----
+------------------------------------------------------------------------
 
 ### 🏙️ 2. Remote Work vs Agency Exposure by ZIP
 
@@ -310,12 +283,12 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 **Remote Work Rates by ZIP and Transit Loss by Mode**
 
-- ZIPs with **20–25% remote work rates** (e.g., 10002, 10005) all showed **~32% ridership losses**.
-- The **10003 ZIP code**, with the highest remote work rate, showed the **sharpest loss**: **-38.8%** on NYCT Bus routes.
+-   ZIPs with **20–25% remote work rates** (e.g., 10002, 10005) all showed **\~32% ridership losses**.
+-   The **10003 ZIP code**, with the highest remote work rate, showed the **sharpest loss**: **-38.8%** on NYCT Bus routes.
 
 🧠 **Insight**: ZIP codes with more flexible job markets are **heavily reliant on subways and NYCT Bus** — and saw larger drops in transit use when remote work expanded.
 
----
+------------------------------------------------------------------------
 
 ### 📈 3. Monthly MTA Ridership by Agency (2019–2023)
 
@@ -323,13 +296,13 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 **Line chart showing ridership recovery over time**
 
-- **Subway ridership** saw the steepest initial crash in early 2020 but also rebounded steadily throughout 2021–2023.
-- **MTA Bus, NYCT Bus, and commuter rail modes plateaued** early — suggesting a permanent reset in their usage.
-- Notably, the **subway’s growth stabilized post-2022**, indicating a new normal rather than continued bounce-back.
+-   **Subway ridership** saw the steepest initial crash in early 2020 but also rebounded steadily throughout 2021–2023.
+-   **MTA Bus, NYCT Bus, and commuter rail modes plateaued** early — suggesting a permanent reset in their usage.
+-   Notably, the **subway’s growth stabilized post-2022**, indicating a new normal rather than continued bounce-back.
 
 🧠 **Insight**: Subway is the **only mode showing sustainable post-COVID growth**, while other systems may require restructuring to match demand.
 
----
+------------------------------------------------------------------------
 
 ### 📉 4. Remote Work vs Ridership Loss Correlation
 
@@ -337,11 +310,11 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 **Scatterplot with trend line: Remote Work % vs Transit Drop**
 
-- Clear **negative correlation**: ZIPs with higher remote work rates saw deeper ridership declines.
-- This was **especially pronounced in NYCT Bus usage**, where flexible employment made daily commuting optional.
-- However, not all high-remote ZIPs lost transit at the same pace — suggesting that **income level, transit reliability, and hybrid habits** play additional roles.
+-   Clear **negative correlation**: ZIPs with higher remote work rates saw deeper ridership declines.
+-   This was **especially pronounced in NYCT Bus usage**, where flexible employment made daily commuting optional.
+-   However, not all high-remote ZIPs lost transit at the same pace — suggesting that **income level, transit reliability, and hybrid habits** play additional roles.
 
----
+------------------------------------------------------------------------
 
 ### 🧠 Takeaway
 
@@ -349,64 +322,52 @@ Remote work adoption did not impact all agencies equally. Subway ridership has s
 
 Agencies reliant on **daily commuters** (like Metro-North and NYCT Bus) have been hardest hit and may never fully recover unless service and funding structures adapt to the post-pandemic commuter landscape.
 
-Future planning will need to consider:
-- Targeted **service scaling by ZIP recovery**
-- Adaptive scheduling for **non-commuter hours**
-- Equity-driven investments in **boroughs with low remote work** and high recovery needs
+Future planning will need to consider: - Targeted **service scaling by ZIP recovery** - Adaptive scheduling for **non-commuter hours** - Equity-driven investments in **boroughs with low remote work** and high recovery needs
 
+## 🗺️ Geographic Recovery of NYC Subway Usage
 
-
-## 🗺️ Geographic Recovery of NYC Subway Usage  
-
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 ### 🎯 Overview
 
 The COVID-19 pandemic didn't just alter daily routines—it redefined the very fabric of urban mobility. As remote work became the norm, New York City's subway system experienced unprecedented shifts in ridership patterns. This section delves into the geographic nuances of subway recovery from 2020 to 2023, examining how remote work adoption influenced transit usage across different ZIP codes and boroughs.
 
----
+------------------------------------------------------------------------
 
 ### 🧭 1. Remote Work Adoption by ZIP Code (2020–2023)
 
 ![Remote Work Adoption Map](images/animated_wfh_growth_vertical.gif)
 
-**Insights:**
-- **High Adoption Areas:** ZIP codes in Manhattan, particularly Midtown and the Financial District, saw the most significant increases in remote work.
-- **Low Adoption Areas:** Outer boroughs like the Bronx and parts of Queens exhibited minimal changes, indicating a continued reliance on in-person occupations.
+**Insights:** - **High Adoption Areas:** ZIP codes in Manhattan, particularly Midtown and the Financial District, saw the most significant increases in remote work. - **Low Adoption Areas:** Outer boroughs like the Bronx and parts of Queens exhibited minimal changes, indicating a continued reliance on in-person occupations.
 
----
+------------------------------------------------------------------------
 
 ### 🚇 2. Subway Ridership Recovery by ZIP Code
 
 ![Subway Ridership Recovery Map](images/subway_ridership_recovery_map.png)
 
-**Observations:**
-- **Lagging Recovery:** Areas with high remote work adoption, such as Midtown Manhattan, showed slower ridership recovery.
-- **Robust Recovery:** Neighborhoods with lower remote work rates, including parts of the Bronx and Queens, demonstrated a quicker return to pre-pandemic ridership levels.
+**Observations:** - **Lagging Recovery:** Areas with high remote work adoption, such as Midtown Manhattan, showed slower ridership recovery. - **Robust Recovery:** Neighborhoods with lower remote work rates, including parts of the Bronx and Queens, demonstrated a quicker return to pre-pandemic ridership levels.
 
----
+------------------------------------------------------------------------
 
 ### 📉 3. Correlation Between Remote Work and Ridership Recovery
 
 ![Correlation Scatter Plot](images/remote_work_vs_ridership_recovery.png)
 
-**Analysis:**
-- A clear negative correlation exists between the increase in remote work and subway ridership recovery.
-- ZIP codes with higher remote work adoption experienced more significant declines in subway usage, underscoring the impact of work-from-home trends on public transit.
+**Analysis:** - A clear negative correlation exists between the increase in remote work and subway ridership recovery. - ZIP codes with higher remote work adoption experienced more significant declines in subway usage, underscoring the impact of work-from-home trends on public transit.
 
----
+------------------------------------------------------------------------
 
 ### 🏙️ 4. Borough-Level Recovery Patterns
 
 ![Borough Recovery Bar Chart](images/borough_recovery_comparison.png)
 
-**Key Points:**
-- **Manhattan:** Exhibited the slowest recovery, aligning with its high concentration of remote-capable jobs.
-- **Bronx & Queens:** Showed stronger recovery rates, reflecting the prevalence of essential and on-site occupations in these boroughs.
+**Key Points:** - **Manhattan:** Exhibited the slowest recovery, aligning with its high concentration of remote-capable jobs. - **Bronx & Queens:** Showed stronger recovery rates, reflecting the prevalence of essential and on-site occupations in these boroughs.
 
----
+------------------------------------------------------------------------
 
 ### 🧠 Takeaway
 
@@ -414,9 +375,10 @@ The geographic disparities in subway ridership recovery highlight the profound i
 
 ## 🧠 Final Summary
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 **🧭 How has remote work influenced NYC subway dynamics since the COVID-19 pandemic?**
 
@@ -424,7 +386,7 @@ Our project set out to understand how the rise of remote work has reshaped New Y
 
 One of the most visible impacts has been the persistent weakness in **weekday ridership**. While weekend travel returned to roughly 77% of pre-pandemic levels by 2023, weekday ridership has stalled at around 67%. The iconic morning and evening rush hours have flattened, particularly on weekdays, as traditional 9-to-5 commuters shift to hybrid or remote schedules. Office-heavy districts like Midtown, the Financial District, and Grand Central have been hit hardest, with ZIP codes in these areas showing the largest and most persistent weekday ridership declines.
 
-These behavioral shifts have had serious **financial consequences**. We estimate that between 2020 and 2023, the MTA lost approximately $8.8 billion in subway fare revenue. Remote work is directly responsible for at least $2.5 to $3.0 billion of that loss. Even in 2023, when tourism and weekend travel had largely recovered, the absence of hundreds of thousands of daily commuters contributed to an estimated $379.8 million in lost fare revenue. The MTA’s longstanding dependence on weekday riders to fund operations has been fundamentally challenged by this shift.
+These behavioral shifts have had serious **financial consequences**. We estimate that between 2020 and 2023, the MTA lost approximately \$8.8 billion in subway fare revenue. Remote work is directly responsible for at least \$2.5 to \$3.0 billion of that loss. Even in 2023, when tourism and weekend travel had largely recovered, the absence of hundreds of thousands of daily commuters contributed to an estimated \$379.8 million in lost fare revenue. The MTA’s longstanding dependence on weekday riders to fund operations has been fundamentally challenged by this shift.
 
 Geographically, the recovery has been **uneven across ZIP codes and boroughs**. Neighborhoods with the highest remote work adoption — particularly in Manhattan — have lagged in ridership recovery. In contrast, areas in the Bronx, Queens, and parts of Brooklyn, where fewer jobs can be done remotely, saw stronger rebounds. These areas remained transit-dependent throughout the pandemic and returned to the system more quickly once restrictions eased. This geographic divide underscores how remote work has exacerbated existing transit inequalities, concentrating ridership losses in wealthier, more flexible parts of the city while placing more demand on services in outer boroughs.
 
@@ -436,9 +398,10 @@ Remote work hasn’t just changed how people work — it’s changed how New Yor
 
 ## 🚦 Future Directions
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
 While our project sheds light on the dramatic and lasting impact of remote work on NYC subway dynamics, several questions remain open — and new ones are emerging.
 
@@ -452,15 +415,16 @@ Lastly, as New York continues adapting to hybrid life, future research should ex
 
 The MTA’s challenges are no longer just operational — they are cultural and structural. Understanding the long-term footprint of remote work is essential to building a subway system that works for the future of New York.
 
----
+------------------------------------------------------------------------
 
 ## 📎 In-Depth Analysis
 
-<div class="mini-train-track">
-  <div class="mini-train"></div>
-</div>
+:::: mini-train-track
+::: mini-train
+:::
+::::
 
-- [Dhruv Sharma – COVID Era Ridership Trends](https://dhruvhw-10.github.io/STA9750-2025-SPRING/Subway_Metrics.html)  
-- [Vihan Raghuvanshi – Fare Revenue Loss Analysis](https://vihan-raghuvanshi.github.io/STA9750-2025-SPRING/Final-Project.html#analysis-1-overall-subway-ridership-recovery)  
-- [Dev – ZIP & Agency Transit Recovery Patterns](subq3_dev.html)  
-- [Shubh Goyal – Geographic Recovery Across Boroughs](https://shubh1133.github.io/STA9750-2025-SPRING/final-project.html)
+-   [Dhruv Sharma – COVID Era Ridership Trends](https://dhruvhw-10.github.io/STA9750-2025-SPRING/Subway_Metrics.html)\
+-   [Vihan Raghuvanshi – Fare Revenue Loss Analysis](https://vihan-raghuvanshi.github.io/STA9750-2025-SPRING/Final-Project.html#analysis-1-overall-subway-ridership-recovery)\
+-   [Devarshi Lala – ZIP & Agency Transit Recovery Patterns](https://devarshi2011.github.io/STA9750-2025-SPRING/final-Project.html)\
+-   [Shubh Goyal – Geographic Recovery Across Boroughs](https://shubh1133.github.io/STA9750-2025-SPRING/final-project.html)
