@@ -1,0 +1,1039 @@
+Agency,Mode,Fuel,State,Total_Energy,Total_Emissions_kg,Total_Emissions_lb,UPT,MILES
+MTA New York City Transit,Heavy Rail,Electric Propulsion,NY,1546269600,366118755703.93085,807152731200,2632003044,9591253658
+Washington Metropolitan Area Transit Authority,Heavy Rail,Electric Propulsion,DC,499328277,192518001038.72778,424429035450,231023784,912604948
+MTA Long Island Rail Road,Commuter Rail,Electric Propulsion,NY,548190400,129798055356.47868,286155388800,83835706,2033685836
+"Metro-North Commuter Railroad Company, dba: MTA Metro-North Railroad",Commuter Rail,Electric Propulsion,NY,405036564,95902734443.124,211429086408,66645285,1150894931
+New Jersey Transit Corporation,Commuter Rail,Electric Propulsion,NJ,365911929,85975079252.66032,189542379222,198590133,2314384007
+Chicago Transit Authority,Heavy Rail,Electric Propulsion,IL,339757455,80446240853.299,177353391510.00003,279146501,1090677628
+Southeastern Pennsylvania Transportation Authority,Commuter Rail,Electric Propulsion,PA,204899285,60876265150.00318,134209031675,197264920,834809485
+Massachusetts Bay Transportation Authority,Heavy Rail,Electric Propulsion,MA,135803120,56856183723.27204,125346279760,234975556,1103417623
+Southeastern Pennsylvania Transportation Authority,Heavy Rail,Electric Propulsion,PA,115833983,34414665051.11993,75871258865,197264920,834809485
+Metropolitan Atlanta Rapid Transit Authority,Heavy Rail,Electric Propulsion,GA,77059623,25621061071.295734,56484703659,62093037,352115956
+Port Authority Trans-Hudson Corporation,Heavy Rail,Electric Propulsion,NY,98060829,23218401691.901554,51187752738,55108860,268404831
+County of Miami-Dade,Heavy Rail,Electric Propulsion,FL,64091351,23082677601.582134,50888532694,77961885,414128978
+Massachusetts Bay Transportation Authority,Light Rail,Electric Propulsion,MA,44642884,18690469074.942623,41205381932,234975556,1103417623
+Maryland Transit Administration,Heavy Rail,Electric Propulsion,MD,46777982,11839733811.722656,26102113956,57907024,343206699
+Metro Transit,Light Rail,Electric Propulsion,MN,30179186,10964940890.4936,24173527986,44977111,175173901
+Port Authority Transit Corporation,Heavy Rail,Electric Propulsion,NJ,37581452,8830180319.510847,19467192136.000004,5451983,47004510
+New Jersey Transit Corporation,Light Rail,Electric Propulsion,NJ,36636308,8608108220.010706,18977607544,198590133,2314384007
+Tri-County Metropolitan Transportation District of Oregon,Light Rail,Electric Propulsion,OR,51428218,8024651410.220356,17691306992,57442650,231430380
+Northern Indiana Commuter Transportation District,Commuter Rail,Electric Propulsion,IN,11106350,7541529129.736645,16626205950,1526836,49941941
+The Greater Cleveland Regional Transit Authority,Heavy Rail,Electric Propulsion,OH,15807213,7485521483.067377,16502730372,22415370,102838552
+Pittsburgh Regional Transit,Light Rail,Electric Propulsion,PA,25129142,7465952413.567872,16459588010,37908532,155119545
+Southeastern Pennsylvania Transportation Authority,Streetcar,Electric Propulsion,PA,21411071,6361301042.8101,14024251505,197264920,834809485
+Maryland Transit Administration,Light Rail,Electric Propulsion,MD,24878007,6296744067.458338,13881927906,57907024,343206699
+Staten Island Rapid Transit Operating Authority,Heavy Rail,Electric Propulsion,NY,24130949,5713617484.192287,12596355378,5194599,30544924
+Central Puget Sound Regional Transit Authority,Light Rail,Electric Propulsion,WA,40633197,5381831573.69524,11864893523.999998,37571636,346306031
+Maryland Transit Administration,Commuter Rail,Electric Propulsion,MD,20636077,5223091038.818481,11514930966,57907024,343206699
+Alternativa de Transporte Integrado,Heavy Rail,Electric Propulsion,PR,5711384,4663157913.835491,10280491200,3732115,15671639
+The Greater Cleveland Regional Transit Authority,Light Rail,Electric Propulsion,OH,8931099,4229330839.781913,9324067356,22415370,102838552
+Pennsylvania Department of Transportation,Commuter Rail,Electric Propulsion,PA,14204836,4220304442.4889555,9304167580,530252,33974346
+City of Charlotte North Carolina,Light Rail,Electric Propulsion,NC,11980088,3472379018.6063814,7655276232,14027141,67531449
+County of Miami-Dade,Monorail / Automated Guideway,Electric Propulsion,FL,6602012,2377732909.9799514,5241997528,77961885,414128978
+Indianapolis and Marion County Public Transportation,Rapid Bus,Electric Battery,IN,3201903,2174183664.7585526,4793248791,6888880,35204901
+Niagara Frontier Transportation Authority,Light Rail,Electric Propulsion,NY,8174000,1935402926.581452,4266828000,14531216,46252415
+Southeastern Pennsylvania Transportation Authority,Trolley Bus,Electric Propulsion,PA,6054170,1798714222.8592684,3965481350,197264920,834809485
+King County,Trolley Bus,Electric Propulsion,WA,13113330,1736849144.07018,3829092359.9999995,78886848,301530502
+Connecticut Department of Transportation,Commuter Rail,Electric Propulsion,CT,5991608,1565424521.2326841,3451166208,495143,14795283
+County of Miami-Dade,Motor Bus,Electric Battery,FL,2857902,1029281321.9511753,2269174188,77961885,414128978
+Greater Dayton Regional Transit Authority,Trolley Bus,Electric Propulsion,OH,2003093,948566688.1367311,2091229092,6578178,42234501
+Transportation District Commission of Hampton Roads,Light Rail,Electric Propulsion,VA,3185411,858258626.8835447,1892134134,7167154,36797144
+West Virginia University,Monorail / Automated Guideway,Electric Propulsion,WV,968750,845879902.2053688,1864843750,1600303,2890640
+County of Miami-Dade,Motor Bus,C Natural Gas,FL,6450609,779556097.65,1718624964.0011427,77961885,414128978
+District Department of Transportation,Streetcar,Electric Propulsion,DC,1558727,600973387.7040035,1324917950,2591448,3903496
+Metropolitan Atlanta Rapid Transit Authority,Motor Bus,C Natural Gas,GA,4914819,593955876.15,1309447003.6778128,62093037,352115956
+MTA New York City Transit,Motor Bus,C Natural Gas,NY,4740687,572912023.9499999,1263053306.2406487,2632003044,9591253658
+MTA New York City Transit,Motor Bus,Diesel Fuel,NY,24981101,560825717.4499999,1236407593.2046187,2632003044,9591253658
+Charleston Area Regional Transportation Authority,Motor Bus,Electric Battery,SC,1992960,504427828.8321797,1112071680,2230900,12721462
+Washington Metropolitan Area Transit Authority,Motor Bus,C Natural Gas,DC,4121831,498123276.34999996,1098172537.5067368,231023784,912604948
+New Jersey Transit Corporation,Motor Bus,Diesel Fuel,NJ,21539346,483558317.7,1066062338.3677739,198590133,2314384007
+Massachusetts Bay Transportation Authority,Rapid Bus,Electric Propulsion,MA,1099315,460246094.5650498,1014667745,234975556,1103417623
+District Department of Transportation,Motor Bus,Electric Battery,DC,1146187,441916951.67421144,974258950,2591448,3903496
+City of Charlotte North Carolina,Streetcar,Electric Propulsion,NC,1483914,430106343.0432456,948221046,14027141,67531449
+Transportation District Commission of Hampton Roads,Motor Bus,Electric Battery,VA,1547280,416890130.72547656,919084320,7167154,36797144
+County of Nassau,Motor Bus,C Natural Gas,NY,3406655,411694256.75,907629392.3161849,20293586,112757303
+Jacksonville Transportation Authority,Monorail / Automated Guideway,Electric Propulsion,FL,1136887,409453002.33146757,902688278,6678105,36776548
+City of Greensboro,Motor Bus,Electric Battery,NC,1366471,396065974.63508457,873174969.0000001,2263152,9475305
+City of Portland,Streetcar,Electric Propulsion,OR,2497870,389757545.5180485,859267280.0000001,3692695,4413873
+Central Florida Regional Transportation Authority,Motor Bus,C Natural Gas,FL,2913232,352064087.2,776167527.922864,18418220,111018391
+King County,Motor Bus,Electric Battery,WA,2411807,319441737.8051547,704247644,78886848,301530502
+New Jersey Transit Corporation,Commuter Rail,Diesel Fuel,NJ,14099532,316534493.4,697838274.8395079,198590133,2314384007
+Washington State Ferries,Ferry Boat,Diesel Fuel,WA,14012522,314581118.9,693531826.3493179,18241119,131769108
+Chicago Transit Authority,Motor Bus,Diesel Fuel,IL,13573058,304715152.09999996,671781118.6227019,279146501,1090677628
+Delaware Transit Corporation,Motor Bus,Electric Battery,DE,612526,304232008.2372473,670715970,7629486,49897548
+The Greater Cleveland Regional Transit Authority,Motor Bus,C Natural Gas,OH,2497389,301809460.65,665375173.1382029,22415370,102838552
+Central Ohio Transit Authority,Motor Bus,C Natural Gas,OH,2471404,298669173.4,658452033.0611079,11526490,51281571
+Massachusetts Bay Transportation Authority,Commuter Rail,Diesel Fuel,MA,12940342,290510677.9,640465650.71189785,234975556,1103417623
+King County,Streetcar,Electric Propulsion,WA,2122439,281115198.0840236,619752188,78886848,301530502
+Hillsborough Area Regional Transit Authority,Streetcar,Electric Propulsion,FL,748585,269604961.3992434,594376490,12574593,53491817
+University of Georgia,Motor Bus,Electric Battery,GA,789143,262377107.61945373,578441819,2941019,3512275
+City of Tallahassee,Motor Bus,Electric Battery,FL,691172,248927510.4099573,548790568,2588477,10140885
+MTA Bus Company,Motor Bus,C Natural Gas,NY,2038747,246382574.95,543179952.386269,119571794,347970662
+Milwaukee County,Motor Bus,Electric Battery,WI,464119,241678208.4894449,532808612,22735042,75456856
+City of Alexandria,Motor Bus,Electric Battery,VA,891492,240198423.3110468,529546247.99999994,4580105,10493813
+City of Knoxville,Motor Bus,Electric Battery,TN,689098,223487526.19499055,492705070,2312188,7161127
+Southeastern Pennsylvania Transportation Authority,Motor Bus,Diesel Fuel,PA,9498681,213245388.45,470125048.28463894,197264920,834809485
+MTA Bus Company,Motor Bus,Diesel Fuel,NY,9224121,207081516.45,456536052.79599893,119571794,347970662
+City of Memphis,Streetcar,Electric Propulsion,TN,632100,205001995.80880153,451951500,2819588,14475117
+City of Charlotte North Carolina,Motor Bus,Electric Battery,NC,656290,190222945.45091674,419369310,14027141,67531449
+Massachusetts Bay Transportation Authority,Motor Bus,C Natural Gas,MA,1555699,188006224.15,414482281.88557297,234975556,1103417623
+Jacksonville Transportation Authority,Motor Bus,C Natural Gas,FL,1503650,181716102.5,400614953.89355,6678105,36776548
+Chelan Douglas PTBA,Motor Bus,Electric Battery,WA,1341349,177660507.4797471,391673908,1113038,9761540
+Washington Metropolitan Area Transit Authority,Motor Bus,Diesel Fuel,DC,7881289,176934938.04999998,390074303.1237909,231023784,912604948
+Pioneer Valley Transit Authority,Motor Bus,Electric Battery,MA,403775,169046967.27780753,372684325,7079756,27546334
+Hillsborough Area Regional Transit Authority,Motor Bus,C Natural Gas,FL,1371713,165771516.04999998,365463199.7141509,12574593,53491817
+New Jersey Transit Corporation,Motor Bus,C Natural Gas,NJ,1366430,165133065.5,364055658.86261,198590133,2314384007
+Greater Richmond Transit Company,Motor Bus,C Natural Gas,VA,1331164,160871169.4,354659797.482628,9723640,48410504
+Spokane Transit Authority,Motor Bus,Electric Battery,WA,1202138,159222131.7052372,351024296,9403739,46318134
+MTA Long Island Rail Road,Commuter Rail,Diesel Fuel,NY,7085033,159058990.85,350664632.40772694,83835706,2033685836
+King County,Motor Bus,Diesel Fuel,WA,7049403,158259097.35,348901171.199757,78886848,301530502
+"Metro-North Commuter Railroad Company, dba: MTA Metro-North Railroad",Commuter Rail,Diesel Fuel,NY,6998370,157113406.5,346375358.23802996,66645285,1150894931
+"Montgomery County, Maryland",Motor Bus,C Natural Gas,MD,1268686,153320703.1,338013888.468322,14372995,58141297
+Chattanooga Area Regional Transportation Authority,Motor Bus,Electric Battery,TN,469720,152339087.9153777,335849799.99999994,1736039,5747254
+MTA New York City Transit,Motor Bus,Electric Battery,NY,638087,151083367.65519682,333081414,2632003044,9591253658
+Metropolitan Atlanta Rapid Transit Authority,Streetcar,Electric Propulsion,GA,440489,146455369.6328619,322878437,62093037,352115956
+Lane Transit District,Motor Bus,Electric Battery,OR,920696,143661685.00693998,316719424,6311613,22779952
+Pittsburgh Regional Transit,Motor Bus,Diesel Fuel,PA,6385126,143346078.7,316023632.02359396,37908532,155119545
+Broward County Board of County Commissioners,Motor Bus,Electric Battery,FL,397683,143226634.06845626,315760302,23209964,119090315
+Maryland Transit Administration,Motor Bus,Diesel Fuel,MD,6345423,142454746.35,314058582.898137,57907024,343206699
+City of Everett,Motor Bus,Electric Battery,WA,1043955,138270931.0448059,304834860,1404970,5193721
+Metro Transit,Motor Bus,Electric Battery,MN,370872,134748152.51607987,297068472,44977111,175173901
+Regional Transit Service,Motor Bus,Electric Battery,NY,558979,132352531.50202757,291787038,9162408,27087937
+METRO Regional Transit Authority,Motor Bus,C Natural Gas,OH,1053705,127340249.25,280736860.30153495,4324674,18176923
+Pierce County Transportation Benefit Area Authority,Motor Bus,C Natural Gas,WA,1036567,125269121.94999999,276170811.63340896,6792245,40362320
+Interurban Transit Partnership,Motor Bus,C Natural Gas,MI,990758,119733104.3,263965996.40186596,6042030,27512044
+Pinellas Suncoast Transit Authority,Motor Bus,Electric Battery,FL,328743,118397702.09832081,261021942,10210124,54152172
+Niagara Frontier Transportation Authority,Motor Bus,C Natural Gas,NY,968439,117035853.14999999,258019582.57155296,14531216,46252415
+Chicago Transit Authority,Motor Bus,Electric Battery,IL,479980,113647503.87821938,250549560,279146501,1090677628
+City of Asheville,Motor Bus,Electric Battery,NC,380763,110362582.66730775,243307557,1377810,5005600
+City of Raleigh,Motor Bus,C Natural Gas,NC,909666,109933136.1,242360790.50878197,5338054,24490026
+New York City Department of Transportation,Ferry Boat,Diesel Fuel,NY,4873850,109417932.5,241224962.34814999,14715363,76519888
+Massachusetts Bay Transportation Authority,Motor Bus,Diesel Fuel,MA,4844815,108766096.75,239787912.216985,234975556,1103417623
+Lehigh and Northampton Transportation Authority,Motor Bus,C Natural Gas,PA,899658,108723669.3,239694375.81216598,3897096,19797124
+Metro Transit,Motor Bus,Bio-Diesel,MN,4548304,102109424.8,225112480.102576,44977111,175173901
+Pittsburgh Regional Transit,Motor Bus,Electric Battery,PA,333421,99060497.954296,218390755,37908532,155119545
+Tri-County Metropolitan Transportation District of Oregon,Motor Bus,Electric Battery,OR,597269,93195442.298446,205460536,57442650,231430380
+Duluth Transit Authority,Motor Bus,Electric Battery,MN,251487,91372248.73220782,201441087,2160263,9955251
+New York City Economic Development Corporation,Ferry Boat,Diesel Fuel,NY,4010558,90037027.1,198497430.68520197,6687168,33504383
+Broward County Board of County Commissioners,Motor Bus,Diesel Fuel,FL,3978503,89317392.35,196910909.52265698,23209964,119090315
+Central New York Regional Transportation Authority,Motor Bus,C Natural Gas,NY,723405,87423494.25,192735583.89343497,6685285,21264729
+MTA New York City Transit,Commuter Bus,Diesel Fuel,NY,3852142,86480587.89999999,190656833.69609797,2632003044,9591253658
+Mass Transportation Authority,Motor Bus,C Natural Gas,MI,714340,86327989,190320411.10917997,2913347,43975174
+Central Puget Sound Regional Transit Authority,Streetcar,Electric Propulsion,WA,641116,84915256.14391597,187205872,37571636,346306031
+Maryland Transit Administration,Commuter Rail,Diesel Fuel,MD,3765982,84546295.89999999,186392454.86705795,57907024,343206699
+Massachusetts Bay Transportation Authority,Rapid Bus,Electric Battery,MA,196542,82285503.17061445,181408266.00000003,234975556,1103417623
+"Arlington County, Virginia",Motor Bus,C Natural Gas,VA,649430,78483615.5,173026548.40361,2097034,5273946
+"Woods Hole, Martha's Vineyard and Nantucket Steamship Authority",Ferry Boat,Diesel Fuel,MA,3408775,76526998.75,168712951.98422498,3860264,40644147
+MTA New York City Transit,Demand Response,Gasoline,NY,3823315,71610689.95,157874359.277569,2632003044,9591253658
+Town of Chapel Hill,Motor Bus,Electric Battery,NC,245930,71281794.5949869,157149270,3722063,6498337
+Milwaukee County,Motor Bus,Diesel Fuel,WI,3069396,68907940.2,151915823.12372398,22735042,75456856
+City of La Crosse,Motor Bus,Electric Battery,WI,130800,68110785.53220056,150158399.99999997,685372,2005024
+"City of Racine, Wisconsin",Motor Bus,Electric Battery,WI,129378,67370315.0656349,148525944,1037031,4186567
+City of Seattle,Monorail / Automated Guideway,Electric Propulsion,WA,505636,66971048.07177655,147645712,2134977,1921479
+Bloomington-Normal Public Transit System,Motor Bus,Electric Battery,IL,281082,66553330.732733995,146724804,2125519,5027621
+"SeaStreak, LLC",Ferry Boat,Diesel Fuel,NJ,2956636,66376478.199999996,146334911.36928397,1192351,23566982
+Valley Regional Transit,Motor Bus,Electric Battery,ID,375953,63095957.57999112,139102610,1096198,4478664
+Birmingham-Jefferson County Transit Authority,Motor Bus,C Natural Gas,AL,513509,62057562.65,136813343.76944298,1795762,9332038
+South Florida Regional Transportation Authority,Commuter Rail,Diesel Fuel,FL,2757884,61914495.8,136497935.73059598,4122066,106697798
+Centre Area Transportation Authority,Motor Bus,C Natural Gas,PA,506163,61169798.55,134856161.279301,4823095,11988843
+Rock Island County Metropolitan Mass Transit District,Motor Bus,C Natural Gas,IL,503129,60803139.65,134047817.73518299,1927164,9497862
+Southwest Ohio Regional Transit Authority,Motor Bus,Diesel Fuel,OH,2703468,60692856.6,133804685.517492,13083835,70844918
+Gary Public Transportation Corporation,Motor Bus,Electric Battery,IN,89180,60555769.24821512,133502460,460489,944846
+Rock Island County Metropolitan Mass Transit District,Motor Bus,Electric Battery,IL,254793,60328739.646741845,133001946,1927164,9497862
+"Frederick County, Maryland",Motor Bus,Electric Battery,MD,225306,57026039.86174489,125720748,677642,3659312
+"Fairfax County, VA",Motor Bus,Diesel Fuel,VA,2539112,57003064.4,125670095.83752799,8365190,44414321
+City of Portland,Hybrid Rail,Electric Propulsion,OR,361200,56360189.05752466,124252800,3692695,4413873
+"City of Rochester, Minnesota",Motor Bus,Electric Battery,MN,149358,54265931.54375811,119635757.99999999,745406,2558386
+"Montgomery County, Maryland",Motor Bus,Diesel Fuel,MD,2341306,52562319.699999996,115879941.25701398,14372995,58141297
+Greater Lafayette Public Transportation Corporation,Motor Bus,C Natural Gas,IN,429790,51940121.5,114508230.66132998,4447311,10619883
+City of Charlotte North Carolina,Motor Bus,Diesel Fuel,NC,2312668,51919396.6,114462540.13229199,14027141,67531449
+METRO Regional Transit Authority,Motor Bus,Electric Battery,OH,109324,51770489.245312124,114134256,4324674,18176923
+Pittsburgh Regional Transit,Inclined Plane,Electric Propulsion,PA,171823,51049189.883063756,112544065.00000001,37908532,155119545
+Pinellas Suncoast Transit Authority,Motor Bus,Diesel Fuel,FL,2232469,50118929.05,110493193.36221099,10210124,54152172
+Greenville Transit Authority,Motor Bus,Electric Battery,SC,197222,49917843.43787138,110049876,764307,4016483
+Town of Blacksburg,Motor Bus,Electric Battery,VA,182528,49179283.50464026,108421632,3520078,6571617
+Transit Authority of River City,Motor Bus,Electric Battery,KY,61846,48840111.2209814,107673886,6247087,22882994
+Westchester County,Motor Bus,Electric Battery,NY,200800,47544520.14406111,104817600,21997971,90095305
+Transportation District Commission of Hampton Roads,Motor Bus,Diesel Fuel,VA,2106037,47280530.65,104235603.48160298,7167154,36797144
+Central Ohio Transit Authority,Motor Bus,Electric Battery,OH,99747,47235291.34272573,104135868,11526490,51281571
+City of Kenosha,Streetcar,Electric Propulsion,WI,90505,47128185.356206514,103899740,1248670,4037901
+Connecticut Department of Transportation - CTTRANSIT - Hartford Division,Motor Bus,Diesel Fuel,CT,2087610,46866844.5,103323582.72159,15128480,66810043
+Westchester County,Motor Bus,Diesel Fuel,NY,2078480,46661876,102871705.06711999,21997971,90095305
+Valley Regional Transit,Motor Bus,C Natural Gas,ID,384903,46515527.55,102549062.34728098,1096198,4478664
+Capital District Transportation Authority,Motor Bus,Diesel Fuel,NY,2070980,46493501,102500502.17461999,13833236,58050444
+Chatham Area Transit Authority,Motor Bus,Electric Battery,GA,138100,45915985.52131434,101227300,2286113,5186604
+Greater Peoria Mass Transit District,Motor Bus,Electric Battery,IL,187119,44305194.545998864,97676118,1871743,10047144
+Erie Metropolitan Transit Authority,Motor Bus,C Natural Gas,PA,366425,44282461.25,97625999.720975,1423465,3300207
+Salem Area Mass Transit District,Motor Bus,C Natural Gas,OR,364746,44079554.1,97178666.55994199,3027255,11246133
+Puerto Rico Maritime Transport Authority,Ferry Boat,Diesel Fuel,PR,1941869,43594959.05,96110318.62081099,1385794,17869630
+South Bend Public Transportation Corporation,Motor Bus,C Natural Gas,IN,356297,43058492.449999996,94927613.62511899,1252820,4679161
+"Board of County Commissioners, Palm Beach County",Motor Bus,Diesel Fuel,FL,1916209,43018892.05,94840309.79127099,8468040,50539296
+Central Puget Sound Regional Transit Authority,Commuter Bus,C Natural Gas,WA,355175,42922898.75,94628681.04222499,37571636,346306031
+Rhode Island Public Transit Authority,Motor Bus,Diesel Fuel,RI,1911644,42916407.8,94614370.96403599,11412537,54303315
+Suburban Mobility Authority for Regional Transportation,Motor Bus,Diesel Fuel,MI,1886595,42354057.75,93374602.796805,4827519,45670297
+Central Puget Sound Regional Transit Authority,Commuter Bus,Diesel Fuel,WA,1802820,40473309,89228266.48757999,37571636,346306031
+Delaware Transit Corporation,Motor Bus,Diesel Fuel,DE,1750039,39288375.55,86615938.50504099,7629486,49897548
+Greater Richmond Transit Company,Demand Response,C Natural Gas,VA,312073,37714022.05,83145087.29187098,9723640,48410504
+Lexington Transit Authority,Motor Bus,C Natural Gas,KY,309927,37454677.949999996,82573332.10212898,3733026,17873805
+Virginia Railway Express,Commuter Rail,Diesel Fuel,VA,1665975,37401138.75,82455298.511025,1466250,45696464
+Port Imperial Ferry Corporation,Ferry Boat,Diesel Fuel,NJ,1627711,36542111.949999996,80561470.84720898,5689838,12587409
+St. Cloud Metropolitan Transit Commission,Motor Bus,C Natural Gas,MN,298393,36060794.05,79500347.77851099,774825,3454101
+Metropolitan Transit Authority,Motor Bus,Diesel Fuel,TN,1595490,35818750.5,78966733.72730999,8162766,34901383
+Indianapolis and Marion County Public Transportation,Motor Bus,Diesel Fuel,IN,1578631,35440265.949999996,78132319.11868899,6888880,35204901
+Pierce County Transportation Benefit Area Authority,Motor Bus,Electric Battery,WA,265806,35205773.3305513,77615351.99999999,6792245,40362320
+Maryland Transit Administration,Demand Response,Gasoline,MD,1878219,35179041.87,77556419.28743939,57907024,343206699
+Snohomish County Public Transportation Benefit Area Corporation,Motor Bus,Diesel Fuel,WA,1526558,34271227.1,75555032.689202,7146008,58898665
+Washington Metropolitan Area Transit Authority,Demand Response,Gasoline,DC,1811999,33938741.27,74822027.7786674,231023784,912604948
+New Jersey Transit Corporation,Demand Response,Gasoline,NJ,1791397,33552865.810000002,73971319.0220422,198590133,2314384007
+Chattanooga Area Regional Transportation Authority,Inclined Plane,Electric Propulsion,TN,102880,33365931.54375811,73559200,1736039,5747254
+"Hyannis Harbor Tours, Inc.",Ferry Boat,Diesel Fuel,MA,1467081,32935968.45,72611294.764239,891899,24769558
+Capital District Transportation Authority,Motor Bus,Electric Battery,NY,137732,32611562.990447335,71896104,13833236,58050444
+"City of Gainesville, FL",Motor Bus,Electric Battery,FL,89083,32083489.218096547,70731902,5170533,17908961
+Transit Authority of River City,Motor Bus,Bio-Diesel,KY,1425558,32003777.099999998,70556167.070202,6247087,22882994
+City of Wilsonville,Motor Bus,Electric Battery,OR,204851,31964122.61523528,70468744,185195,1207058
+Kitsap County Public Transportation Benefit Area Authority,Ferry Boat,Diesel Fuel,WA,1422008,31924079.599999998,70380464.36775199,2739131,24094434
+Luzerne County Transportation Authority,Motor Bus,C Natural Gas,PA,263325,31822826.25,70157239.20727499,864744,4208055
+Central Florida Regional Transportation Authority,Motor Bus,Diesel Fuel,FL,1370610,30770194.5,67836586.19859,18418220,111018391
+Metropolitan Atlanta Rapid Transit Authority,Motor Bus,Diesel Fuel,GA,1367428,30698758.599999998,67679097.18473199,62093037,352115956
+Stark Area Regional Transit Authority,Motor Bus,C Natural Gas,OH,252110,30467493.5,67169245.51997,1387558,10133529
+Rogue Valley Transportation District,Motor Bus,C Natural Gas,OR,249852,30194614.2,66567650.35760399,875282,4236166
+Cape Fear Public Transportation Authority,Motor Bus,C Natural Gas,NC,249824,30191230.4,66560190.36444799,721308,2152407
+Spokane Transit Authority,Motor Bus,Diesel Fuel,WA,1335531,29982670.95,66100396.02978899,9403739,46318134
+Metropolitan Atlanta Rapid Transit Authority,Demand Response,Gasoline,GA,1586664,29718216.720000003,65517374.9452464,62093037,352115956
+Washington State Ferries,Ferry Boat,Bio-Diesel,WA,1320226,29639073.7,65342894.66049399,18241119,131769108
+"Board of County Commissioners, Palm Beach County",Demand Response,Liquified Nat Gas,FL,240948,29118565.799999997,64195372.533995986,8468040,50539296
+Massachusetts Bay Transportation Authority,Ferry Boat,Diesel Fuel,MA,1272099,28558622.55,62960910.446181,234975556,1103417623
+City of Durham,Motor Bus,Electric Battery,NC,97297,28201133.528680682,62172783,5754102,18948578
+Tompkins Consolidated Area Transit,Motor Bus,Electric Battery,NY,118142,27973130.970416673,61670124,2222629,10556141
+Cambria County Transit Authority,Inclined Plane,Electric Propulsion,PA,93624,27816004.57221653,61323720,804968,4713352
+Metropolitan Atlanta Rapid Transit Authority,Motor Bus,Electric Battery,GA,83498,27761715.851257816,61204034,62093037,352115956
+City of Madison,Motor Bus,Electric Battery,WI,53017,27607259.30092261,60863516,9514620,33357045
+Central Puget Sound Regional Transit Authority,Commuter Rail,Diesel Fuel,WA,1227003,27546217.349999998,60728941.69415699,37571636,346306031
+Clark County Public Transportation Benefit Area Authority,Motor Bus,Electric Battery,WA,202348,26800816.46723699,59085616,4492306,19621461
+Springfield Mass Transit District,Motor Bus,C Natural Gas,IL,219210,26491528.5,58403753.56167,1319966,5001748
+Connecticut Department of Transportation - CTTRANSIT New Haven Division,Motor Bus,Diesel Fuel,CT,1172593,26324712.849999998,58035988.44336699,7705131,32389851
+Susquehanna Regional Transportation Authority,Demand Response,Gasoline,PA,1394897,26126420.810000002,57598829.8461422,3072507,19627362
+Susquehanna Regional Transportation Authority,Motor Bus,C Natural Gas,PA,215928,26094898.799999997,57529335.792455986,3072507,19627362
+County of Miami-Dade,Motor Bus,Diesel Fuel,FL,1145705,25721077.25,56705201.326895,77961885,414128978
+River Valley Transit Authority,Motor Bus,C Natural Gas,PA,212663,25700323.549999997,56659447.30480099,780399,4578701
+Suffolk County,Motor Bus,Diesel Fuel,NY,1112119,24967071.55,55042905.280561,3149963,25789843
+City of Memphis,Motor Bus,Diesel Fuel,TN,1097255,24633374.75,54307230.641344994,2819588,14475117
+MTA New York City Transit,Rapid Bus,Diesel Fuel,NY,1085753,24375154.849999998,53737953.88540699,2632003044,9591253658
+City of Madison,Motor Bus,Diesel Fuel,WI,1072778,24083866.099999998,53095772.88138199,9514620,33357045
+Regional Transit Service,Motor Bus,Diesel Fuel,NY,1072095,24068532.75,53061968.67130499,9162408,27087937
+Mid Mon Valley Transit Authority,Motor Bus,C Natural Gas,PA,193812,23422180.2,51637006.91252399,209190,2319917
+New Jersey Transit Corporation,Motor Bus,Electric Battery,NJ,96478,22668579.619163394,49975604,198590133,2314384007
+Ulster County,Motor Bus,Electric Battery,NY,95545,22622715.02571872,49874490,430747,3954087
+"Board of County Commissioners, Palm Beach County",Demand Response,Gasoline,FL,1206852,22604337.96,49833975.5533752,8468040,50539296
+Central Florida Commuter Rail,Commuter Rail,Diesel Fuel,FL,991750,22264787.5,49085395.81824999,1001878,16823179
+Suffolk County,Demand Response,Gasoline,NY,1171526,21942681.98,48375275.546747595,3149963,25789843
+Alaska Railroad Corporation,Aerial Tramway,Diesel Fuel,AK,973495,21854962.75,48181887.977905,225434,27930710
+Pioneer Valley Transit Authority,Motor Bus,Diesel Fuel,MA,972038,21822253.099999998,48109775.62932199,7079756,27546334
+"Hudson Transit Lines, Inc.",Commuter Bus,Diesel Fuel,NJ,967558,21721677.099999998,47888043.76820199,1832789,93151932
+Niagara Frontier Transportation Authority,Motor Bus,Diesel Fuel,NY,957405,21493742.25,47385534.03919499,14531216,46252415
+Greater Attleboro-Taunton Regional Transit Authority,Motor Bus,Electric Battery,MA,50747,21246056.46324537,46839481,707860,3171004
+Westmoreland County Transit Authority,Motor Bus,C Natural Gas,PA,175264,21180654.4,46695294.30332799,350383,4294890
+The Greater Cleveland Regional Transit Authority,Rapid Bus,C Natural Gas,OH,175149,21166756.65,46664655.04572299,22415370,102838552
+Metropolitan Bus Authority,Motor Bus,Diesel Fuel,PR,937995,21057987.75,46424860.95340499,2486681,10234371
+Altoona Metro Transit,Motor Bus,C Natural Gas,PA,172917,20897019.45,46069987.01985899,444716,1614732
+City of Raleigh,Motor Bus,Electric Battery,NC,71968,20859627.509502772,45987552,5338054,24490026
+Cape May Lewes Ferry,Ferry Boat,Diesel Fuel,DE,915117,20544376.65,45292543.65012299,745196,12593812
+Greater Dayton Regional Transit Authority,Motor Bus,Diesel Fuel,OH,915070,20543321.5,45290217.445329994,6578178,42234501
+Central Florida Regional Transportation Authority,Demand Response,Gasoline,FL,1089215,20400996.95,44976445.895909,18418220,111018391
+Massachusetts Bay Transportation Authority,Demand Response,Gasoline,MA,1089105,20398936.650000002,44971903.717323,234975556,1103417623
+"Prince George's County, Maryland",Motor Bus,Diesel Fuel,MD,880267,19761994.15,43567687.54297299,1800711,13130314
+County of Miami-Dade,Demand Response,Gasoline,FL,1054817,19756722.41,43556065.3595342,77961885,414128978
+Northern New England Passenger Rail Authority,Commuter Rail,Diesel Fuel,ME,861435,19339215.75,42635621.82676499,517276,44255935
+Southeastern Pennsylvania Transportation Authority,Demand Response,Gasoline,PA,1032420,19337226.6,42631236.506892,197264920,834809485
+Delaware Transit Corporation,Demand Response,Liquified Petroleum Gas,DE,1503929,19069819.72,42041705.95110639,7629486,49897548
+Greater Richmond Transit Company,Rapid Bus,C Natural Gas,VA,154863,18715193.55,41259890.004200995,9723640,48410504
+Potomac and Rappahannock Transportation Commission,Commuter Bus,Bio-Diesel,VA,832298,18685090.099999998,41193523.33626199,2158231,54836885
+Clark County Public Transportation Benefit Area Authority,Motor Bus,Diesel Fuel,WA,802468,18015406.599999998,39717125.69849199,4492306,19621461
+Pittsburgh Regional Transit,Demand Response,Gasoline,PA,942498,17652987.54,38918129.390434794,37908532,155119545
+King County,Demand Response,Gasoline,WA,940728,17619835.44,38845041.6077328,78886848,301530502
+Whatcom Transportation Authority,Motor Bus,Electric Battery,WA,132093,17495602.870335933,38571156,3724696,11921726
+The Greater Cleveland Regional Transit Authority,Motor Bus,Diesel Fuel,OH,762197,17111322.65,37723964.14064299,22415370,102838552
+Capital Area Transportation Authority,Motor Bus,Diesel Fuel,MI,761706,17100299.7,37699662.724613994,7633877,22977380
+"Academy Lines, Inc.",Commuter Bus,Bio-Diesel,NJ,737782,16563205.9,36515574.991257995,1064165,44972754
+"City of Gainesville, FL",Motor Bus,Diesel Fuel,FL,736614,16536984.299999999,36457766.327465996,5170533,17908961
+City of Charlotte North Carolina,Commuter Bus,Electric Battery,NC,56836,16473679.81783709,36318204,14027141,67531449
+"Woods Hole, Martha's Vineyard and Nantucket Steamship Authority",Motor Bus,Electric Battery,MA,38740,16219130.734548358,35757020,3860264,40644147
+MetroWest Regional Transit Authority,Motor Bus,C Natural Gas,MA,131563,15899388.549999999,35052109.98510099,479776,2476730
+Birmingham-Jefferson County Transit Authority,Demand Response,C Natural Gas,AL,131175,15852498.75,34948735.794225,1795762,9332038
+Stark Area Regional Transit Authority,Demand Response,C Natural Gas,OH,129875,15695393.75,34602378.969124995,1387558,10133529
+Beaver County Transit Authority,Motor Bus,C Natural Gas,PA,129413,15639561.049999999,34479289.082050994,461712,3621844
+Ben Franklin Transit,Motor Bus,Diesel Fuel,WA,691401,15521952.45,34220006.810319,3178377,24325382
+Gwinnett County Board of Commissioners,Commuter Bus,Diesel Fuel,GA,683151,15336739.95,33811683.62856899,1177163,12311104
+County of Lackawanna Transit System,Motor Bus,C Natural Gas,PA,125884,15213081.399999999,33539063.516067993,798042,3912648
+Kitsap County Public Transportation Benefit Area Authority,Motor Bus,Electric Battery,WA,114159,15120260.180892853,33334428,2739131,24094434
+City of Albany,Motor Bus,C Natural Gas,GA,124607,15058755.95,33198834.542488996,273626,1501671
+Jacksonville Transportation Authority,Motor Bus,Diesel Fuel,FL,666575,14964608.75,32991275.742425,6678105,36776548
+City of Tallahassee,Motor Bus,C Natural Gas,FL,122623,14818989.549999999,32670240.741720993,2588477,10140885
+Transit Authority of Northern Kentucky,Motor Bus,Diesel Fuel,KY,651441,14624850.45,32242237.799078997,1913143,10690427
+Greater Portland Transit District,Motor Bus,Electric Battery,ME,74699,14501896.92554726,31971172,1694203,9826377
+Cobb County,Motor Bus,Diesel Fuel,GA,644681,14473088.45,31907660.258638997,854074,4391380
+Cambria County Transit Authority,Motor Bus,C Natural Gas,PA,118980,14378733,31699642.346459996,804968,4713352
+Hillsborough Area Regional Transit Authority,Motor Bus,Diesel Fuel,FL,636515,14289761.75,31503494.549285,12574593,53491817
+City of Alexandria,Motor Bus,Diesel Fuel,VA,626033,14054440.85,30984701.386726998,4580105,10493813
+Research Triangle Regional Public Transportation Authority,Motor Bus,Electric Battery,NC,48139,13952890.294018924,30760820.999999996,1653233,14834526
+Atlanta-Region Transit Link Authority,Commuter Bus,Diesel Fuel,GA,619676,13911726.2,30670069.815043997,845274,27738955
+Broward County Board of County Commissioners,Demand Response,Gasoline,FL,740535,13870220.55,30578565.628941,23209964,119090315
+South Central Transit Authority,Motor Bus,Bio-Diesel,PA,600420,13479429,29717018.761979997,3560909,17522092
+Snohomish County Public Transportation Benefit Area Corporation,Commuter Bus,Diesel Fuel,WA,595542,13369917.9,29475588.400698,7146008,58898665
+St. Cloud Metropolitan Transit Commission,Demand Response,C Natural Gas,MN,110364,13337489.399999999,29404095.881027993,774825,3454101
+Champaign-Urbana Mass Transit District,Motor Bus,Bio-Diesel,IL,587869,13197659.049999999,29095823.094810996,8573106,14797075
+County of Volusia,Motor Bus,Diesel Fuel,FL,579842,13017452.9,28698537.012397997,2292313,19892288
+Jacksonville Transportation Authority,Motor Bus,Electric Battery,FL,35484,12779660.893940907,28174296,6678105,36776548
+Municipality of Anchorage,Motor Bus,Diesel Fuel,AK,562482,12627720.9,27839326.050557997,3117877,20591368
+Intercity Transit,Motor Bus,Diesel Fuel,WA,556132,12485163.4,27525040.934908,3898995,24528110
+The Greater Cleveland Regional Transit Authority,Demand Response,Gasoline,OH,665358,12462155.34,27474316.905670796,22415370,102838552
+New Jersey Transit Corporation,Hybrid Rail (Alternative),Diesel Fuel,NJ,550499,12358702.549999999,27246242.815780994,198590133,2314384007
+Ann Arbor Area Transportation Authority,Motor Bus,Diesel Fuel,MI,549826,12343593.7,27212933.542893995,4680565,23620240
+Toledo Area Regional Transit Authority,Motor Bus,Diesel Fuel,OH,543431,12200025.95,26896421.209888995,1891108,13977629
+Lee County,Motor Bus,Diesel Fuel,FL,524608,11777449.6,25964800.937152,1742894,10735134
+Central Puget Sound Regional Transit Authority,Commuter Bus,Bio-Diesel,WA,517602,11620164.9,25618047.941838,37571636,346306031
+Birmingham-Jefferson County Transit Authority,Rapid Bus,C Natural Gas,AL,89546,10821634.1,23857590.969541997,1795762,9332038
+Greater Bridgeport Transit Authority,Motor Bus,Diesel Fuel,CT,481634,10812683.299999999,23837857.856845994,5266649,15150397
+City of Knoxville,Motor Bus,Diesel Fuel,TN,474097,10643477.65,23464823.696743,2312188,7161127
+Research Triangle Regional Public Transportation Authority,Motor Bus,Diesel Fuel,NC,453333,10177325.85,22437136.115427,1653233,14834526
+County of Rockland,Motor Bus,Diesel Fuel,NY,450480,10113276,22295930.53512,1385483,8437498
+Lane Transit District,Motor Bus,Diesel Fuel,OR,450303,10109302.35,22287170.146856997,6311613,22779952
+"Transit Management of Central Maryland, Inc.",Motor Bus,Electric Battery,MD,39786,10070029.302101951,22200588,790641,4538713
+Tri-County Metropolitan Transportation District of Oregon,Demand Response,Bio-Diesel,OR,443005,9945462.25,21925964.985595,57442650,231430380
+"Hampton Jitney, Inc.",Commuter Bus,Diesel Fuel,NY,441108,9902874.6,21832075.400652,535803,49533110
+Central Midlands Regional Transportation Authority,Motor Bus,Diesel Fuel,SC,438748,9849892.6,21715270.223812,1968473,12347578
+Potomac and Rappahannock Transportation Commission,Motor Bus,Diesel Fuel,VA,437298,9817340.1,21643504.331261996,2158231,54836885
+Greater Hartford Transit District,Demand Response,Gasoline,CT,521599,9769549.27,21538143.711627398,503701,4871394
+Jacksonville Transportation Authority,Demand Response,Gasoline,FL,518933,9719615.09,21428057.819715798,6678105,36776548
+Sarasota County,Motor Bus,Diesel Fuel,FL,431306,9682819.7,21346937.967013996,2189094,11413817
+Town of Chapel Hill,Motor Bus,Diesel Fuel,NC,426501,9574947.45,21109120.647218995,3722063,6498337
+Whatcom Transportation Authority,Motor Bus,Diesel Fuel,WA,418590,9397345.5,20717575.836209998,3724696,11921726
+Rhode Island Public Transit Authority,Motor Bus,Electric Battery,RI,24340,9351262.34906696,20615980,11412537,54303315
+Broward County Board of County Commissioners,Demand Response,Liquified Petroleum Gas,FL,724362,9184910.16,20249236.636939198,23209964,119090315
+Greater Peoria Mass Transit District,Motor Bus,Diesel Fuel,IL,407286,9143570.7,20158098.836633995,1871743,10047144
+Connecticut Department of Transportation - CTTRANSIT Stamford Division,Motor Bus,Diesel Fuel,CT,406472,9125296.4,20117810.949368,3487909,17824627
+Gwinnett County Board of Commissioners,Motor Bus,Diesel Fuel,GA,397044,8913637.799999999,19651184.166635998,1177163,12311104
+King County,Motor Bus,Bio-Diesel,WA,396458,8900482.1,19622180.847301997,78886848,301530502
+Alternativa de Transporte Integrado,Motor Bus,Diesel Fuel,PR,395134,8870758.299999999,19556651.163345996,3732115,15671639
+City of Greensboro,Motor Bus,Diesel Fuel,NC,392784,8818000.799999999,19440340.923695996,2263152,9475305
+Duluth Transit Authority,Motor Bus,Diesel Fuel,MN,389866,8752491.7,19295918.251653995,2160263,9955251
+City of Winston Salem,Motor Bus,Diesel Fuel,NC,386574,8678586.299999999,19132984.928705994,1715582,5888651
+Brevard Board of County Commissioners,Motor Bus,Diesel Fuel,FL,386560,8678272,19132292.01664,1855968,12482419
+District Department of Transportation,Motor Bus,Diesel Fuel,DC,384336,8628343.2,19022217.985584,2591448,3903496
+Worcester Regional Transit Authority,Motor Bus,Diesel Fuel,MA,383374,8606746.299999999,18974605.027905997,4133429,16612797
+Metropolitan Transit Authority,Demand Response,Gasoline,TN,453599,8495909.27,18730251.494827397,8162766,34901383
+Metropolitan Transit Authority,Motor Bus,Electric Battery,TN,25311,8208836.443468716,18097365,8162766,34901383
+City of Tallahassee,Motor Bus,Diesel Fuel,FL,365217,8199121.649999999,18075947.572022997,2588477,10140885
+Susquehanna Regional Transportation Authority,Motor Bus,Diesel Fuel,PA,362002,8126944.899999999,17916825.265437998,3072507,19627362
+City of Raleigh,Motor Bus,Bio-Diesel,NC,355220,7974689,17581158.863179997,5338054,24490026
+City of Nashua,Motor Bus,C Natural Gas,NH,65272,7888121.199999999,17390309.759943996,315974,1787898
+Massachusetts Bay Transportation Authority,Rapid Bus,Diesel Fuel,MA,349862,7854401.899999999,17315971.516777996,234975556,1103417623
+Southeastern Regional Transit Authority,Motor Bus,Diesel Fuel,MA,349633,7849260.85,17304637.455126997,2368548,8819684
+Mass Transportation Authority,Demand Response,Liquified Petroleum Gas,MI,611855,7758321.399999999,17104150.524867997,2913347,43975174
+Suburban Mobility Authority for Regional Transportation,Demand Response,Liquified Petroleum Gas,MI,606341,7688403.88,16950008.9619256,4827519,45670297
+Capital District Transportation Authority,Demand Response,Gasoline,NY,406803,7619420.19,16797926.1392778,13833236,58050444
+Greater Portland Transit District,Motor Bus,C Natural Gas,ME,62634,7569318.899999999,16687471.833317997,1694203,9826377
+Merrimack Valley Regional Transit Authority,Motor Bus,Diesel Fuel,MA,335518,7532379.1,16606033.611441998,1886152,9138820
+Kitsap County Public Transportation Benefit Area Authority,Motor Bus,Diesel Fuel,WA,331278,7437191.1,16396180.242881998,2739131,24094434
+Lexington Transit Authority,Motor Bus,Diesel Fuel,KY,331007,7431107.149999999,16382767.445032997,3733026,17873805
+Regional Transit Service,Demand Response,Gasoline,NY,396377,7424141.21,16367410.194390198,9162408,27087937
+South Central Transit Authority,Demand Response,Gasoline,PA,394602,7390895.46,16294115.949025199,3560909,17522092
+Charleston Area Regional Transportation Authority,Motor Bus,Diesel Fuel,SC,324806,7291894.7,16075856.893514,2230900,12721462
+"Lakeland Bus Lines, Inc.",Commuter Bus,Diesel Fuel,NJ,324287,7280243.149999999,16050169.653352998,742278,25589974
+Transportation District Commission of Hampton Roads,Demand Response,Gasoline,VA,387375,7255533.75,15995694.815924998,7167154,36797144
+Central New York Regional Transportation Authority,Motor Bus,Diesel Fuel,NY,318038,7139953.1,15740883.403321998,6685285,21264729
+Greater Roanoke Transit Company,Motor Bus,Diesel Fuel,VA,317394,7125495.3,15709009.448285999,1287135,7602285
+Kanawha Valley Regional Transportation Authority,Motor Bus,Diesel Fuel,WV,317155,7120129.75,15697180.449444998,1094139,5380596
+King County,Vanpool,Gasoline,WA,379932,7116126.36,15688354.495783199,78886848,301530502
+Chatham Area Transit Authority,Motor Bus,Bio-Diesel,GA,313302,7033629.899999999,15506481.150137998,2286113,5186604
+"City of Rochester, Minnesota",Motor Bus,Diesel Fuel,MN,312334,7011898.3,15458571.230145998,745406,2558386
+Chattanooga Area Regional Transportation Authority,Motor Bus,Diesel Fuel,TN,311691,6997462.95,15426746.768829,1736039,5747254
+City of Durham,Motor Bus,Diesel Fuel,NC,311240,6987338,15404425.101559998,5754102,18948578
+Pasco County Board of County Commissioners,Motor Bus,Diesel Fuel,FL,309694,6952630.3,15327907.811985997,683554,3766914
+County of Lebanon Transit Authority,Motor Bus,C Natural Gas,PA,57030,6892075.5,15194407.48881,243772,1506617
+Milwaukee County,Demand Response,Gasoline,WI,365809,6851602.57,15105180.0578734,22735042,75456856
+Interurban Transit Partnership,Motor Bus,Diesel Fuel,MI,304682,6840110.899999999,15079845.292357998,6042030,27512044
+Central County Transportation Authority,Motor Bus,Diesel Fuel,MI,304210,6829514.5,15056484.256989999,1799216,7244636
+Greater Dayton Regional Transit Authority,Demand Response,Gasoline,OH,363013,6799233.49,14989726.1367238,6578178,42234501
+"Rockland Coaches, Inc.",Commuter Bus,Diesel Fuel,NJ,299196,6716950.2,14808322.749923998,423369,9615140
+Salem Area Mass Transit District,Motor Bus,Bio-Diesel,OR,297696,6683275.2,14734082.171424,3027255,11246133
+Connecticut Department of Transportation- CTTransit Waterbury- NET,Motor Bus,Diesel Fuel,CT,295933,6643695.85,14646824.744826999,2036974,6907927
+Western Reserve Transit Authority,Motor Bus,Diesel Fuel,OH,295775,6640148.75,14639004.737224998,2015081,6871274
+Green Mountain Transit Authority,Motor Bus,Diesel Fuel,VT,292238,6560743.1,14463945.453121997,2455808,10319587
+Hillsborough Area Regional Transit Authority,Demand Response,Gasoline,FL,349939,6554357.47,14449867.565511398,12574593,53491817
+Transit Authority of Central Kentucky,Demand Response,Electric Battery,KY,8210,6483480.146238355,14293610,98435,1683699
+"Trans-Bridge Lines, Inc.",Commuter Bus,Bio-Diesel,PA,287206,6447774.7,14214893.059114,415601,31092890
+Monsey New Square Trails Corporation,Commuter Bus,Diesel Fuel,NY,283980,6375351,14055226.321619999,456140,18929810
+Rockford Mass Transit District,Motor Bus,Diesel Fuel,IL,279539,6275650.55,13835424.715540998,994754,5035893
+Ben Franklin Transit,Demand Response,Gasoline,WA,332007,6218491.11,13709409.8709282,3178377,24325382
+Puerto Rico Highway and Transportation Authority – Público,Publico,Gasoline,PR,328044,6144264.12,13545767.564234398,2942179,13502710
+Suburban Transit Corporation,Commuter Bus,Diesel Fuel,NJ,269799,6056987.55,13353355.892481,763649,25775386
+Collier County,Motor Bus,Diesel Fuel,FL,269461,6049399.45,13336627.015459,844505,8431064
+Connecticut Department of Transportation -CTTRANSIT New Britain,Motor Bus,Diesel Fuel,CT,267709,6010067.05,13249914.019770999,439346,2590317
+Potomac and Rappahannock Transportation Commission,Vanpool,Gasoline,VA,319931,5992307.63,13210761.247250598,2158231,54836885
+Pierce County Transportation Benefit Area Authority,Demand Response,Gasoline,WA,319560,5985358.8,13195441.717655998,6792245,40362320
+Bloomington-Normal Public Transit System,Motor Bus,Diesel Fuel,IL,266436,5981488.2,13186908.515484,2125519,5027621
+Lehigh and Northampton Transportation Authority,Demand Response,Gasoline,PA,318682,5968913.86,13159186.8740332,3897096,19797124
+Maryland Transit Administration,Commuter Bus,Diesel Fuel,MD,263459,5914654.55,13039565.714021,57907024,343206699
+Manatee County Board of County Commissioners,Motor Bus,Diesel Fuel,FL,262606,5895504.7,12997347.571713999,1605257,7357313
+Casco Bay Island Transit District,Ferry Boat,Diesel Fuel,ME,260472,5847596.399999999,12891727.975367997,1053175,3749303
+Transit Authority of River City,Demand Response,Gasoline,KY,310354,5812930.42,12815302.662540399,6247087,22882994
+Tompkins Consolidated Area Transit,Motor Bus,Diesel Fuel,NY,258810,5810284.5,12809469.41439,2222629,10556141
+Dutchess County,Motor Bus,Diesel Fuel,NY,258781,5809633.45,12808034.096539,827886,3978437
+City of Durham,Motor Bus,Bio-Diesel,NC,254651,5716914.95,12603625.037068998,5754102,18948578
+Lakeland Area Mass Transit District,Motor Bus,Diesel Fuel,FL,254113,5704836.85,12576997.416246997,848241,4655234
+Capital Area Transportation Authority,Demand Response,Gasoline,MI,303814,5690436.22,12545249.4993364,7633877,22977380
+Portage Area Regional Transportation Authority,Motor Bus,C Natural Gas,OH,47033,5683938.05,12530923.503790999,904481,2689790
+Broome County,Motor Bus,Diesel Fuel,NY,252281,5663708.45,12486324.923038999,1507413,5399291
+"Escambia County Board of County Commissioners, FL",Motor Bus,Diesel Fuel,FL,252105,5659757.25,12477614.028494999,894386,4947071
+Brockton Area Transit Authority,Motor Bus,Diesel Fuel,MA,250544,5624712.8,12400354.333135998,1859235,10696156
+Cambria County Transit Authority,Demand Response,C Natural Gas,PA,46363,5602968.55,12352416.524701,804968,4713352
+County of Volusia,Demand Response,Gasoline,FL,298128,5583937.44,12310460.1589728,2292313,19892288
+Fort Wayne Public Transportation Corporation,Motor Bus,Bio-Diesel,IN,242668,5447896.6,12010541.802291999,1561932,6664742
+County of Lackawanna Transit System,Demand Response,C Natural Gas,PA,45057,5445138.45,12004461.129639,798042,3912648
+Valley Regional Transit,Demand Response,C Natural Gas,ID,45006,5438975.1,11990873.284961998,1096198,4478664
+City of Fayetteville,Motor Bus,Diesel Fuel,NC,242162,5436536.899999999,11985497.980477998,2195673,9099174
+Westchester County,Demand Response,Gasoline,NY,287458,5384088.34,11869868.836130798,21997971,90095305
+Central Ohio Transit Authority,Motor Bus,Diesel Fuel,OH,238917,5363686.649999999,11824890.862322997,11526490,51281571
+Springfield Mass Transit District,Motor Bus,Bio-Diesel,IL,238858,5362362.1,11821970.732901998,1319966,5001748
+Connecticut Department of Transportation - CTTRANSIT - Hartford Division,Rapid Bus,Diesel Fuel,CT,238128,5345973.6,11785840.318031998,15128480,66810043
+"Adirondack Transit Lines, Inc.",Commuter Bus,Diesel Fuel,NY,237870,5340181.5,11773070.938529998,362745,31065245
+County of Miami-Dade,Commuter Bus,Diesel Fuel,FL,237067,5322154.149999999,11733327.482172998,77961885,414128978
+Greater Portland Transit District,Motor Bus,Diesel Fuel,ME,235530,5287648.5,11657255.636069998,1694203,9826377
+Ann Arbor Area Transportation Authority,Motor Bus,Bio-Diesel,MI,229209,5145742.05,11344405.838271,4680565,23620240
+Sarasota County,Demand Response,Gasoline,FL,271252,5080549.96,11200682.052815199,2189094,11413817
+City of Tallahassee,Demand Response,C Natural Gas,FL,41992,5074733.2,11187858.307384,2588477,10140885
+City of Asheville,Motor Bus,Diesel Fuel,NC,223785,5023973.25,11075951.906414999,1377810,5005600
+City of Mobile,Motor Bus,Diesel Fuel,AL,223750,5023187.5,11074219.626249999,568192,3701933
+"Transit Management of Central Maryland, Inc.",Motor Bus,Diesel Fuel,MD,221699,4977142.55,10972708.008581,790641,4538713
+City of Everett,Motor Bus,Diesel Fuel,WA,220672,4954086.399999999,10921877.959167998,1404970,5193721
+Greater New Haven Transit District,Demand Response,Gasoline,CT,263840,4941723.2,10894621.801183999,204258,1462712
+Loudoun County,Commuter Bus,Diesel Fuel,VA,216900,4869405,10735187.651099999,526819,7797386
+Regional Transportation Authority,Commuter Rail,Diesel Fuel,TN,216007,4849357.149999999,10690989.760032998,173746,4037298
+Rhode Island Public Transit Authority,Demand Response,Gasoline,RI,257505,4823068.65,10633033.607162999,11412537,54303315
+Lane Transit District,Rapid Bus,Bio-Diesel,OR,212371,4767728.95,10511030.597748999,6311613,22779952
+King County,Ferry Boat,Bio-Diesel,WA,208441,4679500.45,10316520.282079,78886848,301530502
+Pioneer Valley Transit Authority,Demand Response,Gasoline,MA,248650,4657214.5,10267388.230989998,7079756,27546334
+County of Nassau,Demand Response,Gasoline,NY,247853,4642286.69,10234478.0825078,20293586,112757303
+"City of Racine, Wisconsin",Motor Bus,Diesel Fuel,WI,205103,4604562.35,10151310.248056998,1037031,4186567
+Connecticut Department of Transportation,Commuter Bus,Diesel Fuel,CT,204637,4594100.649999999,10128246.175002998,495143,14795283
+Wake County,Demand Response,Gasoline,NC,242719,4546126.87,10022482.2201394,168233,1407813
+Town of Blacksburg,Motor Bus,Diesel Fuel,VA,202286,4541320.7,10011886.441634,3520078,6571617
+Montachusett Regional Transit Authority,Demand Response,Gasoline,MA,242287,4538035.51,10004643.846056199,874511,7073693
+Cobb County,Motor Bus,C Natural Gas,GA,37435,4524019.75,9973744.421245,854074,4391380
+"Metro-North Commuter Railroad Company, dba: MTA Metro-North Railroad",Ferry Boat,Diesel Fuel,NY,201156,4515952.2,9955958.539164,66645285,1150894931
+Greater Lynchburg Transit Company,Motor Bus,Diesel Fuel,VA,201130,4515368.5,9954671.702469999,520122,2306018
+City of Charlotte North Carolina,Commuter Bus,Diesel Fuel,NC,200282,4496330.899999999,9912701.028757999,14027141,67531449
+Loudoun County,Motor Bus,Gasoline,VA,238605,4469071.65,9852604.741023,526819,7797386
+Connecticut Department of Transportation,Commuter Rail,Diesel Fuel,CT,198924,4465843.8,9845488.558355998,495143,14795283
+Connecticut Department of Transportation - CTTransit New Britain -Dattco.,Commuter Bus,Diesel Fuel,CT,195369,4386034.05,9669538.387310999,319168,4391736
+County of Miami-Dade,Motor Bus,Gasoline,FL,233907,4381078.11,9658612.4228682,77961885,414128978
+Central Ohio Transit Authority,Demand Response,C Natural Gas,OH,36123,4365464.55,9624190.456221,11526490,51281571
+City of Evansville,Motor Bus,Diesel Fuel,IN,191605,4301532.25,9483244.028995,906183,3415960
+Norwalk Transit District,Motor Bus,Diesel Fuel,CT,191148,4291272.6,9460625.399411999,1564640,5619863
+Greater Attleboro-Taunton Regional Transit Authority,Demand Response,Gasoline,MA,226694,4245978.62,9360769.3852244,707860,3171004
+Skagit Transit,Motor Bus,Diesel Fuel,WA,188048,4221677.6,9307194.870511997,573848,7120242
+Suffolk County,Motor Bus,Gasoline,NY,225361,4221011.53,9305726.4392686,3149963,25789843
+Southeast Area Transit District,Motor Bus,Diesel Fuel,CT,187864,4217546.8,9298088.026215998,1211688,6890209
+"City of Decatur, Il",Motor Bus,Bio-Diesel,IL,187706,4213999.7,9290268.018614,909640,2611423
+Indianapolis and Marion County Public Transportation,Demand Response,Gasoline,IN,224786,4210241.78,9281983.2330236,6888880,35204901
+Central New York Regional Transportation Authority,Demand Response,Gasoline,NY,222139,4160663.47,9172681.8992314,6685285,21264729
+Westmoreland County Transit Authority,Demand Response,Gasoline,PA,221127,4141708.71,9130893.8562402,350383,4294890
+Athens-Clarke County Unified Government,Motor Bus,Diesel Fuel,GA,182134,4088908.3,9014489.016345998,1186787,4197292
+City of Charlotte North Carolina,Demand Response,Diesel Fuel,NC,179871,4038103.9499999997,8902484.730248999,14027141,67531449
+City of Kenosha,Motor Bus,Bio-Diesel,WI,179561,4031144.4499999997,8887141.677358998,1248670,4037901
+"County Commissioners of Charles County, MD",Motor Bus,Gasoline,MD,213772,4003949.56,8827187.2789672,542316,4398362
+County of Pierce,Ferry Boat,Diesel Fuel,WA,178238,4001443.1,8821661.487122,446539,1762277
+"Audubon Area Community Services, Inc.",Demand Response,Gasoline,KY,212438,3978963.74,8772103.0404788,132537,2512446
+Piedmont Authority for Regional Transportation,Commuter Bus,Diesel Fuel,NC,177216,3978499.1999999997,8771078.906303998,367508,9660890
+County of Fayette,Motor Bus,C Natural Gas,PA,32917,3978019.4499999997,8770021.239858998,181885,2022566
+Metro Transit,Commuter Rail,Bio-Diesel,MN,176795,3969047.75,8750242.050604999,44977111,175173901
+Lowell Regional Transit Authority,Motor Bus,Diesel Fuel,MA,176594,3964535.3,8740293.813086,812372,4282663
+Greenville Transit Authority,Motor Bus,Diesel Fuel,SC,175417,3938111.65,8682039.705822999,764307,4016483
+Niagara Frontier Transportation Authority,Demand Response,Gasoline,NY,209136,3917117.2800000003,8635755.0978336,14531216,46252415
+Lehigh and Northampton Transportation Authority,Motor Bus,Diesel Fuel,PA,173387,3892538.15,8581567.456253,3897096,19797124
+Pierce County Transportation Benefit Area Authority,Vanpool,Gasoline,WA,204380,3828037.4,8439367.812787998,6792245,40362320
+Central Florida Regional Transportation Authority,Rapid Bus,Electric Battery,FL,10575,3808615.5437218207,8396550,18418220,111018391
+The Tri-State Transit Authority,Motor Bus,Diesel Fuel,WV,169122,3796788.9,8370476.744717999,731480,4274626
+Clark County Public Transportation Benefit Area Authority,Demand Response,Diesel Fuel,WA,167984,3771240.8,8314152.892495999,4492306,19621461
+Snohomish County Public Transportation Benefit Area Corporation,Demand Response,Gasoline,WA,200012,3746224.7600000002,8259002.0303911995,7146008,58898665
+King County,Demand Response,Liquified Petroleum Gas,WA,292568,3709762.2399999998,8178616.029548799,78886848,301530502
+"JAUNT, Inc.",Demand Response,Gasoline,VA,197171,3693012.83,8141689.9452746,240235,2433504
+Southwest Ohio Regional Transit Authority,Demand Response,Diesel Fuel,OH,161428,3624058.6,7989672.070731999,13083835,70844918
+"City of Huntsville, Alabama",Motor Bus,Diesel Fuel,AL,158993,3569392.85,7869154.864967,701566,3228556
+Kitsap County Public Transportation Benefit Area Authority,Motor Bus,Bio-Diesel,WA,157870,3544181.5,7813573.418529999,2739131,24094434
+North Carolina State University,Motor Bus,Diesel Fuel,NC,156120,3504894,7726959.4102799995,2560095,4157753
+City of Yakima,Motor Bus,Diesel Fuel,WA,154538,3469378.1,7648660.346821999,646711,3435365
+City of Harrisonburg,Motor Bus,Diesel Fuel,VA,152508,3423804.6,7548188.097251999,1522746,3218771
+Williamsburg Area Transit Authority,Motor Bus,Diesel Fuel,VA,149953,3366444.85,7421731.645207,740818,3497142
+City of La Crosse,Motor Bus,Diesel Fuel,WI,149236,3350348.1999999997,7386244.648683999,685372,2005024
+City of Appleton,Motor Bus,Diesel Fuel,WI,148796,3340470.1999999997,7364467.412323998,777302,3335281
+City of Waukesha,Motor Bus,Diesel Fuel,WI,148488,3333555.6,7349223.346871999,466611,2014029
+Niagara Frontier Transportation Authority,Demand Response,C Natural Gas,NY,27370,3307664.5,7292143.309989999,14531216,46252415
+City of Greensboro,Demand Response,Gasoline,NC,175931,3295187.63,7264636.552850599,2263152,9475305
+Cape Cod Regional Transit Authority,Motor Bus,Diesel Fuel,MA,146384,3286320.8,7245088.562095999,726134,8680561
+Washington County Transportation Authority,Demand Response,Gasoline,PA,172213,3225549.49,7111110.9166438,246090,2597556
+"Orange-Newark-Elizabeth, Inc.",Motor Bus,Diesel Fuel,NJ,143674,3225481.3,7110960.583605999,1692482,4056066
+Muncie Indiana Transit System,Motor Bus,Bio-Diesel,IN,143175,3214278.75,7086263.217824999,919115,3654917
+Lee County,Demand Response,Liquified Petroleum Gas,FL,251121,3184214.28,7019982.485973599,1742894,10735134
+City of Winston Salem,Demand Response,Gasoline,NC,169586,3176345.7800000003,7002635.4335036,1715582,5888651
+Housatonic Area Regional Transit,Motor Bus,Diesel Fuel,CT,138439,3107955.55,6851860.964640999,598732,3824120
+Collier County,Demand Response,Gasoline,FL,165897,3107250.81,6850307.280742199,844505,8431064
+Interurban Transit Partnership,Demand Response,Liquified Petroleum Gas,MI,242232,3071501.76,6771494.210131199,6042030,27512044
+Greater Lafayette Public Transportation Corporation,Demand Response,C Natural Gas,IN,25171,3041915.3499999996,6706267.418916998,4447311,10619883
+Atlanta-Region Transit Link Authority,Vanpool,Gasoline,GA,162233,3038624.09,6699011.441295799,845274,27738955
+Chelan Douglas PTBA,Motor Bus,Diesel Fuel,WA,135184,3034880.8,6690758.909295999,1113038,9761540
+Spokane Transit Authority,Demand Response,Diesel Fuel,WA,131642,2955362.9,6515452.156597999,9403739,46318134
+Kitsap County Public Transportation Benefit Area Authority,Demand Response,Liquified Petroleum Gas,WA,228158,2893043.44,6378061.428692799,2739131,24094434
+Lexington Transit Authority,Demand Response,Gasoline,KY,153493,2874923.89,6338114.7063718,3733026,17873805
+First Tennessee Human Resource Agency,Demand Response,Gasoline,TN,152761,2861213.5300000003,6307888.5725086,141537,2243178
+Augusta Richmond County Transit Department,Motor Bus,Diesel Fuel,GA,127180,2855191,6294611.1824199995,423982,1726132
+Spokane Transit Authority,Demand Response,Gasoline,WA,152360,2853702.8000000003,6291330.266936,9403739,46318134
+Knoxville-Knox County Community Action Committee,Demand Response,Gasoline,TN,152000,2846960,6276464.9552,114573,1633712
+Saginaw Transit Authority Regional Service,Motor Bus,Diesel Fuel,MI,126748,2845492.6,6273229.895811999,477324,3044653
+Rhode Island Department of Transportation,Ferry Boat,Diesel Fuel,RI,126643,2843135.35,6268033.055317,34821,904702
+City of Eau Claire,Motor Bus,Diesel Fuel,WI,126470,2839251.5,6259470.641929999,672882,1868624
+Tampa Bay Area Regional Transit Authority,Vanpool,Gasoline,FL,151121,2830496.33,6240168.819044599,393283,11813691
+Greater Attleboro-Taunton Regional Transit Authority,Motor Bus,Diesel Fuel,MA,125825,2824771.25,6227547.193174999,707860,3171004
+Ms Coast Transportation Authority,Motor Bus,Diesel Fuel,MS,125819,2824636.55,6227250.230860999,751314,6961094
+County of Miami-Dade,Vanpool,Gasoline,FL,149546,2800996.58,6175133.080199599,77961885,414128978
+Greater Peoria Mass Transit District,Demand Response,Gasoline,IL,149146,2793504.58,6158616.0671596,1871743,10047144
+Lake County Board of County Commissioners,Demand Response,Gasoline,FL,148556,2782453.88,6134253.4729256,289663,2164266
+City of Green Bay,Motor Bus,Diesel Fuel,WI,123337,2768915.65,6104406.820303,836102,2684166
+Green Mountain Transit Authority,Demand Response,Gasoline,VT,147542,2763461.66,6092382.8448692,2455808,10319587
+Intercity Transit,Vanpool,Gasoline,WA,146336,2740873.2800000003,6042584.0505536,3898995,24528110
+Greater Roanoke Transit Company,Demand Response,Gasoline,VA,145447,2724222.31,6005874.9890722,1287135,7602285
+City of Wilsonville,Motor Bus,C Natural Gas,OR,22479,2716587.15,5989042.362632999,185195,1207058
+Erie Metropolitan Transit Authority,Demand Response,Gasoline,PA,143996,2697045.08,5945959.5242695995,1423465,3300207
+Lake County Board of County Commissioners,Motor Bus,Diesel Fuel,FL,119936,2692563.1999999997,5936078.681983999,289663,2164266
+Norwalk Transit District,Demand Response,Gasoline,CT,142762,2673932.2600000002,5895004.5390412,1564640,5619863
+"City of Jackson, MS",Motor Bus,Diesel Fuel,MS,118478,2659831.1,5863916.839682,449129,1079378
+Luzerne County Transportation Authority,Demand Response,Gasoline,PA,140067,2623454.91,5783721.1636842,864744,4208055
+"Transit Management of Central Maryland, Inc.",Demand Response,Gasoline,MD,139333,2609707.09,5753412.444755799,790641,4538713
+City of Baltimore,Motor Bus,Diesel Fuel,MD,115268,2587766.6,5705042.001692,1276575,1928119
+"Spartanburg Regional Health Services, Inc.",Demand Response,Gasoline,SC,138059,2585845.07,5700805.7582233995,85594,881308
+Lee County,Demand Response,Gasoline,FL,136912,2564361.7600000002,5653443.2233312,1742894,10735134
+Indian River County,Motor Bus,Diesel Fuel,FL,113656,2551577.1999999997,5625258.126663999,1292919,5934814
+Central Ohio Transit Authority,Demand Response,Gasoline,OH,135650,2540724.5,5601332.047189999,11526490,51281571
+City of Memphis,Demand Response,Gasoline,TN,135502,2537952.46,5595220.7523652,2819588,14475117
+Mass Transportation Authority,Demand Response,Gasoline,MI,135390,2535854.7,5590595.988714,2913347,43975174
+Port Imperial Ferry Corporation,Motor Bus,Diesel Fuel,NJ,112500,2525625,5568043.387499999,5689838,12587409
+Anne Arundel County,Demand Response,Gasoline,MD,134824,2525253.52,5567224.415262399,149857,1152250
+Pinellas Suncoast Transit Authority,Demand Response,Gasoline,FL,131809,2468782.57,5442727.429473399,10210124,54152172
+Municipality of Anchorage,Demand Response,Gasoline,AK,130655,2447168.15,5395075.846852999,3117877,20591368
+Greater Richmond Transit Company,Motor Bus,Diesel Fuel,VA,108330,2432008.5,5361654.57927,9723640,48410504
+Cape Cod Regional Transit Authority,Demand Response,Gasoline,MA,129366,2423025.18,5341849.7723316,726134,8680561
+METRO Regional Transit Authority,Demand Response,Gasoline,OH,128485,2406524.0500000003,5305471.051111001,4324674,18176923
+Lakeland Area Mass Transit District,Demand Response,Gasoline,FL,128431,2405512.63,5303241.254350599,848241,4655234
+Erie Metropolitan Transit Authority,Motor Bus,Diesel Fuel,PA,106257,2385469.65,5259054.099783,1423465,3300207
+King County,Motor Bus,Gasoline,WA,126689,2372884.97,5231309.6625614,78886848,301530502
+Baldwin County Commission,Demand Response,Gasoline,AL,126283,2365280.59,5214544.894325799,101576,1077003
+Portage Area Regional Transportation Authority,Motor Bus,Diesel Fuel,OH,105186,2361425.6999999997,5206046.326733999,904481,2689790
+Gary Public Transportation Corporation,Motor Bus,Diesel Fuel,IN,104856,2354017.1999999997,5189713.399463999,460489,944846
+City of Fairfax,Motor Bus,Diesel Fuel,VA,104272,2340906.4,5160809.0675679995,845194,2558100
+Brevard Board of County Commissioners,Demand Response,Diesel Fuel,FL,103909,2332757.05,5142842.8475709995,1855968,12482419
+County of Fayette,Demand Response,Gasoline,PA,124295,2328045.35,5132455.339517,181885,2022566
+Snohomish County Public Transportation Benefit Area Corporation,Vanpool,Gasoline,WA,123886,2320384.7800000003,5115566.6936836,7146008,58898665
+Transit Authority of Northern Kentucky,Demand Response,Gasoline,KY,123685,2316620.0500000003,5107266.894631,1913143,10690427
+Merrimack Valley Regional Transit Authority,Demand Response,Gasoline,MA,123670,2316339.1,5106647.506642,1886152,9138820
+Greater Peoria Mass Transit District,Motor Bus,Bio-Diesel,IL,101998,2289855.1,5048260.350562,1871743,10047144
+Central Florida Regional Transportation Authority,Vanpool,Gasoline,FL,122229,2289349.17,5047144.967165399,18418220,111018391
+"Frederick County, Maryland",Motor Bus,Diesel Fuel,MD,101747,2284220.15,5035837.427092999,677642,3659312
+Jacksonville Transportation Authority,Ferry Boat,Bio-Diesel,FL,101085,2269358.25,5003072.585115,6678105,36776548
+City of Montgomery,Motor Bus,Gasoline,AL,120407,2255223.11,4971909.9727682,422109,1912289
+Niagara Frontier Transportation Authority,Motor Bus,Electric Battery,NY,9444,2236107.809962715,4929768,14531216,46252415
+Transit Authority of Central Kentucky,Demand Response,Gasoline,KY,118290,2215571.7,4884493.681254,98435,1683699
+Worcester Regional Transit Authority,Demand Response,Gasoline,MA,118181,2213530.13,4879992.795200599,4133429,16612797
+City of Durham,Demand Response,Gasoline,NC,116775,2187195.75,4821935.494364999,5754102,18948578
+Ben Franklin Transit,Vanpool,Gasoline,WA,116354,2179310.42,4804551.338140399,3178377,24325382
+Anne Arundel County,Motor Bus,Gasoline,MD,116057,2173747.61,4792287.4559582,149857,1152250
+"Senior Citizens United Community Services of Camden County, Inc.",Demand Response,Gasoline,NJ,115863,2170113.99,4784276.7046338,108834,961907
+"Prince George's County, Maryland",Motor Bus,Electric Battery,MD,8469,2143544.9193058214,4725702,1800711,13130314
+Cambria County Transit Authority,Motor Bus,Diesel Fuel,PA,95426,2142313.6999999997,4722987.629293999,804968,4713352
+County of Lackawanna Transit System,Motor Bus,Diesel Fuel,PA,93729,2104216.05,4638996.788150999,798042,3912648
+Bay Metropolitan Transit Authority,Motor Bus,Diesel Fuel,MI,92941,2086525.45,4599995.737578999,290244,2107127
+City of Mobile,Demand Response,Gasoline,AL,110813,2075527.49,4575749.4150038,568192,3701933
+City of Moorhead,Motor Bus,Diesel Fuel,MN,92425,2074941.25,4574456.978575,383279,1380595
+Ohio Valley Regional Transportation Authority,Motor Bus,Diesel Fuel,WV,92206,2070024.7,4563617.854114,317863,1774356
+Bay County Transportation Planning Organization,Motor Bus,Diesel Fuel,FL,90870,2040031.5,4497494.24553,398400,2792272
+Stark Area Regional Transit Authority,Motor Bus,Diesel Fuel,OH,89974,2019916.3,4453147.873306,1387558,10133529
+MetroWest Regional Transit Authority,Demand Response,Gasoline,MA,107245,2008698.85,4428417.658687,479776,2476730
+Pierce County Transportation Benefit Area Authority,Demand Response,C Natural Gas,WA,16539,1998738.15,4406458.100252999,6792245,40362320
+Regional Transportation Authority,Commuter Bus,Diesel Fuel,TN,88532,1987543.4,4381777.930508,173746,4037298
+Connecticut Department of Transportation- CTTransit Waterbury- NET,Demand Response,Gasoline,CT,105580,1977513.4000000001,4359665.5919079995,2036974,6907927
+Southeastern Regional Transit Authority,Demand Response,Gasoline,MA,104804,1962978.9200000002,4327622.5866104,2368548,8819684
+Cobb County,Commuter Bus,Diesel Fuel,GA,87393,1961972.8499999999,4325404.584566999,854074,4391380
+Loudoun County,Motor Bus,Diesel Fuel,VA,85644,1922707.8,4238840.070036,526819,7797386
+Cape Cod Regional Transit Authority,Motor Bus,Gasoline,MA,102384,1917652.32,4227694.6577184,726134,8680561
+Somerset County,Demand Response,Gasoline,NJ,101194,1895363.62,4178556.5439243997,215121,1265945
+Susquehanna Regional Transportation Authority,Motor Bus,Gasoline,PA,101176,1895026.48,4177813.2783375997,3072507,19627362
+Board of County Commissioners of St. Lucie County,Motor Bus,Diesel Fuel,FL,82437,1850710.65,4080113.7132029994,671535,3348134
+Greater Bridgeport Transit Authority,Motor Bus,Electric Battery,CT,7067,1846391.6684054397,4070592,5266649,15150397
+Westmoreland County Transit Authority,Motor Bus,Diesel Fuel,PA,81750,1835287.5,4046111.5282499995,350383,4294890
+Jackson Transit Authority,Motor Bus,Diesel Fuel,TN,81568,1831201.5999999999,4037103.6713919993,298840,1635772
+Chatham Area Transit Authority,Demand Response,Gasoline,GA,97576,1827598.48,4029160.1609775997,2286113,5186604
+City of Jackson Transportation Authority,Motor Bus,Diesel Fuel,MI,81181,1822513.45,4017949.6021389994,316935,889242
+Rockford Mass Transit District,Demand Response,Gasoline,IL,96772,1812539.56,3995960.9647672,994754,5035893
+Snohomish County Public Transportation Benefit Area Corporation,Motor Bus,Bio-Diesel,WA,80345,1803745.25,3976572.853055,7146008,58898665
+City of Tallahassee,Demand Response,Gasoline,FL,96262,1802987.26,3974901.7731411997,2588477,10140885
+Central Midlands Regional Transportation Authority,Motor Bus,Liquified Petroleum Gas,SC,141725,1797073,3961863.0772599997,1968473,12347578
+Board of County Commissioners of St. Lucie County,Demand Response,Gasoline,FL,95419,1787197.87,3940092.1681594,671535,3348134
+Lane Transit District,Demand Response,Gasoline,OR,94756,1774779.8800000001,3912715.2190456,6311613,22779952
+Municipality of Anchorage,Vanpool,Gasoline,AK,94553,1770977.69,3904332.8349277996,3117877,20591368
+Central Ohio Transit Authority,Demand Response,Diesel Fuel,OH,78499,1762302.55,3885207.447781,11526490,51281571
+Mass Transportation Authority,Motor Bus,Liquified Petroleum Gas,MI,138856,1760694.08,3881661.3826496,2913347,43975174
+Ada County Highway District,Vanpool,Gasoline,ID,93898,1758709.54,3877286.2260748,130715,5076885
+Ann Arbor Area Transportation Authority,Demand Response,Gasoline,MI,93267,1746890.9100000001,3851230.6380042,4680565,23620240
+Metropolitan Bus Authority,Demand Response,Gasoline,PR,93039,1742620.47,3841815.9405713994,2486681,10234371
+Bergen County,Demand Response,Gasoline,NJ,93018,1742227.1400000001,3840948.7973868,139952,1223026
+Martin County,Motor Bus,Diesel Fuel,FL,77544,1740862.8,3837940.9461359996,107491,863744
+Central Midlands Regional Transportation Authority,Demand Response,Liquified Petroleum Gas,SC,136191,1726901.88,3807162.4226855994,1968473,12347578
+City of Memphis,Demand Response,Diesel Fuel,TN,76800,1724160,3801117.6191999996,2819588,14475117
+Susquehanna Regional Transportation Authority,Commuter Bus,C Natural Gas,PA,14193,1715224.0499999998,3781417.2451109993,3072507,19627362
+Whatcom Transportation Authority,Demand Response,Gasoline,WA,91010,1704617.3,3758033.391926,3724696,11921726
+Skagit Transit,Commuter Bus,Diesel Fuel,WA,74965,1682964.25,3710296.6448349995,573848,7120242
+Montachusett Regional Transit Authority,Motor Bus,Diesel Fuel,MA,74722,1677508.9,3698269.6711179996,874511,7073693
+University of Georgia,Motor Bus,Diesel Fuel,GA,72870,1635931.5,3606607.3035299997,2941019,3512275
+Salem Area Mass Transit District,Demand Response,Gasoline,OR,86646,1622879.58,3577832.7796596,3027255,11246133
+City of Knoxville,Demand Response,Gasoline,TN,86438,1618983.74,3569243.9328787997,2312188,7161127
+City of Longview,Motor Bus,Bio-Diesel,WA,71768,1611191.5999999999,3552065.225191999,274804,1040117
+Springfield Mass Transit District,Demand Response,Gasoline,IL,85843,1607839.3900000001,3544674.8759818,1319966,5001748
+City of Albany,Demand Response,C Natural Gas,GA,13256,1601987.5999999999,3531773.9027119996,273626,1501671
+Research Triangle Regional Public Transportation Authority,Demand Response,Gasoline,NC,85152,1594896.96,3516141.7359551997,1653233,14834526
+Green Mountain Transit Authority,Commuter Bus,Diesel Fuel,VT,70929,1592356.05,3510539.994951,2455808,10319587
+Portage Area Regional Transportation Authority,Demand Response,Gasoline,OH,84641,1585325.93,3495041.2517965995,904481,2689790
+Western Piedmont Regional Transit Authority,Demand Response,Gasoline,NC,83565,1565172.45,3450610.4867189997,124319,1139015
+County of Atlantic,Demand Response,Gasoline,NJ,83191,1558167.43,3435167.0795265995,86347,658856
+Stark Area Regional Transit Authority,Demand Response,Diesel Fuel,OH,69350,1556907.5,3432389.41265,1387558,10133529
+METRO Regional Transit Authority,Motor Bus,Diesel Fuel,OH,69319,1556211.55,3430855.1073609996,4324674,18176923
+Pinellas Suncoast Transit Authority,Rapid Bus,Diesel Fuel,FL,68844,1545547.8,3407345.5908359997,10210124,54152172
+Chelan Douglas PTBA,Motor Bus,Gasoline,WA,82298,1541441.54,3398292.8479147996,1113038,9761540
+Buncombe County,Demand Response,Gasoline,NC,81237,1521569.01,3354481.4708261997,113858,1149650
+Interurban Transit Partnership,Rapid Bus,Diesel Fuel,MI,67469,1514679.05,3339291.727211,6042030,27512044
+Toledo Area Regional Transit Authority,Demand Response,Gasoline,OH,80601,1509656.73,3328219.4200925995,1891108,13977629
+Ann Arbor Area Transportation Authority,Commuter Bus,Diesel Fuel,MI,66625,1495731.25,3297519.0283749998,4680565,23620240
+"City of Gainesville, FL",Demand Response,Gasoline,FL,79322,1485701.06,3275406.2708972,5170533,17908961
+Champaign-Urbana Mass Transit District,Demand Response,Gasoline,IL,78570,1471616.1,3244354.286382,8573106,14797075
+"City of Huntsville, Alabama",Demand Response,Gasoline,AL,78060,1462063.8,3223295.0947559997,701566,3228556
+"Escambia County Board of County Commissioners, FL",Demand Response,Gasoline,FL,78049,1461857.77,3222840.8768974,894386,4947071
+The Tri-County Council for the Lower Eastern Shore of Maryland,Motor Bus,Liquified Petroleum Gas,MD,114305,1449387.4,3195348.4497879995,213781,6003442
+Ulster County,Motor Bus,Bio-Diesel,NY,64458,1447082.0999999999,3190266.1393019995,430747,3954087
+Berkshire Regional Transit Authority,Motor Bus,Diesel Fuel,MA,63484,1425215.8,3142059.2569959997,509964,3054823
+County of Rockland,Demand Response,Gasoline,NY,75953,1422599.69,3136291.7285677996,1385483,8437498
+Greater Lafayette Public Transportation Corporation,Motor Bus,Diesel Fuel,IN,63014,1414664.3,3118797.209066,4447311,10619883
+Greater Richmond Transit Company,Vanpool,Gasoline,VA,75265,1409713.45,3107882.4661389994,9723640,48410504
+Kanawha Valley Regional Transportation Authority,Demand Response,Gasoline,WV,73567,1377909.91,3037767.7457841993,1094139,5380596
+Brockton Area Transit Authority,Demand Response,Gasoline,MA,73279,1372515.67,3025875.4963954,1859235,10696156
+Berkshire Regional Transit Authority,Motor Bus,Gasoline,MA,73165,1370380.45,3021168.1476789997,509964,3054823
+Whatcom Transportation Authority,Demand Response,Liquified Petroleum Gas,WA,107497,1363061.96,3005033.6582551994,3724696,11921726
+Bloomington-Normal Public Transit System,Demand Response,Gasoline,IL,72569,1359217.37,2996557.7982493998,2125519,5027621
+Chattanooga Area Regional Transportation Authority,Demand Response,Gasoline,TN,72566,1359161.18,2996433.9206515998,1736039,5747254
+Town of Huntington,Motor Bus,Gasoline,NY,71942,1347473.66,2970667.3803091994,94877,521015
+Beaver County Transit Authority,Demand Response,Gasoline,PA,71542,1339981.66,2954150.3672691993,461712,3621844
+Central County Transportation Authority,Demand Response,Gasoline,MI,69956,1310275.8800000001,2888660.4105656,1799216,7244636
+Lowell Regional Transit Authority,Demand Response,Gasoline,MA,69631,1304188.6300000001,2875240.3374706,812372,4282663
+Housatonic Area Regional Transit,Demand Response,Gasoline,CT,69630,1304169.9000000001,2875199.044938,598732,3824120
+"Frederick County, Maryland",Demand Response,Gasoline,MD,69357,1299056.61,2863926.1835382,677642,3659312
+Intercity Transit,Demand Response,Diesel Fuel,WA,57720,1295814,2856777.4606799996,3898995,24528110
+Okaloosa County Board of County Commissioners,Demand Response,Gasoline,FL,68712,1286975.76,2837292.5000111996,105016,771891
+Susquehanna Regional Transportation Authority,Commuter Bus,Diesel Fuel,PA,57054,1280862.3,2823814.643826,3072507,19627362
+City of Everett,Demand Response,Gasoline,WA,68222,1277798.06,2817059.1590372,1404970,5193721
+Ann Arbor Area Transportation Authority,Vanpool,Gasoline,MI,68171,1276842.83,2814953.2398746,4680565,23620240
+Capital District Transportation Authority,Commuter Bus,Diesel Fuel,NY,56874,1276821.3,2814905.774406,13833236,58050444
+Skagit Transit,Demand Response,Liquified Petroleum Gas,WA,100477,1274048.3599999999,2808792.4954231996,573848,7120242
+Town of Chapel Hill,Demand Response,Gasoline,NC,67987,1273396.51,2807355.4138761996,3722063,6498337
+City of Long Beach,Motor Bus,Diesel Fuel,NY,56169,1260994.05,2780012.702511,97523,270560
+Borough of Pottstown,Motor Bus,Diesel Fuel,PA,55929,1255606.05,2768134.209951,138196,240733
+Bay County Transportation Planning Organization,Demand Response,Gasoline,FL,66859,1252269.07,2760777.4371034,398400,2792272
+Pasco County Board of County Commissioners,Demand Response,Gasoline,FL,66736,1249965.28,2755698.4555936,683554,3766914
+Cape Fear Public Transportation Authority,Demand Response,Gasoline,NC,66111,1238259.03,2729890.6227185996,721308,2152407
+City of Waukesha,Commuter Bus,Diesel Fuel,WI,54933,1233245.8499999999,2718838.4658269994,466611,2014029
+Milford Transit District,Motor Bus,Diesel Fuel,CT,54681,1227588.45,2706366.0486389995,270092,1376659
+"County Commissioners of Charles County, MD",Demand Response,Gasoline,MD,65469,1226234.37,2703380.8167894,542316,4398362
+Connecticut Department of Transportation - CTTransit New Britain -Dattco.,Motor Bus,Diesel Fuel,CT,54146,1215577.7,2679886.908974,319168,4391736
+Piedmont Authority for Regional Transportation,Vanpool,Gasoline,NC,64440,1206961.2,2660890.800744,367508,9660890
+"Prince George's County, Maryland",Demand Response,Gasoline,MD,64165,1201810.45,2649535.354279,1800711,13130314
+The Tri-County Council for the Lower Eastern Shore of Maryland,Motor Bus,Gasoline,MD,64155,1201623.1500000001,2649122.428953,213781,6003442
+Charleston Area Regional Transportation Authority,Demand Response,Gasoline,SC,63922,1197259.06,2639501.2688571997,2230900,12721462
+Cobb County,Demand Response,Gasoline,GA,63851,1195929.23,2636569.4990426,854074,4391380
+Cooperative Alliance for Seacoast Transportation,Motor Bus,Diesel Fuel,NH,52975,1189288.75,2621929.764025,291028,1961994
+Tompkins Consolidated Area Transit,Demand Response,Gasoline,NY,63430,1188043.9000000001,2619185.342818,2222629,10556141
+Washington County Transportation Authority,Motor Bus,Diesel Fuel,PA,52800,1185360,2613268.3631999996,246090,2597556
+Broome County,Demand Response,Gasoline,NY,62386,1168489.78,2576075.9387836,1507413,5399291
+Somerset County,Motor Bus,Gasoline,NJ,61952,1160360.96,2558154.9796351995,215121,1265945
+Central Oregon Intergovernmental Council,Commuter Bus,Diesel Fuel,OR,51658,1159722.0999999999,2556746.5361019997,503039,3520617
+Chattanooga Area Regional Transportation Authority,Motor Bus,Gasoline,TN,61814,1157776.22,2552456.6101363995,1736039,5747254
+Manatee County Board of County Commissioners,Demand Response,Gasoline,FL,61804,1157588.92,2552043.6848103995,1605257,7357313
+METRO Regional Transit Authority,Demand Response,Diesel Fuel,OH,50701,1138237.45,2509381.0470189997,4324674,18176923
+Mecklenburg County,Demand Response,Gasoline,NC,60275,1128950.75,2488907.402465,349575,3143856
+The Tri-County Council for the Lower Eastern Shore of Maryland,Demand Response,Liquified Petroleum Gas,MD,88694,1124639.92,2479403.6604303997,213781,6003442
+County of Lackawanna Transit System,Demand Response,Gasoline,PA,58739,1100181.47,2425482.0723913996,798042,3912648
+Piedmont Authority for Regional Transportation,Commuter Bus,Gasoline,NC,58590,1097390.7,2419329.4850339997,367508,9660890
+Board of County Commissioners of St. Lucie County,Demand Response,Diesel Fuel,FL,47690,1070640.5,2360355.4591099997,671535,3348134
+Intercity Transit,Commuter Bus,Diesel Fuel,WA,47506,1066509.7,2351248.6148139997,3898995,24528110
+Spokane Transit Authority,Vanpool,Gasoline,WA,56463,1057551.99,2331500.2681938,9403739,46318134
+Central County Transportation Authority,Demand Response,Diesel Fuel,MI,46761,1049784.45,2314375.794159,1799216,7244636
+"City of Jackson, MS",Demand Response,Gasoline,MS,55867,1046388.91,2306889.9187642,449129,1079378
+Chatham Area Transit Authority,Ferry Boat,Diesel Fuel,GA,46593,1046012.85,2306060.8493669997,2286113,5186604
+Chelan Douglas PTBA,Demand Response,Gasoline,WA,55414,1037904.22,2288184.4014963997,1113038,9761540
+Private Transportation Corporation,Motor Bus,Diesel Fuel,NY,46016,1033059.2,2277502.973504,237882,1244928
+City of Appleton,Demand Response,Gasoline,WI,55155,1033053.15,2277489.635553,777302,3335281
+Indian River County,Demand Response,Gasoline,FL,54488,1020560.24,2249947.5163088,1292919,5934814
+"Woods Hole, Martha's Vineyard and Nantucket Steamship Authority",Motor Bus,Diesel Fuel,MA,45256,1015997.2,2239887.7470639995,3860264,40644147
+Casco Bay Island Transit District,Ferry Boat,Bio-Diesel,ME,45162,1013886.9,2235235.3374779997,1053175,3749303
+New Jersey Transit Corporation,Vanpool,Gasoline,NJ,53646,1004789.5800000001,2215179.2038596,198590133,2314384007
+Luzerne County Transportation Authority,Motor Bus,Diesel Fuel,PA,44751,1004659.95,2214893.4189689998,864744,4208055
+Western Reserve Transit Authority,Demand Response,Gasoline,OH,53587,1003684.51,2212742.9444362,2015081,6871274
+Putnam County,Motor Bus,Gasoline,NY,53530,1002616.9,2210389.2700779997,96321,793823
+Lakeland Area Mass Transit District,Motor Bus,Gasoline,FL,53309,998477.5700000001,2201263.6203734,848241,4655234
+Beaver County Transit Authority,Motor Bus,Diesel Fuel,PA,44413,997071.85,2198164.5419469997,461712,3621844
+Mass Transportation Authority,Motor Bus,Diesel Fuel,MI,43867,984814.15,2171140.9713729997,2913347,43975174
+Cape Ann Transportation Authority,Demand Response,Gasoline,MA,51843,971019.39,2140728.7675818,180339,519373
+City of Montgomery,Demand Response,Gasoline,AL,51754,969352.42,2137053.7321804,422109,1912289
+Dutchess County,Demand Response,Diesel Fuel,NY,42979,964878.5499999999,2127190.5489009996,827886,3978437
+Ulster County,Motor Bus,Diesel Fuel,NY,42972,964721.4,2126844.092868,430747,3954087
+City of Fayetteville,Demand Response,Gasoline,NC,51296,960774.0800000001,2118141.7522496,2195673,9099174
+Suburban Mobility Authority for Regional Transportation,Demand Response,Diesel Fuel,MI,42729,959266.0499999999,2114817.1191509995,4827519,45670297
+Intercity Transit,Demand Response,Liquified Petroleum Gas,WA,75626,958937.6799999999,2114093.1880816,3898995,24528110
+Manatee County Board of County Commissioners,Demand Response,Diesel Fuel,FL,42706,958749.7,2113678.763614,1605257,7357313
+Interurban Transit Partnership,Demand Response,Gasoline,MI,50918,953694.14,2102533.1749267997,6042030,27512044
+Cooperative Alliance for Seacoast Transportation,Motor Bus,Bio-Diesel,NH,42400,951880,2098533.6856,291028,1961994
+Rock Island County Metropolitan Mass Transit District,Demand Response,Gasoline,IL,50814,951746.22,2098238.7515363996,1927164,9497862
+Gwinnett County Board of Commissioners,Demand Response,Gasoline,GA,50640,948487.2000000001,2091053.850864,1177163,12311104
+Delaware Transit Corporation,Motor Bus,Bio-Diesel,DE,42104,945234.7999999999,2083883.5447759996,7629486,49897548
+Metropolitan Transit Authority,Motor Bus,Gasoline,TN,50400,943992,2081143.6430399998,8162766,34901383
+"Metro-North Commuter Railroad Company, dba: MTA Metro-North Railroad",Motor Bus,Diesel Fuel,NY,41929,941306.0499999999,2075222.1439509997,66645285,1150894931
+Broward County Board of County Commissioners,Motor Bus,Liquified Petroleum Gas,FL,73741,935035.88,2061398.8017655998,23209964,119090315
+Ulster County,Motor Bus,Gasoline,NY,49837,933447.01,2057895.9471862,430747,3954087
+"City of Racine, Wisconsin",Commuter Bus,Diesel Fuel,WI,41276,926646.2,2042902.7454439998,1037031,4186567
+Stark Area Regional Transit Authority,Demand Response,Gasoline,OH,49347,924269.31,2037662.6062122,1387558,10133529
+Montachusett Regional Transit Authority,Motor Bus,Gasoline,MA,49034,918406.8200000001,2024738.0435084,874511,7073693
+Pinellas Suncoast Transit Authority,Motor Bus,Gasoline,FL,48751,913106.23,2013052.2567825997,10210124,54152172
+Housatonic Area Regional Transit,Motor Bus,Gasoline,CT,48491,908236.43,2002316.1983065999,598732,3824120
+City of Wilsonville,Demand Response,C Natural Gas,OR,7493,905529.0499999999,1996347.4542109997,185195,1207058
+County of Douglas,Motor Bus,Gasoline,GA,48315,904939.9500000001,1995048.712569,49871,333837
+County of Nassau,Motor Bus,Electric Battery,NY,3785,896195.2626756539,1975770,20293586,112757303
+Central Oregon Intergovernmental Council,Motor Bus,Diesel Fuel,OR,39912,896024.4,1975393.3127279999,503039,3520617
+Okaloosa County Board of County Commissioners,Motor Bus,Gasoline,FL,47749,894338.77,1971677.1391174,105016,771891
+Bay Metropolitan Transit Authority,Demand Response,Diesel Fuel,MI,39831,894205.95,1971384.3214889998,290244,2107127
+Cape Ann Transportation Authority,Motor Bus,Diesel Fuel,MA,39597,888952.65,1959802.791243,180339,519373
+South Bend Public Transportation Corporation,Demand Response,Gasoline,IN,47285,885648.05,1952517.403991,1252820,4679161
+City of Green Bay,Demand Response,Gasoline,WI,47169,883475.37,1947727.4702093997,836102,2684166
+Central Florida Regional Transportation Authority,Motor Bus,Gasoline,FL,46527,871450.71,1921217.6642801997,18418220,111018391
+Centre Area Transportation Authority,Demand Response,Gasoline,PA,46300,867199,1911844.2593799997,4823095,11988843
+County of Lebanon Transit Authority,Motor Bus,Diesel Fuel,PA,38536,865133.2,1907289.9553839997,243772,1506617
+The Greater Cleveland Regional Transit Authority,Demand Response,Liquified Petroleum Gas,OH,67792,859602.5599999999,1895096.9958271997,22415370,102838552
+Fort Wayne Public Transportation Corporation,Demand Response,Gasoline,IN,45696,855886.0800000001,1886903.5696896,1561932,6664742
+The Tri-State Transit Authority,Demand Response,Gasoline,WV,45610,854275.3,1883352.4118859998,731480,4274626
+Greater Bridgeport Transit Authority,Demand Response,Diesel Fuel,CT,37963,852269.35,1878930.0543969998,5266649,15150397
+City of Terre Haute,Motor Bus,Gasoline,IN,44974,842363.02,1857090.3611523998,145758,197093
+City of Kenosha,Demand Response,Gasoline,WI,43605,816721.65,1800560.8840229998,1248670,4037901
+City of Charlotte North Carolina,Vanpool,Gasoline,NC,43254,810147.42,1786067.2050804,14027141,67531449
+Mid Mon Valley Transit Authority,Motor Bus,Diesel Fuel,PA,35011,785996.95,1732824.5959089997,209190,2319917
+Central Oregon Intergovernmental Council,Demand Response,Gasoline,OR,41791,782745.43,1725656.2298866,503039,3520617
+Brevard Board of County Commissioners,Demand Response,Gasoline,FL,41716,781340.68,1722559.2899416,1855968,12482419
+Kanawha Valley Regional Transportation Authority,Motor Bus,Gasoline,WV,41651,780123.23,1719875.2753225998,1094139,5380596
+The Transportation Management Association Group,Vanpool,Gasoline,TN,41220,772050.6,1702078.1937719998,78792,3623502
+Rockford Mass Transit District,Motor Bus,Electric Battery,IL,3257,771177.7993486406,1700154,994754,5035893
+Charleston Area Regional Transportation Authority,Commuter Bus,Diesel Fuel,SC,33994,763165.2999999999,1682489.4836859996,2230900,12721462
+Lexington Transit Authority,Motor Bus,Electric Battery,KY,960,758117.0451143509,1671360,3733026,17873805
+"Ride Connection, Inc.",Motor Bus,Gasoline,OR,40471,758021.8300000001,1671150.0868546,164113,894584
+Western Piedmont Regional Transit Authority,Motor Bus,Diesel Fuel,NC,33484,751715.7999999999,1657247.6869959997,124319,1139015
+Santee Wateree Regional Transportation Authority,Motor Bus,Gasoline,SC,40018,749537.14,1652444.5695868,89873,619762
+Valley Transit District,Demand Response,Gasoline,CT,39997,749143.81,1651577.4264022,48819,277875
+Town of Huntington,Demand Response,Gasoline,NY,39946,748188.5800000001,1649471.5072396,94877,521015
+City of Rome,Motor Bus,Diesel Fuel,GA,33115,743431.75,1638984.5046849998,204548,1972262
+"Western Maine Transportation Services, Inc.",Demand Response,Gasoline,ME,39642,742494.66,1636918.5773292,168002,787362
+South Florida Regional Transportation Authority,Motor Bus,Diesel Fuel,FL,32812,736629.4,1623987.907828,4122066,106697798
+Green Mountain Transit Authority,Motor Bus,Gasoline,VT,39029,731013.17,1611606.2548453999,2455808,10319587
+Ms Coast Transportation Authority,Demand Response,Diesel Fuel,MS,32467,728884.15,1606912.5747729999,751314,6961094
+Collier County,Demand Response,Diesel Fuel,FL,32274,724551.2999999999,1597360.2870059996,844505,8431064
+Rogue Valley Transportation District,Demand Response,Gasoline,OR,38312,717583.76,1581999.5089711999,875282,4236166
+County of Lebanon Transit Authority,Demand Response,Gasoline,PA,38240,716235.2000000001,1579026.446624,243772,1506617
+Rogue Valley Transportation District,Motor Bus,Diesel Fuel,OR,31697,711597.65,1568802.411143,875282,4236166
+Rockford Mass Transit District,Demand Response,Diesel Fuel,IL,31317,703066.65,1549994.7979229998,994754,5035893
+"Transit Management of Central Maryland, Inc.",Motor Bus,Gasoline,MD,37196,696681.08,1535917.0425895997,790641,4538713
+Rhode Island Public Transit Authority,Vanpool,Gasoline,RI,36655,686548.15,1513577.7824529998,11412537,54303315
+The Tri-County Council for the Lower Eastern Shore of Maryland,Demand Response,Gasoline,MD,36547,684525.31,1509118.1889322,213781,6003442
+Berkshire Regional Transit Authority,Demand Response,Gasoline,MA,36534,684281.8200000001,1508581.3860084,509964,3054823
+Transportation District Commission of Hampton Roads,Ferry Boat,Diesel Fuel,VA,29635,665305.75,1466746.3625649998,7167154,36797144
+Toledo Area Regional Transit Authority,Demand Response,Diesel Fuel,OH,29399,660007.5499999999,1455065.8448809998,1891108,13977629
+Southeast Area Transit District,Demand Response,Gasoline,CT,34643,648863.39,1430497.2068617998,1211688,6890209
+"Frederick County, Maryland",Motor Bus,Gasoline,MD,34609,648226.5700000001,1429093.2607534,677642,3659312
+"City of Rochester, Minnesota",Demand Response,Gasoline,MN,34513,646428.49,1425129.1776237998,745406,2558386
+Kitsap County Public Transportation Benefit Area Authority,Vanpool,Gasoline,WA,33931,635527.63,1401096.9236505998,2739131,24094434
+Ms Coast Transportation Authority,Demand Response,Gasoline,MS,33793,632942.89,1395398.5541518,751314,6961094
+Ms Coast Transportation Authority,Vanpool,Gasoline,MS,33427,626087.71,1380285.4872201998,751314,6961094
+"JAUNT, Inc.",Commuter Bus,Gasoline,VA,33420,625956.6,1379996.4394919998,240235,2433504
+"Ride Connection, Inc.",Demand Response,Gasoline,OR,33048,618989.04,1364635.6173648,164113,894584
+City of Yakima,Demand Response,Gasoline,WA,33001,618108.73,1362694.8683325998,646711,3435365
+River Valley Transit Authority,Motor Bus,Diesel Fuel,PA,27475,616813.75,1359839.9295249998,780399,4578701
+Rhode Island Public Transit Authority,Demand Response,Diesel Fuel,RI,27386,614815.7,1355434.9885339998,11412537,54303315
+Jacksonville Transportation Authority,Commuter Bus,Gasoline,FL,32755,613501.15,1352536.9053129999,6678105,36776548
+County of Lackawanna Transit System,Motor Bus,Gasoline,PA,32399,606833.27,1337836.7637073998,798042,3912648
+Santee Wateree Regional Transportation Authority,Demand Response,Gasoline,SC,32362,606140.26,1336308.9400012,89873,619762
+City of Alexandria,Demand Response,Gasoline,VA,32054,600371.42,1323590.8399604,4580105,10493813
+City of Harrisonburg,Demand Response,Gasoline,VA,31875,597018.75,1316199.476625,1522746,3218771
+Skagit Transit,Vanpool,Gasoline,WA,31415,588402.9500000001,1297204.911629,573848,7120242
+Cape Fear Public Transportation Authority,Motor Bus,Diesel Fuel,NC,26077,585428.65,1290647.710363,721308,2152407
+Saginaw Transit Authority Regional Service,Demand Response,Diesel Fuel,MI,25846,580242.7,1279214.6612739998,477324,3044653
+Western Reserve Transit Authority,Motor Bus,Gasoline,OH,30428,569916.4400000001,1256449.1819528001,2015081,6871274
+Fort Wayne Public Transportation Corporation,Demand Response,Bio-Diesel,IN,25236,566548.2,1249023.4926839997,1561932,6664742
+Jackson Transit Authority,Demand Response,Gasoline,TN,29870,559465.1,1233407.9487619998,298840,1635772
+Cooperative Alliance for Seacoast Transportation,Demand Response,Gasoline,NH,29613,554651.49,1222795.7678838,291028,1961994
+Municipality of Anchorage,Motor Bus,Gasoline,AK,29582,554070.86,1221515.6993731998,3117877,20591368
+Central Midlands Regional Transportation Authority,Commuter Bus,Liquified Petroleum Gas,SC,43110,546634.7999999999,1205122.0127759997,1968473,12347578
+Greater Peoria Mass Transit District,Motor Bus,Gasoline,IL,28840,540173.2000000001,1190876.6401840001,1871743,10047144
+Cobb County,Demand Response,Diesel Fuel,GA,23936,537363.2,1184681.6579839997,854074,4391380
+Cambria County Transit Authority,Demand Response,Gasoline,PA,28596,535603.08,1180801.2622295998,804968,4713352
+Capital District Transportation Authority,Vanpool,Gasoline,NY,28589,535471.97,1180512.2145013998,13833236,58050444
+Duluth Transit Authority,Demand Response,Gasoline,MN,28306,530171.38,1168826.4277756,2160263,9955251
+Salem Area Mass Transit District,Vanpool,Gasoline,OR,28243,528991.39,1166224.9982218,3027255,11246133
+Somerset County,Motor Bus,Diesel Fuel,NJ,23541,528495.45,1165131.6389789998,215121,1265945
+Muncie Indiana Transit System,Demand Response,Liquified Petroleum Gas,IN,41451,525598.6799999999,1158745.3619015997,919115,3654917
+Charlotte County Government,Demand Response,Gasoline,FL,27978,524027.94,1155282.4770828,58403,523957
+"Montgomery County, Maryland",Demand Response,Diesel Fuel,MD,22930,514778.5,1134890.97667,14372995,58141297
+Regional Planning Commission of Greater Birmingham,Vanpool,Gasoline,AL,27382,512864.86,1130672.1276532,40045,2357836
+"Arlington County, Virginia",Demand Response,Gasoline,VA,26666,499454.18,1101106.6743116,2097034,5273946
+Chelan Douglas PTBA,Demand Response,Electric Battery,WA,3761,498141.1762571328,1098212,1113038,9761540
+Milford Transit District,Demand Response,Gasoline,CT,26525,496813.25,1095284.427215,270092,1376659
+City of Fayetteville,Demand Response,Liquified Petroleum Gas,NC,38701,490728.68,1081870.2625016,2195673,9099174
+Martin County,Commuter Bus,Diesel Fuel,FL,21746,488197.7,1076290.413374,107491,863744
+North Central Alabama Regional Council of Governments,Demand Response,Gasoline,AL,25973,486474.29000000004,1072490.9492198,38312,206786
+County of Douglas,Demand Response,Gasoline,GA,25933,485725.09,1070839.2479158,49871,333837
+Greater Lynchburg Transit Company,Demand Response,Gasoline,VA,25845,484076.85000000003,1067205.505047,520122,2306018
+Puerto Rico Highway and Transportation Authority – Público,Publico,Diesel Fuel,PR,21426,481013.7,1060452.4232939999,2942179,13502710
+Delaware Transit Corporation,Motor Bus,Liquified Petroleum Gas,DE,37726,478365.68,1054614.5454415998,7629486,49897548
+Gary Public Transportation Corporation,Motor Bus,Gasoline,IN,24895,466283.35000000003,1027977.5990769999,460489,944846
+City of Wilsonville,Motor Bus,Diesel Fuel,OR,20153,452434.85,997446.9190069998,185195,1207058
+Intercity Transit,Demand Response,Gasoline,WA,23744,444725.12,980449.8940543999,3898995,24528110
+City of Montgomery,Motor Bus,Bio-Diesel,AL,19733,443005.85,976659.5570269999,422109,1912289
+"Western Maine Transportation Services, Inc.",Commuter Bus,Diesel Fuel,ME,19685,441928.25,974283.8585149999,168002,787362
+MTA New York City Transit,Demand Response,Diesel Fuel,NY,19665,441479.25,973293.9841349999,2632003044,9591253658
+City of Eau Claire,Demand Response,Gasoline,WI,23515,440435.95,970993.904089,672882,1868624
+Saginaw Transit Authority Regional Service,Demand Response,Gasoline,MI,23248,435435.04000000004,959968.7978848,477324,3044653
+City of Jackson Transportation Authority,Demand Response,Gasoline,MI,23172,434011.56,956830.5654071999,316935,889242
+Birmingham-Jefferson County Transit Authority,Demand Response,Gasoline,AL,23056,431838.88,952040.6316255999,1795762,9332038
+City of Yakima,Commuter Bus,Diesel Fuel,WA,19140,429693,947309.7816599999,646711,3435365
+Kitsap County Public Transportation Benefit Area Authority,Demand Response,Diesel Fuel,WA,19117,429176.64999999997,946171.4261229999,2739131,24094434
+Greenville Transit Authority,Demand Response,Gasoline,SC,22911,429123.03,946053.2143985999,764307,4016483
+University of Georgia,Demand Response,Electric Battery,GA,1290,428903.84737505787,945570,2941019,3512275
+Lee County,Demand Response,Diesel Fuel,FL,19045,427560.25,942607.8783549999,1742894,10735134
+Pioneer Valley Transit Authority,Motor Bus,Gasoline,MA,22757,426238.61,939694.1643781998,7079756,27546334
+"City of Gainesville, FL",Motor Bus,Gasoline,FL,22250,416742.5,918758.85035,5170533,17908961
+First Tennessee Human Resource Agency,Demand Response,Liquified Petroleum Gas,TN,32788,415751.83999999997,916574.8215007999,141537,2243178
+"Western Maine Transportation Services, Inc.",Motor Bus,Diesel Fuel,ME,18090,406120.5,895341.3767099999,168002,787362
+Greater Hartford Transit District,Demand Response,Diesel Fuel,CT,18056,405357.2,893658.590264,503701,4871394
+Charlotte County Government,Demand Response,Diesel Fuel,FL,18023,404616.35,892025.2975369999,58403,523957
+Worcester Regional Transit Authority,Motor Bus,Gasoline,MA,21468,402095.64,886468.0898567999,4133429,16612797
+City of Evansville,Demand Response,Gasoline,IN,21440,401571.2,885311.8989439999,906183,3415960
+King County,Demand Response,Diesel Fuel,WA,17880,401406,884947.69572,78886848,301530502
+Valley Regional Transit,Demand Response,Gasoline,ID,21373,400316.29000000004,882545.2992598,1096198,4478664
+Sarasota County,Motor Bus,Gasoline,FL,20512,384189.76,846992.4286912,2189094,11413817
+Salem Area Mass Transit District,Motor Bus,Gasoline,OR,19941,373494.93,823414.3925766,3027255,11246133
+Southeast Area Transit District,Motor Bus,Bio-Diesel,CT,16606,372804.7,821892.697714,1211688,6890209
+County of Nassau,Demand Response,Diesel Fuel,NY,16595,372557.75,821348.2668049999,20293586,112757303
+Williamsburg Area Transit Authority,Demand Response,Gasoline,VA,19855,371884.15,819863.234773,740818,3497142
+Gary Public Transportation Corporation,Demand Response,Gasoline,IN,19850,371790.5,819656.7721099999,460489,944846
+Athens-Clarke County Unified Government,Demand Response,Gasoline,GA,19805,370947.65,817798.6081429999,1186787,4197292
+Toledo Area Regional Transit Authority,Vanpool,Gasoline,OH,19662,368269.26,811893.7759811999,1891108,13977629
+Bay Metropolitan Transit Authority,Demand Response,Liquified Petroleum Gas,MI,28708,364017.44,802520.1285728,290244,2107127
+Centre Area Transportation Authority,Vanpool,Gasoline,PA,19376,362912.48,800084.1116575999,4823095,11988843
+Town of Blacksburg,Demand Response,Gasoline,VA,19228,360140.44,793972.8168327999,3520078,6571617
+New York City Economic Development Corporation,Motor Bus,Diesel Fuel,NY,15641,351140.45,774131.258879,6687168,33504383
+Central Midlands Regional Transportation Authority,Vanpool,Gasoline,SC,18544,347329.12,765728.7245343999,1968473,12347578
+Brevard Board of County Commissioners,Vanpool,Gasoline,FL,18267,342140.91000000003,754290.6930042,1855968,12482419
+City of Montgomery,Motor Bus,Diesel Fuel,AL,14913,334796.85,738099.8314469999,422109,1912289
+Collier County,Motor Bus,Gasoline,FL,17699,331502.27,730836.5344874,844505,8431064
+City of Nashua,Demand Response,Gasoline,NH,17574,329161.02,725674.9679124,315974,1787898
+Charleston Area Regional Transportation Authority,Motor Bus,Gasoline,SC,17455,326932.15,720761.156533,2230900,12721462
+Ann Arbor Area Transportation Authority,Demand Response,Diesel Fuel,MI,14510,325749.5,718153.86269,4680565,23620240
+City of Nashua,Motor Bus,Bio-Diesel,NH,14416,323639.2,713501.453104,315974,1787898
+Ohio Valley Regional Transportation Authority,Motor Bus,Gasoline,WV,17175,321687.75,709199.2474049999,317863,1774356
+City of Rome,Demand Response,Gasoline,GA,17117,320601.41000000003,706804.2805142,204548,1972262
+Research Triangle Regional Public Transportation Authority,Vanpool,Gasoline,NC,17051,319365.23,704078.9733625998,1653233,14834526
+"City of Racine, Wisconsin",Demand Response,Gasoline,WI,16946,317398.58,699743.2574396,1037031,4186567
+South Bend Public Transportation Corporation,Motor Bus,Diesel Fuel,IN,14104,316634.8,698059.4127759999,1252820,4679161
+Indianapolis and Marion County Public Transportation,Motor Bus,Gasoline,IN,16642,311704.66000000003,687190.3275292,6888880,35204901
+Indian River County,Motor Bus,Gasoline,FL,16610,311105.3,685868.9664859999,1292919,5934814
+Portage Area Regional Transportation Authority,Motor Bus,Gasoline,OH,16488,308820.24,680831.2775087999,904481,2689790
+"Western Maine Transportation Services, Inc.",Commuter Bus,Gasoline,ME,16425,307640.25,678229.8479549999,168002,787362
+"City of Decatur, Il",Demand Response,Gasoline,IL,16083,301234.59,664107.8018058,909640,2611423
+Transportation District Commission of Hampton Roads,Vanpool,Gasoline,VA,15783,295615.59,651720.0420258,7167154,36797144
+City of Terre Haute,Motor Bus,Diesel Fuel,IN,13070,293421.5,646882.90733,145758,197093
+County of Atlantic,Motor Bus,Diesel Fuel,NJ,13007,292007.14999999997,643764.8030329999,86347,658856
+Western Piedmont Regional Transit Authority,Motor Bus,Gasoline,NC,15487,290071.51,639497.4523762,124319,1139015
+City of Longview,Demand Response,Liquified Petroleum Gas,WA,22719,288076.92,635100.1393703999,274804,1040117
+St. Cloud Metropolitan Transit Commission,Commuter Bus,Diesel Fuel,MN,12819,287786.55,634459.9838609999,774825,3454101
+City of Rome,Motor Bus,Gasoline,GA,15332,287168.36,633097.1098231999,204548,1972262
+Cooperative Alliance for Seacoast Transportation,Motor Bus,Gasoline,NH,15259,285801.07,630082.7549433999,291028,1961994
+City of Fort Lauderdale,Ferry Boat,Diesel Fuel,FL,12706,285249.7,628867.193614,218791,537030
+Green Mountain Transit Authority,Commuter Bus,Gasoline,VT,15214,284958.22000000003,628224.5909764001,2455808,10319587
+Buncombe County,Motor Bus,Gasoline,NC,15007,281081.11,619677.0367281999,113858,1149650
+Town of Huntington,Motor Bus,Diesel Fuel,NY,12491,280422.95,618226.044029,94877,521015
+Putnam County,Demand Response,Gasoline,NY,14937,279770.01,616786.5594461999,96321,793823
+City of Evansville,Demand Response,Diesel Fuel,IN,11859,266234.55,586946.0136209999,906183,3415960
+Bloomington-Normal Public Transit System,Demand Response,Liquified Petroleum Gas,IL,20984,266077.12,586598.9402944,2125519,5027621
+City of Baltimore,Ferry Boat,Diesel Fuel,MD,11815,265246.75,584768.2899849999,1276575,1928119
+Loudoun County,Demand Response,Gasoline,VA,14148,264992.04,584206.7512247999,526819,7797386
+Ulster County,Demand Response,Gasoline,NY,14007,262351.11,578384.5041281999,430747,3954087
+Niagara Frontier Transportation Authority,Demand Response,Diesel Fuel,NY,11662,261811.9,577195.7509779999,14531216,46252415
+Snohomish County Public Transportation Benefit Area Corporation,Commuter Bus,Bio-Diesel,WA,11595,260307.75,573879.6718049999,7146008,58898665
+City of Wilsonville,Motor Bus,Gasoline,OR,13812,258698.76,570332.4602711999,185195,1207058
+County of Rockland,Motor Bus,Gasoline,NY,13531,253435.63,558729.2586105999,1385483,8437498
+Lexington Transit Authority,Vanpool,Gasoline,KY,13385,250701.05000000002,552700.548851,3733026,17873805
+"Escambia County Board of County Commissioners, FL",Motor Bus,Gasoline,FL,12994,243377.62,536555.1686043999,894386,4947071
+Norwalk Transit District,Demand Response,Diesel Fuel,CT,10488,235455.6,519090.12487199996,1564640,5619863
+"Prince George's County, Maryland",Demand Response,Liquified Petroleum Gas,MD,17622,223446.96,492615.63695519994,1800711,13130314
+Fort Wayne Public Transportation Corporation,Motor Bus,Gasoline,IN,11673,218635.29,482007.73303979996,1561932,6664742
+County of Fayette,Motor Bus,Gasoline,PA,11426,214008.98,471808.4774876,181885,2022566
+Jacksonville Transportation Authority,Motor Bus,Gasoline,FL,11358,212735.34,469000.58527079993,6678105,36776548
+Central Oregon Intergovernmental Council,Commuter Bus,Gasoline,OR,11298,211611.54,466523.03331479995,503039,3520617
+Greater Roanoke Transit Company,Motor Bus,Gasoline,VA,11261,210918.53,464995.20960859995,1287135,7602285
+Town of Blacksburg,Demand Response,Diesel Fuel,VA,9174,205956.3,454055.37810599996,3520078,6571617
+Connecticut Department of Transportation - CTTRANSIT New Haven Division,Motor Bus,Electric Battery,CT,788,205880.37847792366,453888,7705131,32389851
+Washington County Transportation Authority,Motor Bus,Gasoline,PA,10948,205056.04,452070.64690479997,246090,2597556
+City of Fort Lauderdale,Motor Bus,Liquified Petroleum Gas,FL,15976,202575.68,446602.39564159996,218791,537030
+Rock Island County Metropolitan Mass Transit District,Ferry Boat,Bio-Diesel,IL,8976,201511.19999999998,444255.62174399995,1927164,9497862
+MetroWest Regional Transit Authority,Motor Bus,Gasoline,MA,10719,200766.87,442614.65693939995,479776,2476730
+Cambria County Transit Authority,Motor Bus,Gasoline,PA,10519,197020.87,434356.15041939996,804968,4713352
+City of Terre Haute,Demand Response,Gasoline,IN,10475,196196.75,432539.278985,145758,197093
+Whatcom Transportation Authority,Vanpool,Gasoline,WA,10131,189753.63,418334.6477706,3724696,11921726
+Lee County,Motor Bus,Gasoline,FL,10029,187843.17,414122.80944539997,1742894,10735134
+Clark County Public Transportation Benefit Area Authority,Vanpool,Gasoline,WA,10024,187749.52000000002,413916.3467824,4492306,19621461
+"Woods Hole, Martha's Vineyard and Nantucket Steamship Authority",Motor Bus,Gasoline,MA,9811,183760.03,405121.03733859997,3860264,40644147
+Bay Metropolitan Transit Authority,Motor Bus,Liquified Petroleum Gas,MI,14407,182680.76,402741.6571112,290244,2107127
+Ohio Valley Regional Transportation Authority,Demand Response,Gasoline,WV,9735,182336.55000000002,401982.804861,317863,1774356
+City of Longview,Demand Response,Gasoline,WA,9665,181025.45,399092.327579,274804,1040117
+Snohomish County Public Transportation Benefit Area Corporation,Demand Response,Electric Battery,WA,1343,177879.18099264274,392156,7146008,58898665
+Massachusetts Bay Transportation Authority,Motor Bus,Gasoline,MA,9474,177448.02,391205.45385239995,234975556,1103417623
+"City of Gainesville, FL",Vanpool,Gasoline,FL,9440,176811.2,389801.507744,5170533,17908961
+Bergen County,Motor Bus,Gasoline,NJ,9437,176755.01,389677.6301462,139952,1223026
+City of La Crosse,Demand Response,Gasoline,WI,9419,176417.87,388934.36455939995,685372,2005024
+Augusta Richmond County Transit Department,Demand Response,Gasoline,GA,9323,174619.79,384970.2814298,423982,1726132
+City of Memphis,Motor Bus,Gasoline,TN,9246,173177.58000000002,381790.7564196,2819588,14475117
+Cape Cod Regional Transit Authority,Motor Bus,Bio-Diesel,MA,7704,172954.8,381299.6111759999,726134,8680561
+City of Waukesha,Demand Response,Gasoline,WI,9085,170162.05000000002,375142.658671,466611,2014029
+Greenville Transit Authority,Motor Bus,Gasoline,SC,8899,166678.27,367462.24760739994,764307,4016483
+River Valley Transit Authority,Demand Response,Gasoline,PA,8893,166565.89,367214.4924118,780399,4578701
+County of Volusia,Vanpool,Gasoline,FL,8826,165310.98,364447.8927276,2292313,19892288
+Ms Coast Transportation Authority,Motor Bus,Gasoline,MS,8619,161433.87,355900.3384794,751314,6961094
+Augusta Richmond County Transit Department,Demand Response,Diesel Fuel,GA,7085,159058.25,350662.99911499996,423982,1726132
+Southwestern Pennsylvania Commission,Vanpool,Gasoline,PA,8487,158961.51,350449.7241762,22169,758063
+Transit Authority of Central Kentucky,Vanpool,Gasoline,KY,8472,158680.56,349830.3361872,98435,1683699
+St. Cloud Metropolitan Transit Commission,Demand Response,Diesel Fuel,MN,7041,158070.44999999998,348485.27547899995,774825,3454101
+Lowell Regional Transit Authority,Motor Bus,Gasoline,MA,8229,154129.17,339796.2507654,812372,4282663
+County of Volusia,Demand Response,Liquified Petroleum Gas,FL,12063,152958.84,337216.11784079997,2292313,19892288
+Transit Authority of Northern Kentucky,Demand Response,Diesel Fuel,KY,6388,143410.6,316165.876972,1913143,10690427
+Erie Metropolitan Transit Authority,Demand Response,Diesel Fuel,PA,6380,143231,315769.92721999995,1423465,3300207
+City of Knoxville,Motor Bus,Gasoline,TN,7642,143134.66,315557.5341292,2312188,7161127
+Ms Coast Transportation Authority,Demand Response,Liquified Petroleum Gas,MS,10906,138288.08,304872.66692959995,751314,6961094
+Capital District Transportation Authority,Motor Bus,Gasoline,NY,7360,137852.80000000002,303913.039936,13833236,58050444
+Green Mountain Transit Authority,Motor Bus,Electric Battery,VT,37876,137442.28030227433,303008,2455808,10319587
+Chelan Douglas PTBA,Vanpool,Gasoline,WA,7147,133863.31,295117.73049219995,1113038,9761540
+King County,Ferry Boat,Diesel Fuel,WA,5591,125517.95,276719.38292899996,78886848,301530502
+Tompkins Consolidated Area Transit,Motor Bus,Gasoline,NY,6578,123205.94,271622.2794428,2222629,10556141
+Clark County Public Transportation Benefit Area Authority,Demand Response,Gasoline,WA,6189,115919.97,255559.48426139998,4492306,19621461
+City of Tallahassee,Motor Bus,Bio-Diesel,FL,5134,115258.3,254100.75334599998,2588477,10140885
+Rock Island County Metropolitan Mass Transit District,Motor Bus,Diesel Fuel,IL,5124,115033.8,253605.816156,1927164,9497862
+Lehigh and Northampton Transportation Authority,Motor Bus,Gasoline,PA,6120,114627.6,252710.299512,3897096,19797124
+Greater Attleboro-Taunton Regional Transit Authority,Motor Bus,Gasoline,MA,5850,109570.5,241561.31570999997,707860,3171004
+Lane Transit District,Motor Bus,Gasoline,OR,5806,108746.38,239744.4442756,6311613,22779952
+City of Nashua,Motor Bus,Gasoline,NH,5614,105150.22,231816.27801639997,315974,1787898
+Kitsap County Public Transportation Benefit Area Authority,Motor Bus,Liquified Petroleum Gas,WA,8232,104381.76,230122.11573119997,2739131,24094434
+City of Eau Claire,Demand Response,Diesel Fuel,WI,4641,104190.45,229700.349879,672882,1868624
+"Prince George's County, Maryland",Motor Bus,Gasoline,MD,5561,104157.53,229627.77378859997,1800711,13130314
+Central Oregon Intergovernmental Council,Motor Bus,Gasoline,OR,5425,101610.25,224011.98935499997,503039,3520617
+Martin County,Demand Response,Gasoline,FL,5410,101329.3,223392.601366,107491,863744
+Ms Coast Transportation Authority,Motor Bus,Liquified Petroleum Gas,MS,7986,101262.48,223245.28865759997,751314,6961094
+Regional Transportation Authority,Vanpool,Gasoline,TN,5372,100617.56,221823.48512719997,173746,4037298
+Southeast Area Transit District,Motor Bus,Gasoline,CT,5351,100224.23,220956.34194259997,1211688,6890209
+City of Winston Salem,Motor Bus,Gasoline,NC,5217,97714.41,215423.1425742,1715582,5888651
+County of Atlantic,Demand Response,Diesel Fuel,NJ,4318,96939.09999999999,213713.87864199997,86347,658856
+Champaign-Urbana Mass Transit District,Demand Response,Diesel Fuel,IL,4306,96669.7,213119.954014,8573106,14797075
+County of Fayette,Motor Bus,Diesel Fuel,PA,4270,95861.5,211338.18013,181885,2022566
+"Ride Connection, Inc.",Demand Response,Electric Battery,OR,596,92997.4326641326,205024,164113,894584
+City of Moorhead,Demand Response,Gasoline,MN,4945,92619.85,204191.573707,383279,1380595
+Santee Wateree Regional Transportation Authority,Motor Bus,Liquified Petroleum Gas,SC,7279,92297.72,203481.39946639998,89873,619762
+Altoona Metro Transit,Motor Bus,Diesel Fuel,PA,4002,89844.9,198073.86343799997,444716,1614732
+Lane Transit District,Vanpool,Gasoline,OR,4744,88855.12,195891.77465439998,6311613,22779952
+City of Wilsonville,Demand Response,Gasoline,OR,4604,86232.92,190110.82009039997,185195,1207058
+Buncombe County,Demand Response,Liquified Petroleum Gas,NC,6615,83878.2,184919.55728399998,113858,1149650
+Lakeland Area Mass Transit District,Demand Response,Diesel Fuel,FL,3735,83850.75,184859.04046499997,848241,4655234
+Potomac and Rappahannock Transportation Commission,Demand Response,Gasoline,VA,4304,80613.92,177723.06031039997,2158231,54836885
+Cape Ann Transportation Authority,Motor Bus,Gasoline,MA,4274,80052.02,176484.28433239998,180339,519373
+Transit Authority of River City,Motor Bus,Gasoline,KY,4133,77411.09,170662.03723579997,6247087,22882994
+Santee Wateree Regional Transportation Authority,Demand Response,Liquified Petroleum Gas,SC,5887,74647.16,164568.62187919999,89873,619762
+Town of Blacksburg,Motor Bus,Gasoline,VA,3777,70743.21,155961.8956302,3520078,6571617
+City of Longview,Motor Bus,Gasoline,WA,3766,70537.18000000001,155507.6777716,274804,1040117
+Santee Wateree Regional Transportation Authority,Commuter Bus,Liquified Petroleum Gas,SC,5542,70272.56,154924.29122719998,89873,619762
+University of Georgia,Demand Response,Gasoline,GA,3424,64131.520000000004,141385.6316224,2941019,3512275
+City of Yakima,Commuter Bus,Gasoline,WA,3337,62502.01,137793.18128619998,646711,3435365
+Borough of Pottstown,Demand Response,Gasoline,PA,3259,61041.07,134572.3637434,138196,240733
+Western Reserve Transit Authority,Demand Response,Diesel Fuel,OH,2704,60704.799999999996,133831.01617599998,2015081,6871274
+Delaware Transit Corporation,Demand Response,Gasoline,DE,3192,59786.16,131805.7640592,7629486,49897548
+Capital Area Transportation Authority,Demand Response,Bio-Diesel,MI,2593,58212.85,128337.21336699999,7633877,22977380
+Ms Coast Transportation Authority,Motor Bus,Electric Battery,MS,152,56328.98186535548,124184,751314,6961094
+City of Fort Lauderdale,Motor Bus,Gasoline,FL,2912,54541.76,120243.8549312,218791,537030
+Snohomish County Public Transportation Benefit Area Corporation,Demand Response,Liquified Petroleum Gas,WA,4273,54181.64,119449.92717679999,7146008,58898665
+Kitsap County Public Transportation Benefit Area Authority,Demand Response,Gasoline,WA,2892,54167.16,119418.0042792,2739131,24094434
+Jackson Transit Authority,Motor Bus,Gasoline,TN,2801,52462.73,115660.38381259999,298840,1635772
+"JAUNT, Inc.",Demand Response,Electric Battery,VA,187,50384.19319429199,111078,240235,2433504
+"Frederick County, Maryland",Demand Response,Diesel Fuel,MD,2175,48828.75,107648.83882499998,677642,3659312
+City of Jackson Transportation Authority,Demand Response,Diesel Fuel,MI,2124,47683.799999999996,105124.65915599998,316935,889242
+Kitsap County Public Transportation Benefit Area Authority,Demand Response,Bio-Diesel,WA,2098,47100.1,103837.82246199998,2739131,24094434
+Williamsburg Area Transit Authority,Motor Bus,Gasoline,VA,2416,45251.68,99762.7587616,740818,3497142
+"Montgomery County, Maryland",Motor Bus,Electric Battery,MD,178,45052.66213678548,99324,14372995,58141297
+Regional Transit Service,Vanpool,Gasoline,NY,2403,45008.19,99225.9558378,9162408,27087937
+South Bend Public Transportation Corporation,Demand Response,Diesel Fuel,IN,1995,44787.75,98739.969405,1252820,4679161
+Lake County Board of County Commissioners,Motor Bus,Gasoline,FL,2109,39501.57,87085.9512534,289663,2164266
+Interurban Transit Partnership,Demand Response,Diesel Fuel,MI,1699,38142.549999999996,84089.82858099998,6042030,27512044
+Okaloosa County Board of County Commissioners,Demand Response,Diesel Fuel,FL,1546,34707.7,76517.28957399998,105016,771891
+"City of Rochester, Minnesota",Motor Bus,Gasoline,MN,1826,34200.98,75400.1645276,745406,2558386
+Suburban Mobility Authority for Regional Transportation,Motor Bus,Electric Battery,MI,82,33921.492139234884,74784,4827519,45670297
+Regional Transit Service,Demand Response,Diesel Fuel,NY,1492,33495.4,73844.628748,9162408,27087937
+City of Fayetteville,Motor Bus,Gasoline,NC,1787,33470.51,73789.7557562,2195673,9099174
+Pasco County Board of County Commissioners,Demand Response,Diesel Fuel,FL,1464,32866.799999999996,72458.80461599998,683554,3766914
+Suburban Mobility Authority for Regional Transportation,Demand Response,Gasoline,MI,1720,32215.600000000002,71023.156072,4827519,45670297
+City of Memphis,Motor Bus,Electric Battery,TN,85,27567.109070951006,60775,2819588,14475117
+"Western Maine Transportation Services, Inc.",Motor Bus,Gasoline,ME,1465,27439.45,60493.560259,168002,787362
+Greater Lafayette Public Transportation Corporation,Demand Response,Gasoline,IN,1441,26989.93,59502.539476599995,4447311,10619883
+Greater Bridgeport Transit Authority,Demand Response,Gasoline,CT,1352,25322.96,55827.50407519999,5266649,15150397
+City of Mobile,Motor Bus,Gasoline,AL,1329,24892.170000000002,54877.7758254,568192,3701933
+Barnegat Bay Decoy & Baymen's Museum,Ferry Boat,Gasoline,NJ,1321,24742.33,54547.4355646,7343,60214
+The Tri-County Council for the Lower Eastern Shore of Maryland,Motor Bus,Diesel Fuel,MD,1087,24403.149999999998,53799.67255299999,213781,6003442
+City of Nashua,Demand Response,Bio-Diesel,NH,1035,23235.75,51225.999164999994,315974,1787898
+Birmingham-Jefferson County Transit Authority,Motor Bus,Diesel Fuel,AL,1016,22809.2,50285.618504,1795762,9332038
+Pierce County Transportation Benefit Area Authority,Motor Bus,Diesel Fuel,WA,996,22360.2,49295.744124,6792245,40362320
+City of La Crosse,Demand Response,Diesel Fuel,WI,948,21282.6,46920.045611999994,685372,2005024
+Skagit Transit,Demand Response,Diesel Fuel,WA,913,20496.85,45187.76544699999,573848,7120242
+River Valley Transit Authority,Motor Bus,Gasoline,PA,1063,19909.99,43893.9621538,780399,4578701
+City of Albany,Demand Response,Gasoline,GA,984,18430.32,40631.8520784,273626,1501671
+City of Longview,Commuter Bus,Gasoline,WA,880,16482.4,36337.428688,274804,1040117
+City of La Crosse,Motor Bus,Gasoline,WI,849,15901.77,35057.3601774,685372,2005024
+Springfield Mass Transit District,Motor Bus,Gasoline,IL,844,15808.12,34850.8975144,1319966,5001748
+City of Long Beach,Demand Response,Gasoline,NY,839,15714.470000000001,34644.4348514,97523,270560
+Buncombe County,Motor Bus,Liquified Petroleum Gas,NC,1222,15494.96,34160.498715199996,113858,1149650
+City of Harrisonburg,Motor Bus,Gasoline,VA,796,14909.08,32868.855949599994,1522746,3218771
+Western Piedmont Regional Transit Authority,Demand Response,Diesel Fuel,NC,664,14906.8,32863.82941599999,124319,1139015
+Santee Wateree Regional Transportation Authority,Motor Bus,Diesel Fuel,SC,583,13088.35,28854.838176999998,89873,619762
+"Spartanburg Regional Health Services, Inc.",Demand Response,Liquified Petroleum Gas,SC,881,11171.08,24627.9863896,85594,881308
+Ulster County,Demand Response,Electric Battery,NY,44,10418.121943917773,22968,430747,3954087
+County of Nassau,Motor Bus,Diesel Fuel,NY,421,9451.449999999999,20836.855698999996,20293586,112757303
+St. Cloud Metropolitan Transit Commission,Motor Bus,Diesel Fuel,MN,287,6443.15,14204.697352999998,774825,3454101
+"City of Jackson, MS",Demand Response,Diesel Fuel,MS,285,6398.25,14105.709915,449129,1079378
+City of Wilsonville,Vanpool,Gasoline,OR,330,6180.9000000000005,13626.535758,185195,1207058
+Altoona Metro Transit,Demand Response,Gasoline,PA,284,5319.32,11727.0792584,444716,1614732
+Somerset County,Demand Response,Diesel Fuel,NJ,181,4063.45,8958.363139,215121,1265945
+Sarasota County,Demand Response,Diesel Fuel,FL,176,3951.2,8710.894543999999,2189094,11413817
+Alternativa de Transporte Integrado,Demand Response,Diesel Fuel,PR,172,3861.4,8512.919667999999,3732115,15671639
+Santee Wateree Regional Transportation Authority,Commuter Bus,Diesel Fuel,SC,124,2783.7999999999997,6137.221155999999,89873,619762
+Buncombe County,Motor Bus,C Natural Gas,NC,18,2175.2999999999997,4795.709885999999,113858,1149650
+City of Fayetteville,Motor Bus,Liquified Petroleum Gas,NC,158,2003.44,4416.8238928,2195673,9099174
+Central Midlands Regional Transportation Authority,Demand Response,Gasoline,SC,100,1873,4129.2532599999995,1968473,12347578
+City of Appleton,Motor Bus,Gasoline,WI,78,1460.94,3220.8175428,777302,3335281
+Pierce County Transportation Benefit Area Authority,Motor Bus,Gasoline,WA,56,1048.88,2312.3818256,6792245,40362320
+Susquehanna Regional Transportation Authority,Demand Response,Diesel Fuel,PA,25,561.25,1237.3429749999998,3072507,19627362
+Champaign-Urbana Mass Transit District,Motor Bus,Hydrogen,IL,4274,0,0,8573106,14797075
+Mass Transportation Authority,Motor Bus,Hydrogen,MI,59,0,0,2913347,43975174
+Stark Area Regional Transit Authority,Motor Bus,Hydrogen,OH,41745,0,0,1387558,10133529

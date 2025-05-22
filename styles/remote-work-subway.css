@@ -1,0 +1,111 @@
+/* ===============================
+   1️⃣ Background Image Only
+   =============================== */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: url("../images/remote_work_subway_banner.png") no-repeat center center fixed;
+  background-size: cover;
+  background-color: #fef6ec;
+}
+
+/* ===============================
+   🚆 Mini Subway Animation
+   =============================== */
+.mini-train-track {
+  height: 40px;
+  background-color: #0039A6;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 2em 0;
+  position: relative;
+}
+
+.mini-train {
+  background-image: url("../images/train_icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  left: -100px;
+  animation: moveMiniTrain 6s linear infinite;
+}
+
+@keyframes moveMiniTrain {
+  0%   { left: -100px; }
+  100% { left: 100vw; }
+}
+
+/* ===============================
+   🧭 TOC Styling (Transparent & Dark Text)
+   =============================== */
+nav.sidebar, .toc-left, .toc-right {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: #111827 !important;
+}
+
+nav.sidebar ul li a {
+  color: #111827 !important;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+nav.sidebar ul li a:hover {
+  color: #0039A6 !important;
+}
+
+/* ===============================
+   📄 Main Content Panel Styling
+   =============================== */
+main {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 2em;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: 2em auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   🧾 Metro-Style Cards
+   =============================== */
+.metro-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-left: 6px solid #0039A6;
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out;
+}
+.metro-card:hover {
+  transform: scale(1.02);
+}
+
+/* ===============================
+   🔷 Navbar Transparency (STA9750 Submission Material)
+   =============================== */
+.navbar,
+.navbar-title,
+.navbar-brand {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(6px);
+  color: #111827 !important;
+}
+
+.navbar-title {
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+/* ===============================
+   🖋 Main Text Readability (Extra Dark)
+   =============================== */
+main, main * {
+  color: #111111 !important;  /* Near-black text for all elements */
+}
