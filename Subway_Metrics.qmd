@@ -28,23 +28,25 @@ This report explores the question:
 
 > 🧠 **How has the rise of remote work since COVID-19 influenced subway ridership patterns across NYC by time and geography?**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XqLVCMaYw94?si=OvW6SNBbkz-O1KMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XqLVCMaYw94?si=OvW6SNBbkz-O1KMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+</iframe>
 
 We use cleaned hourly MTA ridership data (2020–2023), ZIP-level census data on remote work (2019 & 2023), and official MTA station-level annual reports. Our goal is to quantify where and how ridership has rebounded — or failed to — and what role the remote work revolution played in shaping this trend.
 
 To answer this overarching question, our team tackled four specific subquestions:
 
-1. **When did subway ridership recover?**  
-   Did weekday vs weekend patterns evolve across Pre-COVID, Core COVID, and WFH eras?
+1.  **When did subway ridership recover?**\
+    Did weekday vs weekend patterns evolve across Pre-COVID, Core COVID, and WFH eras?
 
-2. **Where did remote work increase the most?**  
-   How do ZIP-level WFH shifts relate to ridership decline?
+2.  **Where did remote work increase the most?**\
+    How do ZIP-level WFH shifts relate to ridership decline?
 
-3. **Which stations suffered most?**  
-   Which locations experienced the steepest and most persistent drops?
+3.  **Which stations suffered most?**\
+    Which locations experienced the steepest and most persistent drops?
 
-4. **Can we model the relationship?**  
-   Does growth in remote work statistically predict subway ridership loss?
+4.  **Can we model the relationship?**\
+    Does growth in remote work statistically predict subway ridership loss?
 
 Each section that follows answers one of these questions, then we bring it all together in a final synthesis to reflect on the MTA’s future in a remote-first world.
 
@@ -84,12 +86,23 @@ mta_2023 <- read_excel("data/mta_2023_ridership.xlsx", sheet = "Annual Total", s
 mta_2023_clean <- mta_2023 |> 
   select(
     station = station_alphabetical_by_borough,
-    borough = s,
-    `2019` = x2019, `2020` = x2020, `2021` = x2021,
-    `2022` = x2022, `2023` = x2023
+    borough = boro,
+    `2019` = x2019, 
+    `2020` = x2020,
+    `2021` = x2021, 
+    `2022` = x2022, 
+    `2023` = x2023
   ) |> 
   filter(!is.na(station)) |> 
-  filter(!str_detect(station, "(?i)weekday|weekend|total|average"))
+  filter(!str_detect(station, "(?i)weekday|weekend|total|average")) |> 
+  mutate(borough = case_when(
+    borough == "Bx" ~ "Bronx",
+    borough == "M"  ~ "Manhattan",
+    borough == "B"  ~ "Brooklyn",
+    borough == "Q"  ~ "Queens",
+    borough == "SI" ~ "Staten Island",
+    TRUE ~ borough
+  ))
 
 # Load ZIP shapefile
 zip_shapefile <- st_read("data/tl_2020_us_zcta510.shp", quiet = TRUE)
@@ -146,12 +159,7 @@ mta_zip_summary %>%
 
 ## Task 2: Cleaning NYC Subway Ridership Data {#task2}
 
-To prep the hourly MTA subway dataset for analysis, we:
-- Parsed timestamps from character format
-- Extracted calendar fields (year, month, hour, etc.)
-- Labeled COVID eras (Pre-COVID, Core COVID, WFH Era)
-- Classified weekdays vs weekends
-- Removed rows with negative ridership or transfer counts
+To prep the hourly MTA subway dataset for analysis, we: - Parsed timestamps from character format - Extracted calendar fields (year, month, hour, etc.) - Labeled COVID eras (Pre-COVID, Core COVID, WFH Era) - Classified weekdays vs weekends - Removed rows with negative ridership or transfer counts
 
 The final dataset includes valid observations from 2020 to 2023 and is saved for reuse.
 
@@ -260,13 +268,15 @@ write_csv(mta_with_zip, "data/cleaned/mta_with_zip.csv")
 message("\n✅ Aggregated summaries saved! Ready for visualization and spatial joining.")
 ```
 
-
 ## 🎨 Task 4: Visualizing the Subway Shift {#task4}
 
 Subway data tells stories better than headlines — especially when animated, mapped, and stacked in plots. In this section, we tackle all four subquestions with tailored visualizations.
 
-### 📊 Subquestion 1:  WFH Uptake by ZIP {#subq1}
+```{r}
 
+```
+
+### 📊 Subquestion 1: WFH Uptake by ZIP {#subq1}
 
 ```{r subq_hourly_animation, message=FALSE, warning=FALSE, fig.show='hide'}
 library(ggplot2)
@@ -412,7 +422,6 @@ ggsave("plots/subq2_office_faceted_final.png", final_plot, width = 10, height = 
 
 > Even in NYC’s densest office zones, subway ridership never fully recovered post-reopening. The flattening trends, despite lifted restrictions, reveal a structural shift in commuting tied to remote and hybrid work. The MTA’s planning must account for permanently lower weekday volumes in business hubs.
 
-
 ### 🚇 Subquestion 3: Station-Level Declines {#subq3}
 
 ```{r subq3_station_drops, message=FALSE, warning=FALSE}
@@ -509,8 +518,7 @@ leaflet(zip_map_data) %>%
   fitBounds(-74.2591, 40.4774, -73.7004, 40.9176)
 ```
 
-> This interactive map visualizes ZIP-level shifts in remote work between 2019 and 2023.
-We observe that central Manhattan, parts of Brooklyn, and pockets of Queens experienced the sharpest increases in work-from-home rates — in some areas rising more than 3 percentage points.
+> This interactive map visualizes ZIP-level shifts in remote work between 2019 and 2023. We observe that central Manhattan, parts of Brooklyn, and pockets of Queens experienced the sharpest increases in work-from-home rates — in some areas rising more than 3 percentage points.
 
 #### 📉 Remote Work vs Subway Ridership Decline
 
@@ -540,16 +548,14 @@ scatter_plot <- ggplot(zip_combined_data, aes(x = wfh_shift, y = ridership_pct_c
 plotly::ggplotly(scatter_plot)
 ```
 
-> The scatter plot confirms a strong negative relationship between WFH growth and subway usage.
-Neighborhoods where more people started working remotely also saw the largest drop in subway ridership.
-The downward-sloping trendline highlights this inverse association — especially pronounced in downtown hubs.
-This suggests remote work isn’t just a personal shift, but a structural change in how NYC moves.
+> The scatter plot confirms a strong negative relationship between WFH growth and subway usage. Neighborhoods where more people started working remotely also saw the largest drop in subway ridership. The downward-sloping trendline highlights this inverse association — especially pronounced in downtown hubs. This suggests remote work isn’t just a personal shift, but a structural change in how NYC moves.
 
 #### 📈 Regression Models: Predicting Subway Decline from Remote Work
+
 To quantify the relationship shown in the map and scatter plot, we fit two linear regression models:
 
-- Model 1 uses only the change in remote work (wfh_shift) to predict subway ridership change.
-- Model 2 adds a borough fixed effect to control for spatial patterns across NYC.
+-   Model 1 uses only the change in remote work (wfh_shift) to predict subway ridership change.
+-   Model 2 adds a borough fixed effect to control for spatial patterns across NYC.
 
 ```{r model_regression_summary, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -589,12 +595,10 @@ bind_rows(model1_df, model2_df) |>
   mta_table_style("Coefficient Comparison: Model 1 vs Model 2")
 ```
 
-> 🔍 Key Takeaways:
-          - In Model 1, the wfh_shift predictor is not statistically significant (p = 0.360).
-          - In Model 2, while wfh_shift still lacks significance (p = 0.260), the borough indicators (Brooklyn, Manhattan,               Queens) are all strongly significant (p < 0.01).
-          - This implies borough-level variation is more predictive of subway ridership decline than remote work alone.
-          
+> 🔍 Key Takeaways: - In Model 1, the wfh_shift predictor is not statistically significant (p = 0.360). - In Model 2, while wfh_shift still lacks significance (p = 0.260), the borough indicators (Brooklyn, Manhattan, Queens) are all strongly significant (p \< 0.01). - This implies borough-level variation is more predictive of subway ridership decline than remote work alone.
+
 #### 📈 R² Comparison: Explanatory Power of Each Model
+
 Model 1 alone explains almost none of the variation in subway ridership change. Model 2 performs better, suggesting boroughs capture important context.
 
 ```{r model_r2_comparison, message=FALSE, warning=FALSE}
@@ -607,12 +611,10 @@ tibble(
   mta_table_style("R² and Adjusted R² for Each Model")
 ```
 
-> 
-Model 1 R² = 0.007 | Adj R² = -0.001
-Model 2 R² = 0.142 | Adj R² = 0.112
-➡️ This means remote work alone explains less than 1% of the variation in ridership decline. Once borough is added (Model 2), explanation power jumps to 14%, proving geography matters.
+> Model 1 R² = 0.007 \| Adj R² = -0.001 Model 2 R² = 0.142 \| Adj R² = 0.112 ➡️ This means remote work alone explains less than 1% of the variation in ridership decline. Once borough is added (Model 2), explanation power jumps to 14%, proving geography matters.
 
 #### 📊 Residual Plot: Model 2
+
 Residual plots help assess model fit. This one shows that while borough controls reduce bias, substantial variance remains — hinting at unmeasured local influences like transit access, job type, or demographic shifts.
 
 ```{r model2_residual_plot, message=FALSE, warning=FALSE}
@@ -679,6 +681,6 @@ Together, these findings confirm that remote work reshaped NYC subway usage both
 
 ### 🚇 Planning Ahead
 
-- Focus subway recovery in areas hit hardest by WFH transitions
-- Invest in flexible service schedules and borough-specific strategy
-- Model future shifts using local factors, not just global trends
+-   Focus subway recovery in areas hit hardest by WFH transitions
+-   Invest in flexible service schedules and borough-specific strategy
+-   Model future shifts using local factors, not just global trends
