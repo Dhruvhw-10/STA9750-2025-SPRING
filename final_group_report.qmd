@@ -292,7 +292,7 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 ### 📈 3. Monthly MTA Ridership by Agency (2019–2023)
 
-![](images/acdfd3bd-2f15-45b4-8091-4c8212d9c53e.png)
+![]("images/dev_animation.gif")
 
 **Line chart showing ridership recovery over time**
 
@@ -306,7 +306,7 @@ Using MTA monthly ridership data and ACS estimates of remote work by ZIP code, w
 
 ### 📉 4. Remote Work vs Ridership Loss Correlation
 
-![](images/dev_remote_vs_drop.png)
+![](plots/dev_animation.gif)
 
 **Scatterplot with trend line: Remote Work % vs Transit Drop**
 
