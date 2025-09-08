@@ -1,6 +1,6 @@
 /* 🌑 Base Styles */
 body {
-  background-image: url("../images/spotify_bg.png");
+  background-image: url("/images/spotify_bg.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: contain;
