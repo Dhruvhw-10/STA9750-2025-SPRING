@@ -4,7 +4,7 @@ author: "Dhruv"
 date: "2025-04-25"
 format:
   html:
-    css: styles/spotify-style.css
+    css: styles/spotify-styles.css
     toc: true
     toc-location: left
     code-fold: true
