@@ -1,22 +1,55 @@
-/* 🎧 Spotify Theme */
+/* 🎧 Spotify Theme (scoped) */
+html, body { min-height: 100%; margin: 0; }
 body.playlist-page {
   background-image: url("../images/spotify_bg.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: contain;
   background-position: left center;
-  background-color: #000000;
+  background-color: #000;
   color: white;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  min-height: 100%;
 }
 
-/* Content */
+/* Content panel (kept) */
 body.playlist-page main {
-  background: linear-gradient(135deg, rgba(20, 40, 20, 0.95), rgba(10, 30, 10, 0.95));
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(29, 185, 84, 0.25);
-  max-width: 900px;
-  margin: 2rem auto;
+  background: linear-gradient(135deg, rgba(20,40,20,0.95), rgba(10,30,10,0.95));
+  padding: 2rem; border-radius: 16px;
+  box-shadow: 0 0 20px rgba(29,185,84,0.25);
+  max-width: 900px; margin: 2rem auto;
 }
+
+/* Code blocks (kept) */
+body.playlist-page pre, body.playlist-page code, body.playlist-page pre code {
+  background-color: #ffffff !important; color: black !important;
+  font-family: 'Fira Code','Courier New', monospace; font-size: .95rem;
+  padding: 1em; border-radius: 8px; border-left: 4px solid #1DB954; overflow-x: auto; white-space: pre-wrap; box-shadow: none;
+}
+body.playlist-page .cell-output, body.playlist-page .cell-output pre,
+body.playlist-page .cell-output code, body.playlist-page .cell-output .sourceCode {
+  background-color: #0d0d0d !important; color: white !important;
+  padding: 1em; border-left: 4px solid #1DB954; border-radius: 8px;
+  font-family: 'Fira Code','Courier New', monospace; font-size: .95rem; white-space: pre-wrap; overflow-x: auto;
+  box-shadow: 0 0 8px rgba(29,185,84,0.2);
+}
+
+/* TOC transparent (kept) */
+body.playlist-page nav.sidebar, body.playlist-page .toc-left, body.playlist-page .toc-right {
+  background-color: transparent !important; box-shadow: none !important; color: white !important;
+}
+body.playlist-page nav.sidebar ul li a { color: white !important; }
+
+/* Play button (kept) */
+body.playlist-page .play-now {
+  display: inline-block; padding: .8em 1.8em; font-size: 1.1rem; font-weight: bold;
+  color: white; background-color: #1DB954; border: none; border-radius: 30px; text-decoration: none;
+  box-shadow: 0 0 12px #1DB954; animation: pulse-glow 2s infinite; transition: all .3s ease;
+}
+body.playlist-page .play-now:hover { background-color: #1ed760; box-shadow: 0 0 20px #1ed760; transform: scale(1.05); }
+@keyframes pulse-glow { 0%,100% { box-shadow: 0 0 10px #1DB954; } 50% { box-shadow: 0 0 25px #1DB954; } }
+
+/* Unset legacy card/player classes (kept) */
+body.playlist-page .spotify-player,
+body.playlist-page .video,
+body.playlist-page .spotify-card,
+body.playlist-page .youtube-card { all: unset; }
