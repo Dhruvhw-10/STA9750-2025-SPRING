@@ -3,7 +3,7 @@ title: "Subway Metrics: MTA Subway Ridership Trends During COVID and Its Afterma
 body-classes: subway-page
 format:
   html:
-    css: ["styles/remote-work-subway.css"]
+    css: ["styles/subway_styles.css"]
 ---
 
 # 🚇 Introduction {#task1}
