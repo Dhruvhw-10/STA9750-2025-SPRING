@@ -1,11 +1,9 @@
 ---
-title: "Dhruv's STA 9750 Website"
-author: "Dhruv Sharma"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-format: html
-editor: 
-  markdown: 
-    wrap: 72
+title: "About Me"
+body-classes: index-page
+format:
+  html:
+    css: []
 ---
 
 ```{r}
