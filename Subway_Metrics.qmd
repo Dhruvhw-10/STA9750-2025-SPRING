@@ -1,9 +1,23 @@
 ---
 title: "Subway Metrics: MTA Subway Ridership Trends During COVID and Its Aftermath"
-body-classes: subway-page
+author: 
+  - Dhruv Sharma
 format:
   html:
-    css: ["styles/subway_styles.css"]
+    theme: cosmo
+    toc: false
+    code-fold: true
+    smooth-scroll: true
+    include-in-header: 
+      - styles/subway_train.html
+    css: 
+      - styles/subway_styles.css
+editor: visual
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
 ---
 
 # 🚇 Introduction {#task1}
