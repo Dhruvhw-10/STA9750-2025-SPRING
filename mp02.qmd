@@ -1,9 +1,23 @@
 ---
 title: "Grand Transit Awards: GTA IV Edition"
-body-classes: gta-page
-format:
+author: "Dhruv"
+format: 
   html:
-    css: ["styles/gta-style.css"]
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true
+    css: styles/gta-style.css
+    code-overflow: wrap
+    code-fold: true
+    code-tools: true
+    fig-cap-location: top
+    theme: default  # was `null`, which caused an error
+    self-contained: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
 # 🚆 Green Transit Analysis: The Quest for a Cleaner Commute
