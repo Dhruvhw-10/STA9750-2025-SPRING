@@ -1,4 +1,5 @@
-/* 🇺🇸 MP04 Patriotic Theme */
+/* 🇺🇸 MP04 Patriotic Theme (scoped) */
+html, body { min-height: 100%; margin: 0; }
 body.election-page {
   background-image: url("../images/us_patriotic_background.png");
   background-size: cover;
@@ -6,26 +7,58 @@ body.election-page {
   background-attachment: fixed;
   background-repeat: no-repeat;
   color: #111;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI","Helvetica Neue",sans-serif;
 }
 
-/* Content panel */
+/* Main content panel (kept) */
 body.election-page main {
   max-width: 850px;
   margin: 60px auto;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255,255,255,0.92);
   padding: 2em;
   border-radius: 18px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-/* Code chunks */
+/* Headings (kept) */
+body.election-page h1, body.election-page h2, body.election-page h3,
+body.election-page h4, body.election-page h5, body.election-page h6 {
+  color: #111 !important;
+  font-weight: 700;
+}
+
+/* Code chunks (kept) */
 body.election-page .cell.code {
   background-color: #f9f9f9;
   color: black;
   border-left: 4px solid #3C3B6E;
-  padding: 1em;
-  border-radius: 6px;
-  font-family: Consolas, monospace;
-  overflow-x: auto;
+  padding: 1em; border-radius: 6px;
+  font-family: Consolas, monospace; overflow-x: auto;
 }
+
+/* Code output (kept) */
+body.election-page .cell-output,
+body.election-page .cell-output pre,
+body.election-page .cell-output code {
+  background-color: #fff; color: #000;
+  border-left: 4px solid #B22234;
+  padding: 1em; border-radius: 6px; margin-top: 1em;
+}
+
+/* Tables (kept) */
+body.election-page table { border-collapse: collapse; width: 100%; background: #fff; color: #000; margin: 1em 0; }
+body.election-page table, body.election-page th, body.election-page td { border: 1px solid #999; padding: .6em; text-align: left; }
+
+/* Slide-out TOC (kept) */
+body.election-page nav#TOC {
+  position: fixed; top: 80px; right: -220px; width: 240px;
+  background: rgba(0,0,0,0.75); padding: 1em; border-radius: 10px 0 0 10px;
+  transition: right .3s ease-in-out; z-index: 1000; color: #fff;
+  max-height: 80vh; overflow-y: auto;
+}
+body.election-page nav#TOC:hover { right: 0; }
+body.election-page nav#TOC a { color: #FFD700; text-decoration: none; }
+body.election-page nav#TOC a:hover { color: #fff; text-decoration: underline; }
+
+/* Captions (kept) */
+body.election-page .caption { font-style: italic; color: #555; margin-top: .2em; }
