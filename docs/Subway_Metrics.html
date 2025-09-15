@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="styles/subway_styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed subway-page">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -2691,4 +2691,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 <script src="site_libs/quarto-html/zenscroll-min.js"></script>
+  <!-- Subway line UI -->
+<div class="subway-container">
+  <div class="subway-track"></div>
+  <div class="subway-train"></div>
+
+  <!-- Update hrefs to match your actual section ids -->
+  <div class="subway-stop stop-1"><a href="#introduction">Intro</a></div>
+  <div class="subway-stop stop-2"><a href="#data">Data</a></div>
+  <div class="subway-stop stop-3"><a href="#approach">Approach</a></div>
+  <div class="subway-stop stop-4"><a href="#modeling">Modeling</a></div>
+  <div class="subway-stop stop-5"><a href="#results">Results</a></div>
+  <div class="subway-stop stop-6"><a href="#discussion">Discussion</a></div>
+  <div class="subway-stop stop-7"><a href="#alt">A/B?</a></div>
+  <div class="subway-stop stop-8"><a href="#summary">Summary</a></div>
+</div>
 </body></html>
