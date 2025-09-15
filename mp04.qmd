@@ -1,19 +1,9 @@
 ---
 title: "MP04: County-Level U.S. Election Analysis (2020 vs 2024)"
-author: "Dhruv Sharma"
+body-classes: election-page
 format:
   html:
-    css: styles/mp04-style.css
-    toc: true
-    toc-location: right
-    number-sections: false
-    page-layout: full
-    code-fold: true
-    smooth-scroll: true
-execute:
-  echo: true
-  warning: false
-  message: false
+    css: ["styles/mp04-style.css"]
 ---
 
 # The Great American Realignment
