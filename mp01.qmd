@@ -1,9 +1,16 @@
 ---
 title: "NYC Payroll Data Analysis"
-body-classes: payroll-page
+author: "Dhruv Sharma"
+date: today
 format:
   html:
-    css: []
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    theme: flatly
+    highlight: github
+editor: visual
 ---
 
 # **📌 Introduction**
