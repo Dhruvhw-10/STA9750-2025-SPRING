@@ -1,12 +1,8 @@
-/* 🌆 GTA IV Awards Style */
-body.gta-page {
-  margin: 0;
-  padding: 0;
-  color: black;
-  font-family: "Verdana", sans-serif;
-}
+/* 🌆 GTA IV Awards (scoped) */
+html, body { min-height: 100%; margin: 0; }
+body.gta-page { color: black; font-family: "Verdana", sans-serif; background-color: transparent; }
 
-/* Background image with blur */
+/* Blurred background overlay (kept) */
 body.gta-page::before {
   content: "";
   background-image: url('../images/gta_banner.png');
@@ -14,22 +10,24 @@ body.gta-page::before {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  position: fixed; inset: 0;
   z-index: -2;
   filter: blur(8px) brightness(0.75);
   opacity: 0.6;
 }
 
-/* Content panel */
-body.gta-page main.content {
+/* Translucent content panel (kept) */
+body.gta-page main, body.gta-page main.content {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   padding: 2rem;
   margin: 2rem auto;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
   max-width: 95%;
+}
+
+/* Table baseline (kept) */
+body.gta-page table {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
 }
