@@ -1,21 +1,9 @@
 ---
-title: "The Ultimate Playlist - Hustle & Heart 🎶"
-author: "Dhruv"
-date: "2025-04-25"
+title: "The Ultimate Playlist - Hustle & Heart"
+body-classes: playlist-page
 format:
   html:
-    css: styles/spotify-styles.css
-    toc: true
-    toc-location: left
-    code-fold: true
-    page-layout: full
-    allow-html: true
-    smooth-scroll: true 
-execute:
-  echo: true  
-  eval: true 
-  warning: false
-  message: false
+    css: ["styles/spotify-style.css"]
 ---
 
 # 🎧 Introduction
