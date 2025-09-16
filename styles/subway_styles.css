@@ -1,17 +1,27 @@
+/* ===========================
+   Subway Metrics — page styles
+   =========================== */
+
+/* 🔒 Guard: if the subway widget is injected twice, hide duplicates */
+.subway-container ~ .subway-container { display: none !important; }
+
+/* Background + base typography */
 body {
   background-image: url("../images/subway_background.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  color: #111827; /* ✨ Deep gray-blue for body text */
-  font-family: "Segoe UI", sans-serif;
+  background-color: #000;            /* safe fallback under the image */
+  color: #111827;                    /* deep gray-blue for body text */
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   font-weight: 500;
 }
 
+/* Carded content panel */
 main {
-  background-color: rgba(255, 255, 255, 0.85);  /* Light background with opacity */
-  color: #000;                                  /* Black text for contrast */
+  background-color: rgba(255, 255, 255, 0.85);  /* light with opacity */
+  color: #000;                                  /* black for contrast */
   padding: 2em;
   border-radius: 12px;
   max-width: 1000px;
@@ -19,14 +29,14 @@ main {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
-h1, h2, h3 {
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+/* Give the content a little breathing room from the track on widescreens */
+@media (min-width: 1200px) {
+  main { margin-left: 90px; }
 }
 
-a {
-  color: #0039A6;
-  font-weight: 600;
-}
+h1, h2, h3 { text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+
+a { color: #0039A6; font-weight: 600; }
 
 code {
   background-color: #f2f2f2;
@@ -41,19 +51,22 @@ code {
   border-left: 4px solid #0039A6;
 }
 
-/* 🔁 Subway Animation Container */
+/* ===========================
+   Subway “left rail” widget
+   =========================== */
+
 .subway-container {
   position: fixed;
-  top: 0;
+  top: 0;                  /* start at top of viewport */
   left: 0;
   width: 150px;
   height: 100vh;
   background: transparent;
   z-index: 9999;
-  pointer-events: none;
+  pointer-events: none;    /* only the stops will be clickable */
 }
 
-/* 🛤 Track */
+/* Single vertical track */
 .subway-track {
   position: absolute;
   top: 0;
@@ -65,7 +78,7 @@ code {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 🚏 Subway Stop Dots */
+/* Stops */
 .subway-stop {
   position: absolute;
   left: 60px;
@@ -82,28 +95,24 @@ code {
   pointer-events: auto;
   transition: transform 0.2s;
 }
+.subway-stop:hover { transform: scale(1.2); box-shadow: 0 0 8px #fff; }
 
-.subway-stop:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 8px #fff;
-}
-
-/* 🎯 Station labels aligned RIGHT of track and black */
+/* Stop labels (to the right of the track) */
 .subway-stop a {
   position: absolute;
   top: 50%;
   left: 40px;
   transform: translateY(-50%);
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 700;
   color: #00FF99 !important;
-  text-shadow: 0 0 5px black;
+  text-shadow: 0 0 5px #000;
   white-space: nowrap;
   pointer-events: auto;
-  z-index: 9999;
+  z-index: 10000;
 }
 
-/* 🎯 Position stops (adjust as needed) */
+/* Stop positions */
 .subway-stop.stop-1 { top: 5%; }
 .subway-stop.stop-2 { top: 15%; }
 .subway-stop.stop-3 { top: 25%; }
@@ -113,7 +122,7 @@ code {
 .subway-stop.stop-7 { top: 75%; }
 .subway-stop.stop-8 { top: 90%; }
 
-/* 🛤 Flip subway train to vertical with window stack */
+/* “Train” (vertical car with stacked windows) */
 .subway-train {
   position: absolute;
   top: 0;
@@ -132,8 +141,6 @@ code {
   z-index: 9999;
 }
 
-
-/* 🚉 Train windows now stacked */
 .train-window {
   width: 12px;
   height: 6px;
@@ -143,37 +150,23 @@ code {
   margin: 2px 0;
 }
 
+/* Train animation: pause at each stop */
 @keyframes trainPause {
-  0%    { top: 0%; }
-
-  5%    { top: 5%; }
-  10%   { top: 5%; }
-
-  15%   { top: 15%; }
-  20%   { top: 15%; }
-
-  25%   { top: 25%; }
-  30%   { top: 25%; }
-
-  35%   { top: 35%; }
-  40%   { top: 35%; }
-
-  50%   { top: 50%; }
-  55%   { top: 50%; }
-
-  65%   { top: 62%; }
-  70%   { top: 62%; }
-
-  80%   { top: 75%; }
-  85%   { top: 75%; }
-
-  95%   { top: 90%; }
-  100%  { top: 90%; }
+  0%   { top: 0%;  }
+  5%   { top: 5%;  }   10% { top: 5%;  }
+  15%  { top: 15%; }   20% { top: 15%; }
+  25%  { top: 25%; }   30% { top: 25%; }
+  35%  { top: 35%; }   40% { top: 35%; }
+  50%  { top: 50%; }   55% { top: 50%; }
+  65%  { top: 62%; }   70% { top: 62%; }
+  80%  { top: 75%; }   85% { top: 75%; }
+  95%  { top: 90%; }  100% { top: 90%; }
 }
 
-
-
-
-
-
-
+/* Hide the widget on small screens & when printing */
+@media (max-width: 992px) {
+  .subway-container { display: none !important; }
+}
+@media print {
+  .subway-container { display: none !important; }
+}
