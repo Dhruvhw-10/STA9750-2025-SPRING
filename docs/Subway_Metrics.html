@@ -193,6 +193,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 <link rel="stylesheet" href="styles/subway_styles.css">
+<style>
+  /* inline fallback: forces the bg even if CSS pathing is off */
+  body.subway-page{
+    background: url("images/subway_background.png") center/cover fixed no-repeat !important;
+    background-color:#000; /* safe fallback under the image */
+  }
+</style>
 </head>
 
 <body class="floating nav-fixed subway-page">
